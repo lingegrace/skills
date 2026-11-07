@@ -45,10 +45,28 @@
   }
 
   /* ───────── 2. "I'm a…" picker ───────── */
-  $$('.who-chip').forEach(chip => chip.addEventListener('click', () => {
-    $$('.who-chip').forEach(c => c.setAttribute('aria-pressed', c === chip));
+  const whoChips = $$('.who-chip');
+  const whoPre = $('.who-pre'), whoWord = $('.who-word');
+  const pickWho = chip => {
+    whoChips.forEach(c => c.setAttribute('aria-pressed', c === chip));
     $$('[data-who-group]').forEach(g => { g.hidden = g.dataset.whoGroup !== chip.dataset.who; });
-  }));
+    if (whoWord) {
+      whoWord.classList.add('swap');
+      setTimeout(() => { whoPre.textContent = chip.dataset.pre; whoWord.textContent = chip.dataset.word; whoWord.classList.remove('swap'); }, reduce ? 0 : 220);
+    }
+  };
+  if (whoChips.length) {
+    // rotate through the personas every 4s until the visitor picks one; pause while hovering
+    let i = 0, timer = null, chosen = false, hovering = false;
+    const wrap = $('#who'), chipsBox = $('.who-chips');
+    const tick = () => { if (chosen || hovering || document.hidden) return; i = (i + 1) % whoChips.length; pickWho(whoChips[i]); };
+    if (!reduce) { chipsBox.classList.add('auto'); timer = setInterval(tick, 4000); }
+    wrap.addEventListener('pointerenter', () => { hovering = true; });
+    wrap.addEventListener('pointerleave', () => { hovering = false; });
+    whoChips.forEach((chip, n) => chip.addEventListener('click', () => {
+      chosen = true; i = n; clearInterval(timer); chipsBox.classList.remove('auto'); pickWho(chip);
+    }));
+  }
 
   /* ───────── 3. Drawers that pull out ───────── */
   const drawers = $$('.drawer');

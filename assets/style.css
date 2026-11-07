@@ -357,3 +357,10 @@ code { font-family: 'JetBrains Mono', monospace; font-size: .88em; }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 #requestWrap.nudge .request-paper { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(196,86,42,.15), var(--shadow); }
+/* "I'm a …" heading that changes with the chosen persona */
+.who-head { font-size: clamp(2rem, 4.4vw, 3rem); }
+.who-word { color: var(--accent); font-style: italic; display: inline-block; transition: opacity .25s, transform .25s; }
+.who-word.swap { opacity: 0; transform: translateY(8px); }
+.who-caret { display: inline-block; width: 2px; height: .9em; margin-left: .15em; background: var(--accent); vertical-align: -.08em; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.who-chips.auto .who-chip[aria-pressed="true"] { box-shadow: 0 0 0 3px rgba(196,86,42,.18); }

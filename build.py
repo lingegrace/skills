@@ -307,7 +307,14 @@ def build_home(skills, issues, resources, site):
 </div>""" for s in stack)
     # personas
     personas = site.get("personas", [])
-    p_chips = "".join(f'<button class="who-chip" data-who="{i}" aria-pressed="{"true" if i == 0 else "false"}">{e(p["label"])}</button>' for i, p in enumerate(personas))
+    def heading(p):
+        h = p.get("heading") or ["I'm a", p["label"]]
+        return h[0], h[1]
+    p_chips = "".join(
+        '<button class="who-chip" data-who="%d" data-pre="%s" data-word="%s" aria-pressed="%s">%s</button>'
+        % (i, e(heading(p)[0]), e(heading(p)[1]), "true" if i == 0 else "false", e(p["label"]))
+        for i, p in enumerate(personas))
+    h0 = heading(personas[0]) if personas else ("I'm a", "…")
     p_groups = ""
     for i, p in enumerate(personas):
         items = [by_name[n] for n in p.get("skills", []) if n in by_name][:6]
@@ -349,7 +356,7 @@ def build_home(skills, issues, resources, site):
 </section>
 
 <section class="block" id="who">
-  <div class="block-head"><h2>I'm a…</h2></div>
+  <div class="block-head"><h2 class="who-head" aria-live="polite"><span class="who-pre">{e(h0[0])}</span> <span class="who-word">{e(h0[1])}</span><span class="who-caret" aria-hidden="true"></span></h2></div>
   <div class="who-chips" role="group" aria-label="Choose who you are">{p_chips}</div>
   {p_groups}
 </section>

@@ -22,24 +22,31 @@ hero_stack: [deep-research, meeting-to-actions, human-writing, literature-review
 # "I'm a…" picker on the home page.
 personas:
   - label: Student
+    heading: ["I'm a", "student"]
     line: Read faster, write clearer, and revise smarter for your degree.
     skills: [literature-review, paper-tutor, academic-editing, thesis-chapter-review, citation-formatter, active-recall]
   - label: Researcher
+    heading: ["I'm a", "researcher"]
     line: From a vague topic to a defensible finding, with every source checked.
     skills: [research-question-grill, deep-research, interview-guide, thematic-analysis, survey-design, quantitative-analysis]
   - label: Marketer
+    heading: ["I'm a", "marketer"]
     line: Know the customer, find the message, and ship pages that convert.
     skills: [customer-review-mining, positioning-messaging, seo-research, landing-page-writer, content-repurposing, competitor-messaging]
   - label: Product manager
+    heading: ["I'm a", "product manager"]
     line: Discover the right problem, then write it down so everyone builds the same thing.
     skills: [product-discovery, prd-writer, value-proposition-writer, user-persona-builder, decision-memo, competitor-analysis]
   - label: Content creator
+    heading: ["I'm a", "content creator"]
     line: Find topics worth writing, research them properly, and sound like yourself.
     skills: [topic-discovery, content-research-analyst, linkedin-writer, newsletter-writer, my-writing-voice, fact-check-draft]
   - label: Anyone at work
+    heading: ["I just need help", "at work"]
     line: The documents everyone writes, done in a fraction of the time.
     skills: [meeting-to-actions, weekly-report, executive-writing, decision-memo, document-review, sop-builder]
   - label: Exam & career prep
+    heading: ["I need", "exam & career prep"]
     line: Practice with a patient tutor, find your weak spots, and walk into the room ready.
     skills: [ielts-writing-coach, study-plan-builder, mistake-analysis, socratic-tutor, interview-practice, resume-review]
 
