@@ -68,28 +68,20 @@
     }));
   }
 
-  /* ───────── 3. Drawers that pull out ───────── */
-  const drawers = $$('.drawer');
-  const closeTray = (tray, drawer, cb) => {
-    drawer && drawer.setAttribute('aria-expanded', 'false');
-    if (!tray || tray.hidden) return cb && cb();
-    tray.classList.add('closing');
-    setTimeout(() => { tray.hidden = true; tray.classList.remove('closing'); cb && cb(); }, reduce ? 0 : 380);
+  /* ───────── 3. Folders: click a tab to bring that folder to the front ───────── */
+  const ftabs = $$('.ftab');
+  const openFolder = tab => {
+    ftabs.forEach(t => { const on = t === tab; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
+    $$('.folder').forEach(p => { p.hidden = p.dataset.panel !== tab.dataset.folder; });
   };
-  drawers.forEach(d => d.addEventListener('click', () => {
-    const tray = document.getElementById('tray-' + d.dataset.drawer);
-    const isOpen = d.getAttribute('aria-expanded') === 'true';
-    const openOne = drawers.find(x => x.getAttribute('aria-expanded') === 'true');
-    const openTray = openOne && document.getElementById('tray-' + openOne.dataset.drawer);
-    if (isOpen) return closeTray(tray, d);
-    closeTray(openTray, openOne, () => {
-      d.setAttribute('aria-expanded', 'true'); tray.hidden = false;
-      tray.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' });
+  ftabs.forEach((tab, n) => {
+    tab.addEventListener('click', () => openFolder(tab));
+    tab.addEventListener('keydown', ev => {
+      const k = ev.key === 'ArrowRight' ? 1 : ev.key === 'ArrowLeft' ? -1 : 0;
+      if (!k) return; ev.preventDefault();
+      const next = ftabs[(n + k + ftabs.length) % ftabs.length]; next.focus(); openFolder(next);
     });
-  }));
-  $$('.tray-close').forEach(b => b.addEventListener('click', () => {
-    const tray = b.closest('.tray'); closeTray(tray, $(`.drawer[data-drawer="${tray.dataset.tray}"]`));
-  }));
+  });
 
   /* ───────── 4. Catalog: search that understands you ───────── */
   const q = $('#q');

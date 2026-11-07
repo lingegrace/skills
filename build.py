@@ -272,7 +272,7 @@ def install_block(s):
     <button role="tab" aria-selected="false" data-tab="manual">Manual</button>
   </div>
   <div class="install-pane" data-pane="cc">
-    <p>Add the library once, then install this drawer ({e(s['field']['name'])}):</p>
+    <p>Add the library once, then install this folder ({e(s['field']['name'])}):</p>
     <pre><code>/plugin marketplace add {REPO}
 /plugin install {s['plugin']}@{MARKETPLACE}</code></pre>
     <button class="copy" data-copy="/plugin marketplace add {REPO}&#10;/plugin install {s['plugin']}@{MARKETPLACE}">Copy</button>
@@ -319,22 +319,20 @@ def build_home(skills, issues, resources, site):
     for i, p in enumerate(personas):
         items = [by_name[n] for n in p.get("skills", []) if n in by_name][:6]
         p_groups += f'<div class="who-group" data-who-group="{i}"{"" if i == 0 else " hidden"}><p class="who-line">{e(p.get("line", ""))}</p><div class="cards cards-3">{"".join(card(s, compact=True) for s in items)}</div></div>'
-    # cabinet
-    drawers, trays = "", ""
+    # folders: one tab per type of work, its skills as sheets inside
+    tabs_html, panels = "", ""
+    first = True
     for f in FIELDS:
         items = [s for s in skills if s["field"]["key"] == f["key"]]
         if not items:
             continue
-        drawers += f"""<button class="drawer" data-drawer="{f['slug']}" aria-expanded="false" aria-controls="tray-{f['slug']}" style="--c:{f['color']}">
-  <span class="drawer-plate"><span class="drawer-code">{f['code']}</span><span class="drawer-name">{e(f['name'])}</span></span>
-  <span class="drawer-pull" aria-hidden="true"></span>
-</button>"""
-        tabs = "".join(f"""<a class="tcard" href="{url('skills/' + s['name'] + '/')}" style="--i:{i}"><span class="tcard-tab">{s['call']}</span><span class="tcard-name">{e(s['name'])}</span><span class="tcard-tag">{e(s['tagline'])}</span></a>""" for i, s in enumerate(items))
-        trays += f"""<div class="tray" id="tray-{f['slug']}" data-tray="{f['slug']}" hidden style="--c:{f['color']}">
-  <div class="tray-head"><div><span class="drawer-code">{f['code']}</span><h3>{e(f['name'])}</h3><p class="muted">{e(f['blurb'])}</p></div>
-  <div class="tray-actions"><a class="btn btn-line" href="{url('skills/?field=' + f['slug'])}">See every card</a><button class="btn btn-ghost tray-close" type="button">Push the drawer back</button></div></div>
-  <div class="tray-box"><div class="tray-cards">{tabs}</div></div>
+        tabs_html += f"""<button class="ftab" role="tab" id="ftab-{f['slug']}" aria-controls="fpanel-{f['slug']}" aria-selected="{'true' if first else 'false'}" tabindex="{'0' if first else '-1'}" data-folder="{f['slug']}" style="--c:{f['color']}"><span class="ftab-code">{f['code']}</span><span class="ftab-name">{e(f['name'])}</span><span class="ftab-n">{len(items)}</span></button>"""
+        sheets = "".join(f"""<a class="sheet" href="{url('skills/' + s['name'] + '/')}" style="--i:{i}"><span class="sheet-call">{s['call']}</span><span class="sheet-name">{e(s['name'])}</span><span class="sheet-tag">{e(s['tagline'])}</span><span class="sheet-give"><b>Give</b> {e(s['give'])}</span></a>""" for i, s in enumerate(items))
+        panels += f"""<div class="folder" role="tabpanel" id="fpanel-{f['slug']}" aria-labelledby="ftab-{f['slug']}" data-panel="{f['slug']}" style="--c:{f['color']}"{'' if first else ' hidden'}>
+  <div class="folder-head"><div><h3>{e(f['name'])}</h3><p>{e(f['blurb'])}</p></div><a class="btn btn-line" href="{url('skills/?field=' + f['slug'])}">Open in the catalog</a></div>
+  <div class="sheets">{sheets}</div>
 </div>"""
+        first = False
     methods = site.get("methods", [])
     method_chips = "".join(f"<span>{e(m)}</span>" for m in methods)
     latest = "".join(f"""<li><a href="{e(i['url'])}" target="_blank" rel="noopener"><span class="ins-date">{fmt_date(i.get('date'))}</span><span class="ins-title">{e(i['title'])}</span><span class="ins-arrow">↗</span></a></li>""" for i in issues[:3])
@@ -356,19 +354,20 @@ def build_home(skills, issues, resources, site):
 </section>
 
 <section class="block" id="who">
+  <p class="eyebrow">Start from who you are</p>
   <div class="block-head"><h2 class="who-head" aria-live="polite"><span class="who-pre">{e(h0[0])}</span> <span class="who-word">{e(h0[1])}</span><span class="who-caret" aria-hidden="true"></span></h2></div>
   <div class="who-chips" role="group" aria-label="Choose who you are">{p_chips}</div>
   {p_groups}
 </section>
 
-<section class="block">
-  <div class="block-head"><h2>Open a drawer</h2><a href="{url('skills/')}">The whole catalog →</a></div>
-  <div class="cabinet">
-    <div class="cabinet-top" aria-hidden="true"></div>
-    <div class="drawers">{drawers}</div>
-    <div class="cabinet-foot" aria-hidden="true"></div>
+<section class="block" id="folders">
+  <p class="eyebrow">Or browse by type of work</p>
+  <div class="block-head"><h2>Open a folder</h2><a href="{url('skills/')}">The whole catalog →</a></div>
+  <p class="muted folders-note">Every skill, filed by the kind of work it does. Pick a tab.</p>
+  <div class="folders">
+    <div class="folder-tabs" role="tablist" aria-label="Types of work">{tabs_html}</div>
+    {panels}
   </div>
-  {trays}
 </section>
 
 <section class="block principles">
@@ -382,16 +381,19 @@ def build_home(skills, issues, resources, site):
   <div class="method-chips" aria-label="Some of the methods inside">{method_chips}</div>
 </section>
 
-<section class="block">
-  <div class="block-head"><h2>Reading room</h2><a href="{url('insights/')}">All insights →</a></div>
-  <p class="muted">Essays from my newsletter, <em>Signals Across Markets</em>, on AI, society and markets.</p>
-  <ul class="ins-list">{latest}</ul>
-</section>
-
-<section class="block">
-  <div class="block-head"><h2>Skill Workshop</h2><a href="{url('resources/')}">All lessons →</a></div>
-  <p class="muted">Learn to write skills that actually improve your work.</p>
-  <div class="lessons lessons-grid">{lessons}</div>
+<section class="block duo">
+  <div class="duo-col">
+    <p class="eyebrow">Reading room</p>
+    <div class="block-head"><h2>Insights</h2><a href="{url('insights/')}">All insights →</a></div>
+    <p class="muted">Essays from my newsletter, <em>Signals Across Markets</em>, on AI, society and markets.</p>
+    <ul class="ins-list">{latest}</ul>
+  </div>
+  <div class="duo-col">
+    <p class="eyebrow">Skill Workshop</p>
+    <div class="block-head"><h2>Write your own</h2><a href="{url('resources/')}">All lessons →</a></div>
+    <p class="muted">Learn to write skills that actually improve your work.</p>
+    <div class="lessons">{lessons}</div>
+  </div>
 </section>
 
 <section class="block pro-teaser">
@@ -452,7 +454,7 @@ def build_skill(s, skills, site):
   <section id="install" class="skill-sec"><h2>Install</h2>{install_block(s)}</section>
   <section class="skill-sec"><h2>The full instructions</h2><p class="muted">This is exactly what Claude reads. Nothing hidden.</p><div class="prose skill-md">{md(s['body'])}</div></section>
   {f'<section class="skill-sec"><h2>Search terms</h2><p class="muted">{e(s["terms"])}</p></section>' if s['terms'] else ''}
-  {f'<section class="skill-sec"><h2>Same drawer</h2><div class="cards cards-3">{"".join(card(r, compact=True) for r in related)}</div></section>' if related else ''}
+  {f'<section class="skill-sec"><h2>In the same folder</h2><div class="cards cards-3">{"".join(card(r, compact=True) for r in related)}</div></section>' if related else ''}
 </article>
 """
     return page(f"skills/{s['name']}/", f"{s['name']}: {s['tagline']} · Claude skill",
