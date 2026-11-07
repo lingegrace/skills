@@ -1,7 +1,9 @@
 # Site settings for Grace's Skill Library.
 
-# Where "Request a skill", feedback and custom-skill forms are sent (Formspree, Web3Forms, etc.).
-# Leave empty until it's set up: forms then say they aren't connected yet, instead of pretending to send.
+# Where "Request a skill", feedback (the lamp) and custom-skill forms are sent.
+# Use the Web app URL of the Google Apps Script in backend/google-sheet-receiver.gs
+# (looks like https://script.google.com/macros/s/…/exec). Each message becomes a row in your Google Sheet
+# and you get an email. Leave empty until it's set up: forms then say they aren't connected yet.
 form_endpoint: ""
 
 # Claude Code plugin for each drawer (see .claude-plugin/marketplace.json in the skills repo).

@@ -178,6 +178,12 @@
     const data = Object.fromEntries(new FormData(form));
     data.type = type; data.page = location.pathname + location.search;
     if (!endpoint) throw new Error('not-connected');
+    if (/script\.google(usercontent)?\.com/.test(endpoint)) {
+      // Google Apps Script web app → appends a row to Grace's Google Sheet and emails her.
+      // text/plain avoids a CORS preflight; the response is opaque, so a network error is the only failure we can see.
+      await fetch(endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) });
+      return;
+    }
     const r = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
     if (!r.ok) throw new Error('failed');
   };
@@ -225,6 +231,10 @@
     cord.addEventListener('pointerup', release); cord.addEventListener('pointercancel', release);
     cord.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(); } });
     document.addEventListener('keydown', ev => { if (ev.key === 'Escape' && lamp.classList.contains('on')) toggle(); });
+    // click anywhere outside the lamp and its card to put it away
+    document.addEventListener('pointerdown', ev => {
+      if (lamp.classList.contains('on') && !panel.contains(ev.target) && !cord.contains(ev.target)) toggle();
+    });
   }
 
   /* ───────── 7. Install tabs + copy buttons ───────── */
