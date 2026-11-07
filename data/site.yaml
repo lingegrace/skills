@@ -1,0 +1,148 @@
+# Site settings for Grace's Skill Library.
+
+# Where "Request a skill", feedback and custom-skill forms are sent (Formspree, Web3Forms, etc.).
+# Leave empty until it's set up: forms then say they aren't connected yet, instead of pretending to send.
+form_endpoint: ""
+
+# Claude Code plugin for each drawer (see .claude-plugin/marketplace.json in the skills repo).
+plugins:
+  research: research-intelligence-skills
+  writing: writing-skills
+  work: work-skills
+  learning: learning-skills
+  marketing: marketing-skills
+  product: product-skills
+  skill-engineering: skill-engineering-skills
+
+# Cards in the swipeable stack on the home page.
+hero_stack: [deep-research, meeting-to-actions, human-writing, literature-review, value-proposition-writer, socratic-tutor]
+
+# "I'm a…" picker on the home page.
+personas:
+  - label: Student
+    line: Read faster, write clearer, and revise smarter for your degree.
+    skills: [literature-review, paper-tutor, academic-editing, thesis-chapter-review, citation-formatter, active-recall]
+  - label: Researcher
+    line: From a vague topic to a defensible finding, with every source checked.
+    skills: [research-question-grill, deep-research, interview-guide, thematic-analysis, survey-design, quantitative-analysis]
+  - label: Marketer
+    line: Know the customer, find the message, and ship pages that convert.
+    skills: [customer-review-mining, positioning-messaging, seo-research, landing-page-writer, content-repurposing, competitor-messaging]
+  - label: Product manager
+    line: Discover the right problem, then write it down so everyone builds the same thing.
+    skills: [product-discovery, prd-writer, value-proposition-writer, user-persona-builder, decision-memo, competitor-analysis]
+  - label: Content creator
+    line: Find topics worth writing, research them properly, and sound like yourself.
+    skills: [topic-discovery, content-research-analyst, linkedin-writer, newsletter-writer, my-writing-voice, fact-check-draft]
+  - label: Anyone at work
+    line: The documents everyone writes, done in a fraction of the time.
+    skills: [meeting-to-actions, weekly-report, executive-writing, decision-memo, document-review, sop-builder]
+  - label: Exam & career prep
+    line: Practice with a patient tutor, find your weak spots, and walk into the room ready.
+    skills: [ielts-writing-coach, study-plan-builder, mistake-analysis, socratic-tutor, interview-practice, resume-review]
+
+# Order of cards inside each drawer (anything not listed goes last, alphabetically).
+order:
+  # research
+  - deep-research
+  - research-question-grill
+  - literature-review
+  - market-research
+  - competitor-analysis
+  - trend-research
+  - topic-discovery
+  - fact-check-draft
+  - content-research-analyst
+  - interview-guide
+  - thematic-analysis
+  - survey-design
+  - quantitative-analysis
+  - sociology-deep-research
+  # writing
+  - human-writing
+  - my-writing-voice
+  - long-form-editor
+  - linkedin-writer
+  - newsletter-writer
+  - executive-writing
+  - copy-editor
+  - interview-to-article
+  - academic-editing
+  - abstract-writer
+  - methods-section-writer
+  - citation-formatter
+  - peer-review-response
+  - thesis-chapter-review
+  - ethics-application
+  # work
+  - meeting-to-actions
+  - decision-memo
+  - weekly-report
+  - document-review
+  - sop-builder
+  # learning
+  - socratic-tutor
+  - paper-tutor
+  - book-tutor
+  - active-recall
+  - knowledge-gap-detector
+  - transfer-practice
+  - study-plan-builder
+  - mistake-analysis
+  - ielts-writing-coach
+  - ielts-speaking-partner
+  - interview-practice
+  - resume-review
+  # marketing
+  - value-proposition-writer
+  - positioning-messaging
+  - customer-review-mining
+  - competitor-messaging
+  - seo-research
+  - landing-page-writer
+  - content-repurposing
+  - feature-launch-kit
+  - customer-case-study
+  # product
+  - product-discovery
+  - prd-writer
+  - feature-spec
+  - product-critique
+  - user-persona-builder
+  - ai-product-audit
+  # skill engineering
+  - skill-creator
+  - prompt-to-skill
+  - workflow-decomposer
+  - skill-reviewer
+  - skill-eval
+  - agent-orchestrator
+
+# Shown under "Built on the same principles".
+methods:
+  - Braun & Clarke thematic analysis
+  - PRISMA screening
+  - Minto Pyramid / SCQA
+  - BLUF
+  - Retrieval practice
+  - Spaced repetition
+  - Socratic questioning
+  - SQ3R active reading
+  - Opportunity Solution Tree
+  - Jobs-to-be-Done
+  - Nielsen's heuristics
+  - Feature → Advantage → Benefit
+  - TAM / SAM / SOM
+  - STEEP horizon scanning
+  - Search intent
+  - STAR method
+  - SIPOC
+
+# "Coming next" on the Skill Workshop page.
+upcoming_lessons:
+  - How I decompose a job into AI skills
+  - A skill is a workflow, not a prompt
+  - "Most skills don't need more instructions. They need better inputs."
+  - How to evaluate a skill without asking AI whether it worked
+  - What I learned from studying 20 real-world AI skills
+  - "Free vs paid AI skills: what should actually be monetized?"

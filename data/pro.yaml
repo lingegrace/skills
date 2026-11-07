@@ -1,51 +1,108 @@
 # Pro / paid skills. Edit this file to set prices and checkout links.
-# When a plan has a checkout_url (Lemon Squeezy, Gumroad, Stripe Payment Link…), its button becomes "Buy".
-# Without one, the button is "Join the waitlist" (opens an email).
+# A plan with checkout_url (Lemon Squeezy, Gumroad, Stripe Payment Link…) shows a "Buy" button.
+# A plan with form: true opens the custom-skill form. Otherwise the button is "Join the waitlist".
 
 intro: >-
-  Everything in the catalog is free and stays free. Pro adds deeper, done-for-you workflows for academic and
-  content work, plus early access to new skills. Pro is not open yet. Join the waitlist and you'll hear first.
+  The free catalog covers single tasks: one input, one method, one output. Pro skills run whole workflows end to
+  end, from research to a published piece or from scattered docs to a working knowledge base, with checkpoints where
+  you approve the direction. If your work needs something more specific, I'll build a skill around it.
 
 plans:
   - name: Free
     price: "$0"
-    note: Forever, MIT-licensed
+    note: Open source, forever
     includes:
       - Every skill in the catalog
       - Install in Claude Code, Claude.ai or the desktop app
-      - All Workshop lessons
+      - All Skill Workshop lessons
     cta: Browse the catalog
     checkout_url: /skills/skills/
   - name: Pro skill
     price: Coming soon
-    note: Buy one skill, keep it forever
+    note: Buy one workflow, keep it forever
     highlight: true
     includes:
-      - One Pro skill, with all future updates
+      - One end-to-end Pro workflow
+      - All future updates to it
       - Worked examples and templates
-      - Email support
   - name: Library pass
     price: Coming soon
-    note: Every Pro skill, including new ones
+    note: Every Pro workflow, including new ones
     includes:
       - All Pro skills
       - Every new Pro skill as it ships
       - Early access to new free skills
+  - name: Custom skill
+    price: Let's talk
+    note: Built around your team's own process
+    includes:
+      - A consultation on the work you want packaged
+      - A skill designed for your inputs, outputs and standards
+      - Testing on your real material before handover
+    cta: Tell me about your work
+    form: true
 
-# Pro skills appear here once approved. Leave empty to hide the section.
-skills: []
+# Pro skills (long-horizon workflows). Listed here; the files themselves are sold, not published.
+skills:
+  - name: research-to-article
+    field: Content
+    tagline: From a question to a published article
+    summary: Deep research, angle, outline, draft in your voice, fact-check, edit, and a publishing package with social posts.
+    stages: 9 stages · 2 checkpoints
+  - name: linkedin-content-system
+    field: Content
+    tagline: A month of LinkedIn content, researched
+    summary: Pillars, topic bank, calendar, research per post, drafts in your voice, fact-check, repurposing and a monthly review.
+    stages: 9 stages · checkpoints on pillars and calendar
+  - name: content-strategist
+    field: Marketing
+    tagline: Audience to key message to every channel
+    summary: Audience, JTBD, research, positioning and key message, then angles, funnel mapping, drafts and repurposing, with a message-integrity check at every step.
+    stages: 11 stages · 2 checkpoints
+  - name: marketing-researcher
+    field: Research
+    tagline: A market judgment you can defend
+    summary: Define the question, map competitors, build a taxonomy, gather tiered evidence, compare, find white space and write the judgment memo.
+    stages: 8 stages · 2 checkpoints
+  - name: pm-researcher
+    field: Product
+    tagline: User, competitor and market research to a decision
+    summary: Synthesizes user research, competitors and the market into an opportunity tree, a prioritized recommendation and a PRD seed.
+    stages: 7 stages · checkpoint on priorities
+  - name: seo-content-system
+    field: Marketing
+    tagline: From keywords to a content plan that ranks
+    summary: Keyword research and intent clusters, a funnel topic map, briefs, drafts, on-page checks, internal links and a refresh schedule.
+    stages: 8 stages · checkpoint on the topic map
+  - name: bofu-page-writer
+    field: Marketing
+    tagline: Comparison, alternatives and pricing pages
+    summary: Fair, sourced comparison tables and bottom-of-funnel page copy, with proof, FAQ, schema suggestions and a claims check.
+    stages: 7 stages · checkpoint on every competitor claim
+  - name: knowledge-base-builder
+    field: Work
+    tagline: Scattered docs into one knowledge base
+    summary: Inventory, taxonomy, de-duplication, article templates, rewritten articles, cross-links, a gap list and a maintenance plan.
+    stages: 9 stages · checkpoint on the taxonomy
+  - name: skill-eval-system
+    field: Skill Engineering
+    tagline: Test and track your team's skills
+    summary: Criteria per skill, a test set, baseline runs, scoring, and regression tracking across versions before you ship changes.
+    stages: 7 stages · checkpoint before each release
 
 faq:
   - q: Are the free skills really free?
-    a: Yes. They are MIT-licensed on GitHub. You can use, change and share them, including at work.
+    a: Yes. They're open source under the MIT license, which means anyone can use, copy, change and share them, including at work and in commercial projects. The only condition is keeping the short copyright notice in the files. I chose this license so the free skills can spread as widely as possible.
+  - q: What's the difference between a free skill and a Pro skill?
+    a: A free skill does one job well, like turning a meeting into action items. A Pro skill runs a whole workflow of many steps, like going from a research question to a fact-checked, published article, and stops at checkpoints for your approval.
   - q: What does a skill actually do?
-    a: A skill is a set of instructions Claude loads when your request matches it. It turns Claude into a careful specialist for one job, such as a Braun & Clarke thematic analysis or a value proposition, with fixed steps and a fixed output.
+    a: A skill is a set of instructions Claude loads when your request matches it. It makes Claude work like a careful specialist for that job, asking the right questions first, following a named method, and producing a fixed kind of output.
   - q: Which Claude plans and apps work?
     a: Claude Code, Claude.ai and the Claude desktop app, on any plan where Skills are enabled. Skills are plain Markdown, so other agents that support the Agent Skills format can use them too.
   - q: Do the skills browse the web or see my data?
-    a: A skill doesn't add web access or send your data anywhere. It works with what you give Claude, and with web search only if your Claude setup already has it.
-  - q: When will Pro open?
-    a: Join the waitlist and you'll get an email when it opens.
+    a: A skill doesn't add web access or send your data anywhere. It works with what you give Claude, and uses web search only if your Claude setup already has it.
+  - q: How does a custom skill work?
+    a: Tell me about the work you want packaged. We'll talk through what you start from, what you need to hand in and how you judge quality. I'll design the skill around that and test it on your real material before you use it.
 
 refunds: >-
   The refund policy for Pro purchases will be published here before Pro opens. Free skills cost nothing, so there's nothing to refund.
