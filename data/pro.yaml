@@ -1,0 +1,51 @@
+# Pro / paid skills. Edit this file to set prices and checkout links.
+# When a plan has a checkout_url (Lemon Squeezy, Gumroad, Stripe Payment Link…), its button becomes "Buy".
+# Without one, the button is "Join the waitlist" (opens an email).
+
+intro: >-
+  Everything in the catalog is free and stays free. Pro adds deeper, done-for-you workflows for academic and
+  content work, plus early access to new skills. Pro is not open yet. Join the waitlist and you'll hear first.
+
+plans:
+  - name: Free
+    price: "$0"
+    note: Forever, MIT-licensed
+    includes:
+      - Every skill in the catalog
+      - Install in Claude Code, Claude.ai or the desktop app
+      - All Workshop lessons
+    cta: Browse the catalog
+    checkout_url: /skills/skills/
+  - name: Pro skill
+    price: Coming soon
+    note: Buy one skill, keep it forever
+    highlight: true
+    includes:
+      - One Pro skill, with all future updates
+      - Worked examples and templates
+      - Email support
+  - name: Library pass
+    price: Coming soon
+    note: Every Pro skill, including new ones
+    includes:
+      - All Pro skills
+      - Every new Pro skill as it ships
+      - Early access to new free skills
+
+# Pro skills appear here once approved. Leave empty to hide the section.
+skills: []
+
+faq:
+  - q: Are the free skills really free?
+    a: Yes. They are MIT-licensed on GitHub. You can use, change and share them, including at work.
+  - q: What does a skill actually do?
+    a: A skill is a set of instructions Claude loads when your request matches it. It turns Claude into a careful specialist for one job, such as a Braun & Clarke thematic analysis or a value proposition, with fixed steps and a fixed output.
+  - q: Which Claude plans and apps work?
+    a: Claude Code, Claude.ai and the Claude desktop app, on any plan where Skills are enabled. Skills are plain Markdown, so other agents that support the Agent Skills format can use them too.
+  - q: Do the skills browse the web or see my data?
+    a: A skill doesn't add web access or send your data anywhere. It works with what you give Claude, and with web search only if your Claude setup already has it.
+  - q: When will Pro open?
+    a: Join the waitlist and you'll get an email when it opens.
+
+refunds: >-
+  The refund policy for Pro purchases will be published here before Pro opens. Free skills cost nothing, so there's nothing to refund.
