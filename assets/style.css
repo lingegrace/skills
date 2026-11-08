@@ -589,9 +589,9 @@ a.cat-click:hover img, a.cat-click:focus-visible img { transform: rotate(-6deg) 
 
 /* About: buttons in the headline serif, text closer to the top */
 .about-head { padding-bottom: 1.6rem; }
-@media (min-width: 701px) { .about-head .about-cat { margin-bottom: -4rem; } }
+@media (min-width: 1200px) { .about-head .about-cat { margin-bottom: -4rem; } }
 .about-head .hero-cta { margin-top: 1.6rem; }
-.about-head .btn { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 1.25rem; letter-spacing: 0; padding: .45rem 1.1rem; }
+.about-head .btn { font-family: 'Fraunces', 'Instrument Serif', serif; font-weight: 400; font-size: 1.02rem; letter-spacing: -.005em; padding: .55rem 1.1rem; }
 
 /* About: tap the cat for sparkles */
 .about-cat { cursor: pointer; }
