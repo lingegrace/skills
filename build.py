@@ -410,7 +410,7 @@ def build_home(skills, issues, resources, site):
   <div class="duo-col">
     <p class="eyebrow">Skill Workshop</p>
     <div class="block-head"><h2>Write your own skill</h2><a href="{url('resources/')}">All lessons →</a></div>
-    <p class="muted">How to create skills that actually work, plus my LLM notebook and learning notes.</p>
+    <p class="muted">How to create skills that actually work.</p>
     <div class="lessons">{lessons}</div>
   </div>
 </section>
