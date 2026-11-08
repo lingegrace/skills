@@ -19,7 +19,8 @@ google_form:
 
 # Claude Code plugin for each drawer (see .claude-plugin/marketplace.json in the skills repo).
 plugins:
-  research: research-intelligence-skills
+  social-science: social-science-research-skills
+  market-research: market-research-skills
   writing: writing-skills
   work: work-skills
   learning: learning-skills
@@ -38,7 +39,6 @@ personas:
     skills: [literature-review, paper-tutor, academic-editing, thesis-chapter-review, citation-formatter, active-recall]
   - label: Researcher
     heading: ["I'm a", "researcher"]
-    line: From a vague topic to a defensible finding, with every source checked.
     skills: [research-question-grill, deep-research, interview-guide, thematic-analysis, survey-design, quantitative-analysis]
   - label: Marketer
     heading: ["I'm a", "marketer"]

@@ -1,32 +1,38 @@
 {
   "newsletter": "Signals Across Markets",
   "url": "https://www.linkedin.com/newsletters/7422191016994217984/",
+  "logo": "https://media.licdn.com/dms/image/v2/D5612AQHL-IQHm0zSEQ/series-logo_image-shrink_100_100/B56Zz7vlJLKAAY-/0/1773750081815?e=2147483647&v=beta&t=G1HEjrfV1tgmexOxfVrXHP_y5SzkedpTQ2YlToTaH6c",
   "updated": "2026-11-08",
   "issues": [
     {
       "title": "Is AI Capex Paying Off, or Is It a Bubble? What the US and China Show in 2026",
       "url": "https://www.linkedin.com/pulse/ai-capex-paying-off-bubble-what-us-china-show-2026-linge-guo-kh4zc",
-      "date": "2026-11-08"
+      "date": "2026-11-08",
+      "cover": "https://media.licdn.com/dms/image/v2/D5612AQGFFF1FSnCYTg/article-cover_image-shrink_720_1280/B56aG7RQJ4HgAQ-/0/1794143224828?e=2147483647&v=beta&t=Y3GcrxUa3AToEvQ_xR7jg8M4VujvB55YrwR7rinc3dE"
     },
     {
       "title": "How Is China Using AI in 2026? Personal Agents, Super-Apps and a New Search…",
       "url": "https://www.linkedin.com/pulse/how-china-using-ai-2026-personal-agents-super-apps-new-linge-guo-gvmnc",
-      "date": "2026-11-08"
+      "date": "2026-11-08",
+      "cover": "https://media.licdn.com/dms/image/v2/D5612AQHffF553RAo3g/article-cover_image-shrink_720_1280/B56aG7RMhkIwAQ-/0/1794143209880?e=2147483647&v=beta&t=HDzSrFGyR56dkHuBCB6nqEW5No_t7aE7rycL-WT7_lY"
     },
     {
       "title": "What Is an AI Agent? Why 2026 Is the Year AI Started Acting for Us",
       "url": "https://www.linkedin.com/pulse/what-ai-agent-why-2026-year-started-acting-us-linge-guo-hmusc",
-      "date": "2026-11-07"
+      "date": "2026-11-07",
+      "cover": "https://media.licdn.com/dms/image/v2/D5612AQFILzEOYBCWrQ/article-cover_image-shrink_720_1280/B56aG7RF22HsAQ-/0/1794143182597?e=2147483647&v=beta&t=Tndlxxa3nZ6imOJAY3aI7vVJRB2QBz3vWzSFbE-sCGA"
     },
     {
       "title": "How to Find Meaning in Life in the Age of AI",
       "url": "https://www.linkedin.com/pulse/how-find-meaning-life-age-ai-linge-guo-ajw7c",
-      "date": "2026-10-25"
+      "date": "2026-10-25",
+      "cover": "https://media.licdn.com/dms/image/v2/D5612AQHCvJXF0FCAaw/article-cover_image-shrink_720_1280/B56aG1fNnuG4AU-/0/1794046223144?e=2147483647&v=beta&t=O2m3xQgw51_kAtir8TKnTh2pVwy0aKWWYnEaxX7b6-0"
     },
     {
       "title": "Voice AI Workflows. It's More Than Just Typing Faster",
       "url": "https://www.linkedin.com/pulse/voice-ai-workflows-its-more-than-just-typing-faster-linge-guo-rtzsc",
-      "date": null
+      "date": null,
+      "cover": "https://media.licdn.com/dms/image/v2/D5612AQGHJkS3IEfJdg/article-cover_image-shrink_720_1280/B56aFzbV.NJ8AU-/0/1792937911270?e=2147483647&v=beta&t=HYvPN0L39FxMwOkp3EzI4GIVb44RGno7cG6sS3FzUYE"
     }
   ]
 }

@@ -34,13 +34,16 @@ NEWSLETTER_JSON = PERSONAL_SITE + "newsletter.json"
 NEWSLETTER_URL = "https://www.linkedin.com/newsletters/7422191016994217984/"
 SUBSCRIBE_URL = "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7422191016994217984"
 EMAIL = "graceguo2004@outlook.com"
+LINKEDIN = "https://www.linkedin.com/in/lingeguo2004/"
 
 # Repo folder → catalog field (one drawer each). Order = order on the site.
 FIELDS = [
-    {"key": "research", "code": "RS", "slug": "research", "name": "Social Science & Market Research",
-     "blurb": "Find, check and analyse information, then form a judgment.", "color": "#3E6B8A"},
+    {"key": "social-science", "code": "SS", "slug": "social-science", "name": "Social Science Research",
+     "blurb": "Research questions, literature reviews, interviews, thematic and quantitative analysis.", "color": "#3E6B8A"},
+    {"key": "market-research", "code": "MR", "slug": "market-research", "name": "Market Research",
+     "blurb": "Deep research, market sizing, competitors, trends and topics, with sources you can check.", "color": "#8A4E6E"},
     {"key": "writing", "code": "WR", "slug": "writing", "name": "Writing, Editing & Social Media",
-     "blurb": "You know what to say. Turn it into writing that fits the reader.", "color": "#6E7F3E"},
+     "blurb": "Research briefs, fact-checks, your own voice, LinkedIn, newsletters and academic writing.", "color": "#6E7F3E"},
     {"key": "work", "code": "WK", "slug": "work", "name": "Meetings, Memos & Reports",
      "blurb": "Meetings, reports, memos and SOPs, without the busywork.", "color": "#8A6A2E"},
     {"key": "learning", "code": "LN", "slug": "learning", "name": "Learning & Exam Prep",
@@ -330,7 +333,8 @@ def build_home(skills, issues, resources, site):
     p_groups = ""
     for i, p in enumerate(personas):
         items = [by_name[n] for n in p.get("skills", []) if n in by_name][:6]
-        p_groups += f'<div class="who-group" data-who-group="{i}"{"" if i == 0 else " hidden"}><p class="who-line">{e(p.get("line", ""))}</p><div class="cards cards-3">{"".join(card(s, compact=True) for s in items)}</div></div>'
+        line_html = ('<p class="who-line">' + e(p["line"]) + '</p>') if p.get("line") else ""
+        p_groups += f'<div class="who-group" data-who-group="{i}"{"" if i == 0 else " hidden"}>{line_html}<div class="cards cards-3">{"".join(card(s, compact=True) for s in items)}</div></div>'
     # folders: one tab per type of work, its skills as sheets inside
     tabs_html, panels = "", ""
     first = True
@@ -355,7 +359,6 @@ def build_home(skills, issues, resources, site):
     <p class="eyebrow">Claude skills for research, writing and everyday work</p>
     <h1>AI is good at output.<br><em>But input is the work.</em></h1>
     <p class="lede">These skills don't automate your job. They package the work inside it: the right questions to ask first, a proven method to follow, and evidence for every claim.</p>
-    <p class="for">For <b>students</b> in social science, media and education, and for <b>people at work</b> in marketing, product, content, research and operations.</p>
     <div class="hero-cta"><a class="btn btn-ink" href="#who">Find skills for me</a><a class="btn btn-line" href="{url('skills/')}">See the whole catalog</a></div>
   </div>
   <div class="hero-stack" id="stack" aria-label="Sample skill cards. Swipe a card up to see the next one.">
@@ -373,13 +376,13 @@ def build_home(skills, issues, resources, site):
 </section>
 
 <section class="block">
-  <a class="catalog-cta" href="{url('skills/')}" aria-label="Open the whole catalog">
+  <a class="cat-cta" href="{url('skills/')}" aria-label="Open the whole catalog">
     <span class="cta-text">
       <span class="eyebrow">Or browse by type of work</span>
       <span class="cta-title">Every skill, filed by field</span>
       <span class="cta-fields">{' · '.join(e(f['name']) for f in FIELDS)}</span>
     </span>
-    <span class="cta-arrow" aria-hidden="true">→</span>
+    <span class="cat-click"><span class="bubble">Click me!</span><img src="{url('assets/grace-cat-cutout-480.png')}" alt="" width="120" height="183"></span>
   </a>
 </section>
 
@@ -473,31 +476,45 @@ def build_skill(s, skills, site):
                 (s["summary"] + " Free Claude skill for Claude Code and Claude.ai.")[:300], body, site, active="skills/")
 
 
+def cache_covers(issues):
+    """Download each issue's cover into the site so we never depend on LinkedIn's image links."""
+    import hashlib
+    d = OUT / "assets" / "covers"
+    d.mkdir(parents=True, exist_ok=True)
+    for i in issues:
+        src = i.get("cover")
+        if not src:
+            continue
+        name = hashlib.sha1(src.split("?")[0].encode()).hexdigest()[:16] + ".jpg"
+        try:
+            req = urllib.request.Request(src, headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/130 Safari/537.36"})
+            with urllib.request.urlopen(req, timeout=20) as r:
+                (d / name).write_bytes(r.read())
+            i["cover"] = url("assets/covers/" + name)
+        except Exception as ex:
+            print(f"cover: keeping remote link ({ex})")
+
+
 def build_insights(issues, site):
-    items = "".join(f"""<li><a href="{e(i['url'])}" target="_blank" rel="noopener"><span class="ins-date">{fmt_date(i.get('date'))}</span><span class="ins-title">{e(i['title'])}</span><span class="ins-arrow">↗</span></a></li>""" for i in issues[1:])
+    def cover(i, cls="ins-cover"):
+        return f'<img class="{cls}" src="{e(i["cover"])}" alt="" loading="lazy" referrerpolicy="no-referrer">' if i.get("cover") else f'<span class="{cls} ins-cover-empty"></span>'
     lead = issues[0] if issues else None
-    lead_html = f"""<a class="ins-lead" href="{e(lead['url'])}" target="_blank" rel="noopener"><span class="eyebrow">Latest issue · {fmt_date(lead.get('date'))}</span><span class="ins-lead-title">{e(lead['title'])}</span><span class="btn btn-line">Read on LinkedIn ↗</span></a>""" if lead else '<p class="muted">New issues appear here automatically.</p>'
+    lead_html = f"""<a class="ins-feature" href="{e(lead['url'])}" target="_blank" rel="noopener">{cover(lead, 'ins-feature-img')}<span class="ins-feature-text"><span class="eyebrow">Latest issue · {fmt_date(lead.get('date'))}</span><span class="ins-feature-title">{e(lead['title'])}</span><span class="ins-read">Read on LinkedIn ↗</span></span></a>""" if lead else '<p class="muted">New issues appear here automatically.</p>'
+    grid = "".join(f"""<a class="ins-card" href="{e(i['url'])}" target="_blank" rel="noopener">{cover(i)}<span class="ins-card-body"><span class="ins-date">{fmt_date(i.get('date'))}</span><span class="ins-card-title">{e(i['title'])}</span></span></a>""" for i in issues[1:])
     body = f"""
-<section class="page-head insights-head">
-  <p class="eyebrow">Reading room</p>
-  <h1>Insights</h1>
-  <div class="author">
-    <img class="author-mark" src="{url('assets/grace-cat.png')}" alt="Grace's avatar: a calico cat drinking bubble tea" width="88" height="88">
-    <div>
-      <p class="lede">I'm <b>Linge (Grace) Guo</b>, a sociologist trained at UCL and Oxford. I study how AI and digital technology reshape the way we know, work and live, and I build tools from what I learn.</p>
-      <div class="hero-cta"><a class="btn btn-accent" href="{SUBSCRIBE_URL}">Subscribe on LinkedIn</a><a class="btn btn-line" href="{PERSONAL_SITE}">Visit my personal site ↗</a></div>
-    </div>
+<section class="page-head nl-head">
+  <img class="nl-logo" src="{url('assets/signals-cat.png')}" alt="A sleeping pink cat, the mascot of Signals Across Markets" width="207" height="110">
+  <div>
+    <p class="eyebrow">Insights · from my LinkedIn newsletter</p>
+    <h1>Signals Across Markets</h1>
+    <p class="lede">One signal a week, from AI, technology, society or the economy, and what it means for the people living through it. Written by <a href="{url('about/')}">Linge (Grace) Guo</a>, a sociologist who studies how AI reshapes work and everyday life. New issues appear here automatically.</p>
   </div>
 </section>
-<section class="block nl-about">
-  <h2><em>Signals Across Markets</em></h2>
-  <p>A weekly newsletter on LinkedIn. Each issue takes one signal, from macro forces, technology news, society or AI, and asks what it means for the people living through it. It's written from a humanistic, sociological perspective: less hype about what AI can do, more attention to what it changes about work, learning and everyday life.</p>
-  <ul class="nl-facts"><li><b>Weekly</b> on LinkedIn</li><li><b>One idea</b> per issue, with sources</li><li><b>For</b> professionals, students and anyone curious about where AI is taking us</li></ul>
-</section>
-<section class="block">{lead_html}<ul class="ins-list ins-list-big">{items}</ul><p class="muted small">New issues appear here automatically. <a href="{NEWSLETTER_URL}">See every issue on LinkedIn ↗</a></p></section>
+<section class="block">{lead_html}</section>
+<section class="block"><div class="block-head"><h2>Earlier issues</h2><a href="{NEWSLETTER_URL}" target="_blank" rel="noopener">Every issue on LinkedIn ↗</a></div><div class="ins-grid">{grid}</div></section>
 """
-    return page("insights/", "Insights · Grace's Skill Library",
-                "Insights on AI, society and markets from Linge (Grace) Guo's weekly LinkedIn newsletter, Signals Across Markets.",
+    return page("insights/", "Signals Across Markets · Insights · Grace's Skill Library",
+                "Signals Across Markets: Linge (Grace) Guo's weekly LinkedIn newsletter on AI, society and markets, mirrored here.",
                 body, site, active="insights/")
 
 
@@ -617,7 +634,7 @@ def build_about(skills, site):
     <p class="eyebrow">About the librarian</p>
     <h1>Hi, I'm Grace.</h1>
     <p class="lede">I'm a sociologist (UCL; MSc Sociology, Oxford) who studies how AI and digital technologies reshape the way we know, work and live.</p>
-    <div class="hero-cta"><a class="btn btn-accent" href="{SUBSCRIBE_URL}">Subscribe on LinkedIn</a><a class="btn btn-line" href="{PERSONAL_SITE}">Visit my personal site ↗</a></div>
+    <div class="hero-cta"><a class="btn btn-accent" href="{LINKEDIN}">Connect with me on LinkedIn</a><a class="btn btn-line" href="{PERSONAL_SITE}">Visit my personal site ↗</a></div>
   </div>
   <img class="about-cat" src="{url('assets/grace-cat-cutout-480.png')}" alt="Grace's avatar: a calico cat drinking bubble tea" width="300" height="457">
 </section>
@@ -658,6 +675,7 @@ def main():
     write("skills/index.html", build_catalog(skills, site))
     for s in skills:
         write(f"skills/{s['name']}/index.html", build_skill(s, skills, site))
+    cache_covers(issues)
     write("insights/index.html", build_insights(issues, site))
     write("resources/index.html", build_resources(resources, site))
     for r in resources:
