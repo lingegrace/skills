@@ -567,3 +567,13 @@ a.cat-cta:hover .cat-click img { transform: rotate(-6deg) translateY(-4px); }
   font-family: 'Inter', sans-serif; font-weight: 600; font-size: .9rem; color: #fff; background: var(--ink); padding: .65rem 1rem; border-radius: 100px; box-shadow: 0 10px 20px -8px rgba(26,15,7,.5); transition: transform .2s; animation: rise .3s ease; }
 .to-top:hover { transform: translateY(-2px); background: var(--accent); }
 .to-top[hidden] { display: none; }
+
+/* catalog card on home: only the cat is the link */
+.cat-cta { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; color: var(--ink);
+  padding: 1.4rem 1.8rem 1.4rem 2rem; background: var(--card); border: 1px solid var(--rule); border-left: 4px solid var(--accent); border-radius: 10px; box-shadow: var(--shadow); }
+.cat-cta .cta-title { font-size: clamp(1.5rem, 3vw, 2.1rem); color: var(--ink); }
+.cat-cta .cta-fields { color: var(--ink-3); font-size: .9rem; }
+a.cat-click { text-decoration: none; cursor: pointer; }
+a.cat-click:hover img, a.cat-click:focus-visible img { transform: rotate(-6deg) translateY(-4px); }
+@media (max-width: 560px) { .cat-cta { padding: 1.2rem 1rem; } }
+.duo .lessons .lesson-title { font-weight: 400; }

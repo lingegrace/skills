@@ -352,7 +352,7 @@ def build_home(skills, issues, resources, site):
     methods = site.get("methods", [])
     method_chips = "".join(f"<span>{e(m)}</span>" for m in methods)
     latest = "".join(f"""<li><a href="{e(i['url'])}" target="_blank" rel="noopener"><span class="ins-date">{fmt_date(i.get('date'))}</span><span class="ins-title">{e(i['title'])}</span><span class="ins-arrow">↗</span></a></li>""" for i in issues[:3])
-    lessons = "".join(f"""<a class="lesson" href="{url('resources/' + r['slug'] + '/')}"><span class="lesson-no">{e(r.get('time', ''))}</span><span class="lesson-title">{e(r['title'])}</span></a>""" for r in [x for x in resources if x['column'] in ('skill-workshop', 'how-skills-work')][:4])
+    lessons = "".join(f"""<a class="lesson" href="{url('resources/' + r['slug'] + '/')}"><span class="lesson-no">{e(r.get('time', ''))}</span><span class="lesson-title">{e(r['title'])}</span></a>""" for r in [x for x in resources if x['column'] == 'skill-workshop'][:4])
     body = f"""
 <section class="hero">
   <div class="hero-text">
@@ -376,14 +376,14 @@ def build_home(skills, issues, resources, site):
 </section>
 
 <section class="block">
-  <a class="cat-cta" href="{url('skills/')}" aria-label="Open the whole catalog">
+  <div class="cat-cta">
     <span class="cta-text">
       <span class="eyebrow">Or browse by type of work</span>
       <span class="cta-title">Every skill, filed by field</span>
       <span class="cta-fields">{' · '.join(e(f['name']) for f in FIELDS)}</span>
     </span>
-    <span class="cat-click"><span class="bubble">Click me!</span><img src="{url('assets/grace-cat-cutout-480.png')}" alt="" width="120" height="183"></span>
-  </a>
+    <a class="cat-click" href="{url('skills/')}" aria-label="Open the whole catalog"><span class="bubble">Click me!</span><img src="{url('assets/grace-cat-cutout-480.png')}" alt="" width="120" height="183"></a>
+  </div>
 </section>
 
 <section class="block principles">
@@ -406,7 +406,7 @@ def build_home(skills, issues, resources, site):
   <div class="duo-col">
     <p class="eyebrow">Skill Workshop</p>
     <div class="block-head"><h2>Write your own skill</h2><a href="{url('resources/')}">All lessons →</a></div>
-    <p class="muted">How to create skills that actually work, plus my LLM notebook and reading notes.</p>
+    <p class="muted">How to create skills that actually work, plus my LLM notebook and learning notes.</p>
     <div class="lessons">{lessons}</div>
   </div>
 </section>
