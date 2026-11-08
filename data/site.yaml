@@ -10,12 +10,12 @@ form_endpoint: ""
 # Get them from the form's "Get pre-filled link" (see backend/google-form-setup.md). When action is set,
 # all three forms (request a skill, feedback lamp, custom skill) submit straight into the Google Form.
 google_form:
-  action: ""        # https://docs.google.com/forms/d/e/<FORM_ID>/formResponse
+  action: "https://docs.google.com/forms/d/e/1FAIpQLScDFYcgyxYSzNpi5qQCAhO7kHfMeUmsz7J92VSNvm6SyZDGTw/formResponse"
   fields:
-    type: ""        # entry.XXXXXXXXX  (Type: request / feedback / consult)
-    message: ""     # entry.XXXXXXXXX  (Message)
-    email: ""       # entry.XXXXXXXXX  (Email)
-    page: ""        # entry.XXXXXXXXX  (Page)
+    type: "entry.1241490579"
+    message: "entry.329111907"
+    email: "entry.1396407127"
+    page: "entry.1847325453"
 
 # Claude Code plugin for each drawer (see .claude-plugin/marketplace.json in the skills repo).
 plugins:
