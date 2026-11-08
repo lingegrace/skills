@@ -279,3 +279,29 @@
     navigator.clipboard?.writeText(b.dataset.copy).then(() => { const t = b.textContent; b.textContent = 'Copied ✓'; setTimeout(() => b.textContent = t, 1500); });
   }));
 })();
+
+// About: tap the cat and it sparkles
+(() => {
+  const cat = document.querySelector('.about-cat');
+  if (!cat) return;
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  cat.addEventListener('click', ev => {
+    cat.classList.add('glow');
+    setTimeout(() => cat.classList.remove('glow'), 700);
+    if (calm) return;
+    const r = cat.getBoundingClientRect();
+    const x = ev.clientX || r.left + r.width / 2, y = ev.clientY || r.top + r.height / 2;
+    for (let i = 0; i < 9; i++) {
+      const s = document.createElement('span');
+      s.className = 'sparkle';
+      s.textContent = '✨';
+      const a = (Math.PI * 2 * i) / 9 + Math.random() * .4, d = 60 + Math.random() * 70;
+      s.style.left = x + 'px'; s.style.top = y + 'px';
+      s.style.setProperty('--dx', Math.cos(a) * d + 'px');
+      s.style.setProperty('--dy', Math.sin(a) * d + 'px');
+      s.style.fontSize = (1 + Math.random() * .9) + 'rem';
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 1000);
+    }
+  });
+})();

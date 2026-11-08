@@ -510,9 +510,6 @@ a.cat-cta:hover .cat-click img { transform: rotate(-6deg) translateY(-4px); }
 .btn-boba { background: #D9B48C; border-color: #D9B48C; color: #3B2416; box-shadow: 0 6px 14px -8px rgba(59,36,22,.6); }
 .btn-boba:hover { background: #C99C6E; border-color: #C99C6E; color: #2A190E; }
 
-/* About text in a clearer serif (Fraunces, already used for skill names) */
-.about-head .lede, .about p { font-family: 'Fraunces', serif; font-weight: 400; font-variation-settings: "opsz" 14; line-height: 1.7; }
-.about p { font-size: 1.1rem; }
 
 /* "Find skills for me" lands with "Start from who you are" in view */
 #who { scroll-margin-top: 96px; }
@@ -577,3 +574,28 @@ a.cat-click { text-decoration: none; cursor: pointer; }
 a.cat-click:hover img, a.cat-click:focus-visible img { transform: rotate(-6deg) translateY(-4px); }
 @media (max-width: 560px) { .cat-cta { padding: 1.2rem 1rem; } }
 .duo .lessons .lesson-title { font-weight: 400; }
+
+/* ── round 7 ── */
+/* catalog: search sits closer to the intro */
+.catalog-head { padding-bottom: .6rem; }
+
+/* Pro: wider intro, plans visible on the first screen */
+.pro-head { padding-top: 1.8rem; padding-bottom: .4rem; }
+.pro-intro p:last-child { margin-bottom: 0; }
+.pro-intro { max-width: 1000px; }
+.pro-intro strong { color: var(--ink); font-weight: 600; }
+.plans-block .plans { padding-top: 2.9rem; }
+.plans-block .plan-guide { top: -2.7rem; }
+
+/* About: buttons in the headline serif, text closer to the top */
+.about-head { padding-bottom: 1.6rem; }
+@media (min-width: 701px) { .about-head .about-cat { margin-bottom: -4rem; } }
+.about-head .hero-cta { margin-top: 1.6rem; }
+.about-head .btn { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 1.25rem; letter-spacing: 0; padding: .45rem 1.1rem; }
+
+/* About: tap the cat for sparkles */
+.about-cat { cursor: pointer; }
+.about-cat.glow { filter: drop-shadow(0 0 18px rgba(255, 214, 120, .95)) drop-shadow(0 10px 14px rgba(26,15,7,.18)); transform: rotate(-3deg) scale(1.05); }
+.sparkle { position: fixed; z-index: 60; pointer-events: none; font-size: 1.4rem; line-height: 1; animation: sparkle 1s ease-out forwards; }
+@keyframes sparkle { 0% { transform: translate(-50%, -50%) scale(.3); opacity: 0; } 20% { opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.1) rotate(25deg); opacity: 0; } }

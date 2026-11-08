@@ -3,7 +3,7 @@
 # A plan with form: true opens the custom-skill form. Otherwise the button is "Join the waitlist".
 
 intro: |
-  The free catalog is built for single tasks: one input, one method, one output. Turn a meeting transcript into action items. Check a draft against its sources. Write a value proposition from a PRD. Pro skills run whole workflows end to end, with checkpoints where you approve the direction, and I can build a custom skill around your team's own work.
+  The free catalog is built for single tasks: one input, one method, one output. Turn a meeting transcript into action items. Check a draft against its sources. Write a value proposition from a PRD. **Pro skills run whole workflows end to end**, with checkpoints where you approve the direction, and I can build a custom skill around your team's own work.
 
 plans:
   - name: Free

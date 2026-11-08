@@ -59,6 +59,10 @@ FIELD_BY_KEY = {f["key"]: f for f in FIELDS}
 ALL_PLUGIN = "research-skills"
 
 e = html.escape
+
+
+def bold(s):
+    return re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", s)
 md = lambda text: markdown.markdown(text, extensions=["tables", "fenced_code", "sane_lists"])
 
 
@@ -266,7 +270,7 @@ def request_form(prefill_label="What skill do you wish existed?"):
     return f"""<form class="request" id="request" data-form="request">
   <div class="request-paper">
     <p class="eyebrow">Request a skill</p>
-    <h2>Can't find it? Ask for it.</h2>
+    <h2>Can't find it? Ask for it. I can build it for you.</h2>
     <p class="muted">Describe the task you want help with. Your request comes straight to me.</p>
     <label class="sr-only" for="reqMsg">{e(prefill_label)}</label>
     <textarea id="reqMsg" name="message" rows="3" required placeholder="e.g. Turn my lecture notes into exam questions…"></textarea>
@@ -433,10 +437,10 @@ def build_catalog(skills, site):
   <div class="cards">{''.join(card(s) for s in items)}</div>
 </section>"""
     body = f"""
-<section class="page-head">
+<section class="page-head catalog-head">
   <p class="eyebrow">The catalog</p>
   <h1>Filed by field.</h1>
-  <p class="lede">Every card shows the input it needs and the output you get. Search in your own words, in English or Chinese.</p>
+  <p class="lede">Every card shows the input it needs and the output you get. Search in your own words.</p>
 </section>
 <div class="filters">
   <label class="search"><span class="sr-only">Search skills</span><input id="q" type="search" placeholder="What do you need help with? e.g. sociological interviews, 周报, IELTS essay…" autocomplete="off"></label>
@@ -558,7 +562,7 @@ def build_resources(resources, site):
 <section class="page-head">
   <p class="eyebrow">Skill Workshop</p>
   <h1>How to create skills that actually work</h1>
-  <p class="lede">Everything I've learned about building with AI, in one place: step-by-step lessons on creating Claude skills, what happens inside Claude when a skill runs, my LLM notebook (how models predict, train, align and get evaluated, plus Google's ML Crash Course), reading notes on AI, startups and growth, and short, sourced summaries of AI governance.</p>
+  <p class="lede">Everything I've learned about building with AI, in one place: step-by-step lessons on creating Claude skills, what happens inside Claude when a skill runs, my LLM notebook (how models predict, train, align and get evaluated, plus Google's ML Crash Course), learning notes on AI, startups and growth, and short, sourced summaries of AI governance.</p>
   <nav class="col-nav" aria-label="Sections">{nav}</nav>
 </section>
 {sections}
@@ -609,12 +613,12 @@ def build_pro(pro, site):
     skills_html = "".join(f"""<div class="card card-static"><span class="corner-badge">In Library Pass</span><span class="card-hole" aria-hidden="true"></span><span class="card-top"><span class="call">SC-{n:02d}</span><span class="card-field">{e(x.get('field', ''))}</span><span class="stamp stamp-pro">{e(x.get('status', 'Coming soon'))}</span></span><span class="card-title">{e(x['name'])}</span><span class="card-tag">{e(x.get('tagline', ''))}</span><span class="card-sum">{e(x.get('summary', ''))}</span>{f'<span class="card-stages">{e(x["stages"])}</span>' if x.get('stages') else ''}</div>""" for n, x in enumerate(pro.get("skills", []), 1))
     faq = "".join(f"<details><summary>{e(q['q'])}</summary><p>{e(q['a'])}</p></details>" for q in pro.get("faq", []))
     body = f"""
-<section class="page-head">
+<section class="page-head pro-head">
   <p class="eyebrow">Special collections</p>
   <h1>Pro</h1>
-  <div class="pro-intro">{''.join(f'<p>{e(x)}</p>' for x in (pro.get('intro') or '').split(chr(10)+chr(10)) if x.strip())}</div>
+  <div class="pro-intro">{''.join(f'<p>{bold(e(x))}</p>' for x in (pro.get('intro') or '').split(chr(10)+chr(10)) if x.strip())}</div>
 </section>
-<section class="block"><div class="plans">{''.join(plan(p) for p in pro.get('plans', []))}</div></section>
+<section class="block plans-block"><div class="plans">{''.join(plan(p) for p in pro.get('plans', []))}</div></section>
 {f'<section class="block"><div class="block-head"><h2>In the special collection <span class="h-note">Whole workflows, end to end</span></h2></div><div class="cards cards-3">{skills_html}</div></section>' if skills_html else ''}
 <section class="block" id="consult">
   <form class="request" data-form="consult">
