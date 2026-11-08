@@ -44,7 +44,8 @@ until the loss stops improving
 
 If you plot it, iterations go on the x-axis and loss on the y-axis. A healthy curve drops steeply at first, then flattens out.
 
-> 🖼 Diagram to add: a loss curve with iterations on the x-axis and loss on the y-axis, dropping fast and then flattening at the point of convergence.
+![Machine Learning Crash Course exercise: moving the weight and bias sliders to fit a line with the lowest loss](../../assets/articles/fig-26.png)
+*Machine Learning Crash Course exercise: moving the weight and bias sliders to fit a line with the lowest loss. Source: Google, [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course), CC BY 4.0.*
 
 A model has **converged** when more training won't improve it. The curve is flat and stays flat.
 
@@ -65,6 +66,9 @@ In the course exercise, I set a learning rate of 0.03. The model converged after
 ## What is batch size?
 
 A model rarely looks at all the data before each update. Instead, it works in **batches**:
+
+![Full batch, a single mini-batch, and one epoch made of ten mini-batches](../../assets/articles/fig-25.png)
+*Full batch, a single mini-batch, and one epoch made of ten mini-batches. Source: Google, [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course), CC BY 4.0.*
 
 - The model picks a batch of examples at random, averages their gradients, and then updates the weight and bias once per iteration.
 - **Batch size** is the hyperparameter for how many examples it processes before each update.

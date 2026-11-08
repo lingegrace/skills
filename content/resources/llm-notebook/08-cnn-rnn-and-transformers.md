@@ -53,8 +53,6 @@ P(negative) ≈ 0.01
 
 Prediction: positive sentiment.
 
-> 🖼 Diagram to add: the seven CNN steps for "I like the cat on a mat", showing a 3-word filter sliding over the embedding matrix, the ReLU and max-pool, and the final softmax bar.
-
 ## Local CNN vs global Transformer: what's the difference?
 
 A CNN is **local**. Each filter only sees a small, fixed window: "like the" (two words) or "the cat on" (three words). It never considers the whole sentence at once. Stacking layers widens the view a little, but long-range links stay hard.
@@ -89,8 +87,6 @@ Microsoft's **XiaoIce** (小冰) was a social chatbot designed for companionship
 The data came from human conversations on the internet and from people's conversations with XiaoIce itself, which, according to the notes, amounted to **more than 30 billion conversation pairs since May 2018**.
 
 That second source matters. XiaoIce learned partly from its own users, so the people who talked to it most shaped how it spoke to everyone. For a social scientist, a companion chatbot raises questions that a sentiment classifier doesn't: who is it designed to keep talking, and what does it learn from them?
-
-> 🖼 Diagram to add: XiaoIce's reply architecture, a user message feeding three candidate generators (GRU neural, retrieval on paired data, retrieval on unpaired data) and a response chosen from the candidates.
 
 ## What this means when you write a skill
 

@@ -21,8 +21,6 @@ A **deterministic** program gives the same answer every time for the same input.
 
 A harness hands the checkable parts to code, so the model can spend its effort on the parts that genuinely need judgement.
 
-> 🖼 Diagram to add: the agent loop (think → act → observe) with a "harness" layer wrapped around it, showing a gate before actions (constraints) and a checkpoint after actions (feedback).
-
 There are two kinds.
 
 ## Before the fact: constraints

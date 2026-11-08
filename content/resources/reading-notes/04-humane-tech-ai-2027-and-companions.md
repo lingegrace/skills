@@ -39,8 +39,6 @@ The third assumption is that **democratic institutions remain passive**: governm
 | Racing | Companies and countries compete for speed | Safety testing gets cut short |
 | Passive institutions | Democratic bodies don't intervene | Nobody applies the brakes |
 
-> 🖼 Diagram to add: three arrows (misalignment, racing, passive institutions) converging on "high-risk outcome", with a gap shown where institutions could intervene.
-
 Reading these as assumptions rather than facts is the point. If any of them changes, for example if institutions act, the story changes too. That puts questions of who decides and who is accountable at the centre, not only questions of technology.
 
 ## What are AI companions?

@@ -21,8 +21,6 @@ ChatGPT seemed to arrive out of nowhere in late 2022, but it sits at the end of 
 | 2018 | **BERT and GPT** | The first widely known large *pre-trained* Transformer models. |
 | 2023 | **GPT-4** | A much larger, more capable model in the same family. |
 
-> 🖼 Diagram to add: a horizontal timeline of these six milestones, with GPT-4 at the right end.
-
 ## What did word2vec do?
 
 Computers cannot do maths with the word "cat". word2vec (2013) solved this by turning each word into a **vector**: a list of decimal numbers, such as `[0.21, -0.73, 0.05, …]`. These are often called **embeddings**.
@@ -59,8 +57,6 @@ Output:  [positive, negative, neutral]
 Notice that a person chose the input features: word counts, sentence length and so on. The network only learns how to combine them.
 
 A **deep** network would take the raw text (as embeddings) and pass it through many layers. Early layers might pick up word-level patterns, later ones phrases, and later still the tone of a whole sentence. Nobody hand-designs those features; the layers learn them.
-
-> 🖼 Diagram to add: shallow vs deep network side by side, with hand-crafted features feeding one hidden layer on the left, and raw embeddings feeding many stacked layers on the right.
 
 ## How is an RNN different from a Transformer?
 

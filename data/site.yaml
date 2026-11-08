@@ -172,7 +172,7 @@ resource_columns:
   - key: skill-workshop
     name: Skill Workshop
     kicker: Write your own
-    blurb: Practical lessons on writing skills that actually improve your work, built from real skills in this library.
+    blurb: How to create a skill, a worked example built from a real research method, what the most popular skills do well, and how to test yours before you rely on it.
   - key: how-skills-work
     name: How skills work
     kicker: Under the hood

@@ -44,8 +44,6 @@ This is also a question of trust and power: who holds the data, and who is allow
 
 Startups targeting banks, fintechs and compliance departments. The range was wide, from automated debt collection to AI due diligence (checking a company before investing in it) to a "Copilot for bankers".
 
-> 🖼 Diagram to add: four boxes (AI Ops, Developer tools, Healthcare + biotech, Finance + payments) with two or three example products under each.
-
 ## 16 top YC ventures (from TechCrunch)
 
 TechCrunch picked out 16 YC ventures. Here they are with a one-line description of each:

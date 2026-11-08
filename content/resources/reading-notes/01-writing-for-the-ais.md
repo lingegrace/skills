@@ -40,8 +40,6 @@ The author also questions a shared assumption behind framings like writing as in
 
 His conclusion is that the value is not in volume. It is in writing things that literally do not exist on the internet yet.
 
-> 🖼 Diagram to add: a three-step staircase labelled "teach → persuade → simulate you", with a short note under each step on why it is limited.
-
 ## "Be generous in what you write and selfish in what you choose to write about"
 
 This was the line that stayed with me. The author paraphrases it as his operating principle, one he arrived at more or less by accident, and credits it as the main reason he has kept writing for so long.

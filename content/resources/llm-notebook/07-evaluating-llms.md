@@ -40,8 +40,6 @@ The last paper is a critique. Schaeffer and colleagues examine these sharp, unpr
 
 The lesson for non-engineers: when someone says an ability "emerged", ask which of the four meanings they intend. "Not explicitly trained for" is a much weaker claim than "appeared suddenly and unpredictably".
 
-> 🖼 Diagram to add: the same model-size curve plotted with an all-or-nothing metric (sharp jump) and a gradual metric (smooth rise), illustrating the "mirage" argument.
-
 ## Can a model have seen the test before?
 
 Yes, and it's a real problem. **Contamination** happens when benchmark questions end up in a model's training data, so a high score may reflect memory rather than ability. With "black-box" models, whose training data isn't public, it's hard to check from the outside. That's one reason to test a model on your own examples too.

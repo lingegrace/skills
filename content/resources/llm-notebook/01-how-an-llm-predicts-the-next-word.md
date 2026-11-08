@@ -44,8 +44,6 @@ until the answer is finished
 
 That is the whole generation process. A long, fluent answer is just this loop running hundreds of times. This style of model is called **autoregressive**: each new token depends on the ones it has already produced.
 
-> 🖼 Diagram to add: the 「今天天气」 loop, showing a bar chart of next-character probabilities, one character being chosen, and the arrow feeding it back into the input.
-
 ## Why does guessing the next word look like understanding?
 
 The key is **scale**. When a model has tens or hundreds of billions of **parameters** (the adjustable numbers inside it that are tuned during training), and it has been trained on an enormous amount of text, this "probability prediction" becomes remarkably accurate. Accurate enough that it feels as if the model really understands what you are saying.

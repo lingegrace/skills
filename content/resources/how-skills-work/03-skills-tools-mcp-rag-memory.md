@@ -58,8 +58,6 @@ A typical RAG setup works like this:
 
 "Premium plan" and "Pro subscription" end up near each other, so the right passage is found.
 
-> 🖼 Diagram to add: documents turned into dots in a 2D "meaning space", with the question's dot landing next to the "Pro subscription" passage and far from unrelated passages.
-
 ## Memory: carrying things across conversations
 
 Each new conversation starts with an empty context. A **memory system** stores information that's worth keeping across sessions, and loads it into the context when a new session starts.

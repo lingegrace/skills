@@ -25,7 +25,8 @@ z = bias + weight1 × feature1 + weight2 × feature2 + ...
 probability = sigmoid(z) = 1 / (1 + e^(−z))
 ```
 
-> 🖼 Diagram to add: the S-shaped sigmoid curve, with z on the x-axis and probability (0 to 1) on the y-axis.
+![The sigmoid function squeezes any input into a value between 0 and 1](../../assets/articles/fig-27.png)
+*The sigmoid function squeezes any input into a value between 0 and 1. Source: Google, [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course), CC BY 4.0.*
 
 ### Odds and log-odds
 
@@ -48,6 +49,9 @@ The threshold is set by people, not learned by the model. Move it and you change
 ## What is a confusion matrix?
 
 Once the model makes yes/no calls, we compare them with the **ground truth** (the real answers). There are four possible outcomes:
+
+![A confusion matrix for a spam classifier: true and false positives and negatives](../../assets/articles/fig-29.png)
+*A confusion matrix for a spam classifier: true and false positives and negatives. Source: Google, [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course), CC BY 4.0.*
 
 | | Actually spam | Actually not spam |
 |---|---|---|
@@ -72,11 +76,15 @@ Precision improves as false positives go down; recall improves as false negative
 
 The **ROC curve** (receiver operating characteristic) plots the true positive rate against the **false positive rate** (FPR, the share of real negatives wrongly flagged) at every possible threshold. **AUC** is the area under that curve.
 
+![Two ROC curves: AUC 0.65 versus AUC 0.93](../../assets/articles/fig-35.png)
+*Two ROC curves: AUC 0.65 versus AUC 0.93. Source: Google, [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course), CC BY 4.0.*
+
 - AUC of 0.5 means the model does no better than chance.
 - AUC closer to 1.0 means better separation of the two classes.
 - AUC is useful for comparing two models, as long as the dataset is roughly balanced. The model with the larger area is generally better.
 
-> 🖼 Diagram to add: an ROC curve with three marked points A (low FPR, lower TPR), B (balanced) and C (highest TPR, higher FPR).
+![An ROC curve with three candidate thresholds, A, B and C](../../assets/articles/fig-34.png)
+*An ROC curve with three candidate thresholds, A, B and C. Source: Google, [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course), CC BY 4.0.*
 
 ### Choosing a threshold: points A, B and C
 

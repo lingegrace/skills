@@ -21,7 +21,8 @@ Each layer in the stack learns features at a different level of complexity.
 
 To keep track, I will label the key matrices **A** to **E**. A **matrix** here is simply a table of numbers: one row per token, one column per dimension of its vector.
 
-> 🖼 Diagram to add: the full encoder-decoder diagram with matrices A–E marked at the points where they appear.
+![The Transformer model architecture: an encoder stack (left) and a decoder stack (right)](../../assets/articles/fig-22.png)
+*The Transformer model architecture: an encoder stack (left) and a decoder stack (right). Source: Vaswani et al. (2017), [Attention Is All You Need](https://arxiv.org/abs/1706.03762), Figure 1. Reproduced with attribution, as permitted by the authors for scholarly use.*
 
 ## Step 1: How does the input become numbers?
 

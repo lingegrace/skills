@@ -36,8 +36,6 @@ PPO's drawbacks, according to the notes:
 - it may need a lot of data to converge;
 - its settings (hyperparameters) are not straightforward to tune.
 
-> 🖼 Diagram to add: RLHF pipeline (pairwise human rankings → Bradley-Terry reward model → PPO updates the model) next to DPO (pairwise rankings → model updated directly).
-
 ## What is DPO, and why did it catch on?
 
 **DPO** (*Direct Preference Optimization*) skips the separate reward model. It trains the model directly on preference pairs: for each prompt, a *chosen* answer and a *rejected* one. It has become widely used, especially for open models, because it is simpler and cheaper than running PPO.

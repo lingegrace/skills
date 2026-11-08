@@ -16,6 +16,9 @@ This last part of my Machine Learning Crash Course notes covers how to test a mo
 
 You can't judge a model on the same examples it learned from. That would be like marking students on the exact questions they practised. So the data is divided:
 
+![Splitting a dataset into training, validation and test sets](../../assets/articles/fig-39.png)
+*Splitting a dataset into training, validation and test sets. Source: Google, [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course), CC BY 4.0.*
+
 | Set | Used for |
 |---|---|
 | **Training set** | The model learns its weights from this |
@@ -39,7 +42,8 @@ It should meet all of these:
 
 **Generalization** is the opposite: a model that makes good predictions on new data it hasn't seen.
 
-> 🖼 Diagram to add: training loss and validation loss over iterations; training loss keeps falling while validation loss starts rising, marking where overfitting begins.
+![Overfitting: training loss keeps falling while validation loss starts to rise](../../assets/articles/fig-40.png)
+*Overfitting: training loss keeps falling while validation loss starts to rise. Source: Google, [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course), CC BY 4.0.*
 
 ### When can a model generalize?
 

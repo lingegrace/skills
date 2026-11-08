@@ -49,8 +49,6 @@ A few terms explained:
 - **PMF score** comes from the classic product-market fit survey question: how disappointed would you be if you could no longer use this?
 - **CSAT** and **CES** measure satisfaction and ease. Note that Verna counts only the top box (a 7 out of 7), a deliberately strict bar.
 
-> 🖼 Diagram to add: four segments of a ring (NPS, PMF, CSAT, CES) feeding into one "Lovable Score /100", with the North Star metric shown alongside it.
-
 ## The four questions behind the score
 
 Strip away the acronyms and the Lovable Score asks four plain questions:

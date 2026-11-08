@@ -24,6 +24,9 @@ Three common techniques follow.
 
 **Normalization** puts features on a similar scale. Imagine one feature is age (0 to 100) and another is income (0 to 1,000,000). Without scaling, the bigger numbers dominate.
 
+![Normalization techniques and when to use each](../../assets/articles/fig-36.png)
+*Normalization techniques and when to use each. Source: Google, [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course), CC BY 4.0.*
+
 Normalization:
 
 - Helps models **converge faster** during training.
@@ -46,7 +49,8 @@ A simple linear model can only draw straight-line relationships. To capture curv
 
 Example: cross "country" with "time of day". A purchase at 3 a.m. may mean something different in one country than another. The cross lets the model learn each combination separately.
 
-> 🖼 Diagram to add: a grid showing two bucketed features (e.g. country × time-of-day bucket) and each cell as one crossed feature.
+![A synthetic feature (y = x²) lets a linear model separate classes that a straight line cannot](../../assets/articles/fig-38.png)
+*A synthetic feature (y = x²) lets a linear model separate classes that a straight line cannot. Source: Google, [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course), CC BY 4.0.*
 
 ## What makes a good label?
 
@@ -77,6 +81,9 @@ If you have ever coded interview transcripts with a colleague and calculated kap
 ## What undermines data quality?
 
 Common problems to look for:
+
+![Common problems that undermine data quality, with examples](../../assets/articles/fig-37.png)
+*Common problems that undermine data quality, with examples. Source: Google, [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course), CC BY 4.0.*
 
 - **Omitted values**: missing entries.
 - **Duplicate examples**: the same case appearing more than once.

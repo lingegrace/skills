@@ -33,6 +33,12 @@ None of these touches the model itself. They are all about the system *around* t
 
 **Chain-of-thought (CoT)** prompting asks the model to show its reasoning step by step before giving an answer. The classic way is to include a few worked examples (called *few-shot exemplars*) in the prompt, each with its reasoning written out. Because a model predicts one word at a time, writing out the steps gives it more "room" to get to the right answer.
 
+![A few-shot chain-of-thought exemplar for a maths word problem](../../assets/articles/fig-47.png)
+*A few-shot chain-of-thought exemplar for a maths word problem. Source: Wei et al. (2022), [Chain-of-Thought Prompting Elicits Reasoning in Large Language Models](https://arxiv.org/abs/2201.11903), Table 20, CC BY 4.0.*
+
+![Self-consistency: sample several reasoning paths, then take the most common answer](../../assets/articles/fig-49.png)
+*Self-consistency: sample several reasoning paths, then take the most common answer. Source: Wang et al. (2022), [Self-Consistency Improves Chain of Thought Reasoning in Language Models](https://arxiv.org/abs/2203.11171), Figure 1, CC BY 4.0.*
+
 **Self-consistency** builds on this. Instead of taking one chain of reasoning, you sample several, each a little different, and pick the answer most of them agree on. If you ask a model 「中国的首都是」 five times and four runs say 北京, you trust 北京 more than any single run.
 
 **Tree-of-Thought** goes further: the model explores several possible next steps and abandons the dead ends.
@@ -40,6 +46,9 @@ None of these touches the model itself. They are all about the system *around* t
 ## What is ReAct, and why does it help with made-up answers?
 
 A model reasoning on its own can confidently build on a wrong fact, and the error carries through every later step. **ReAct** (short for *Reasoning + Acting*) interleaves thinking with doing. The model writes a thought, takes an action (in the original research, querying a simple Wikipedia API), reads the result, and thinks again.
+
+![ReAct compared with reasoning-only and acting-only prompting on a question-answering task](../../assets/articles/fig-48.png)
+*ReAct compared with reasoning-only and acting-only prompting on a question-answering task. Source: Yao et al. (2022), [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629), Figure 1, CC BY 4.0.*
 
 ```
 Thought: I need the population of the city in the question.
@@ -63,6 +72,9 @@ The model doesn't run the tool itself. It writes a structured request ("call `ge
 
 Somewhat. Research on **EmotionPrompts** tested adding emotional phrases to the end of a prompt, such as *"This is very important to my career."* The authors reported that some of these phrases improved scores on many of their tasks, and that combining certain phrases scored well. Treat it as an interesting finding rather than a rule: effects vary between models and tasks.
 
+![The emotional stimuli used in EmotionPrompt, grouped by the psychological theory behind them](../../assets/articles/fig-50.png)
+*The emotional stimuli used in EmotionPrompt, grouped by the psychological theory behind them. Source: Li et al. (2023), [Large Language Models Understand and Can be Enhanced by Emotional Stimuli](https://arxiv.org/abs/2307.11760), Figure 2, CC BY 4.0.*
+
 A more dependable habit for reducing hallucination is to give the model explicit permission not to know:
 
 > Answer as truthfully as possible, and if you're unsure of the answer, say "Sorry, I don't know".
@@ -85,8 +97,6 @@ The loop looks like this:
 ```
 
 ReAct is one way to run this loop. A specialised example is **ChemCrow**, which connects a language model to chemistry tools so it can plan and check chemistry tasks rather than guess. Frameworks such as AutoGPT, GPT-Engineer and BabyAGI package this loop so people can automate repetitive tasks or generate whole code projects.
-
-> 🖼 Diagram to add: the agent loop, with LLM at the centre and arrows to Tools, Memory and Orchestration code.
 
 ## What about many agents working together?
 

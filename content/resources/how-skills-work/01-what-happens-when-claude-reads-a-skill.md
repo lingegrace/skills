@@ -30,8 +30,6 @@ The **context** is everything the model can see at that moment: your instruction
 
 So an agent is not a mysterious autonomous mind. It is a model that keeps **thinking → acting → observing the result → thinking again**. In the research literature this pattern is called **ReAct**, short for *Reasoning + Acting*.
 
-> 🖼 Diagram to add: a circular loop with four stops (Think, Act with a tool, Observe the result, Think again), with an arrow showing each tool result being appended to a growing "context" box.
-
 Two things make this loop work. The model's reasoning decides whether it can work out a sensible next step. The tools are what let it turn that idea into an action in the world.
 
 ## Why does the context window matter so much?

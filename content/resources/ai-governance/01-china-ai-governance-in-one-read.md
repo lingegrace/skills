@@ -32,7 +32,14 @@ The plan's technical agenda can be read as four building blocks:
 3. **Support platforms:** shared platforms, data, tools and testing resources that make development and deployment efficient.
 4. **Intelligent infrastructure:** the network, data and computing infrastructure that AI applications run on.
 
-> 🖼 Diagram to add: four stacked layers, from basic theory at the bottom to intelligent infrastructure, with one example under each.
+![Box 1 of the plan: basic theory](../../assets/articles/fig-01.png)
+
+![Box 2: key common technologies](../../assets/articles/fig-02.png)
+
+![Box 3: basic support platforms](../../assets/articles/fig-03.png)
+
+![Box 4: intelligent infrastructure](../../assets/articles/fig-04.png)
+*Source: State Council of the People's Republic of China, *New Generation Artificial Intelligence Development Plan* (Guofa [2017] No. 35), boxes 1–4 (Chinese original).*
 
 ### The eight areas of basic theory
 

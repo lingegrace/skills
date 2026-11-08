@@ -403,7 +403,7 @@ def build_home(skills, issues, resources, site):
   <div class="duo-col">
     <p class="eyebrow">Skill Workshop</p>
     <div class="block-head"><h2>Write your own</h2><a href="{url('resources/')}">All lessons →</a></div>
-    <p class="muted">Learn to write skills that actually improve your work.</p>
+    <p class="muted">How to create skills that actually work, plus my LLM notebook and reading notes.</p>
     <div class="lessons">{lessons}</div>
   </div>
 </section>
@@ -531,8 +531,8 @@ def build_resources(resources, site):
     body = f"""
 <section class="page-head">
   <p class="eyebrow">Skill Workshop</p>
-  <h1>Learn to write skills that actually improve your work.</h1>
-  <p class="lede">Lessons on writing skills, how skills work inside Claude, my notebook on how large language models work, and notes from what I read.</p>
+  <h1>How to create skills that actually work</h1>
+  <p class="lede">Everything I've learned about building with AI, in one place: step-by-step lessons on creating Claude skills, what happens inside Claude when a skill runs, my LLM notebook (how models predict, train, align and get evaluated, plus Google's ML Crash Course), reading notes on AI, startups and growth, and short, sourced summaries of AI governance.</p>
   <nav class="col-nav" aria-label="Sections">{nav}</nav>
 </section>
 {sections}

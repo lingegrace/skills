@@ -59,8 +59,6 @@ It works roughly like this:
 
 Either way, "human preference" is a social fact, not a natural one. It reflects particular raters, guidelines and cultural assumptions.
 
-> 🖼 Diagram to add: the training pipeline as four boxes (pretraining → SFT (or PEFT/LoRA) → RLHF/DPO → inference), with the data source for each stage underneath.
-
 ## What happens at inference, when you send a prompt?
 
 **Inference** means using the trained model to generate responses for real queries. Several things can happen here.

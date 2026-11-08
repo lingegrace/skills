@@ -79,8 +79,6 @@ Put these pieces together and a skill stops looking like magic.
 - An instruct model has been trained to **follow instructions** in that text.
 - Numbered steps work like a ready-made **chain-of-thought**: they give the model a draft structure to follow, so each step's output becomes input for the next.
 
-> 🖼 Diagram to add: a stacked context window showing, top to bottom, the system prompt, skill descriptions, the loaded SKILL.md, the conversation, and tool results, with an arrow pointing to "next token".
-
 ## What this means when you write a skill
 
 - **If it isn't in the text, Claude doesn't know it.** Write down the assumptions you'd normally leave unsaid: who the output is for, what "good" looks like.
