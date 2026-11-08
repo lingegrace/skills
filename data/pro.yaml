@@ -3,13 +3,7 @@
 # A plan with form: true opens the custom-skill form. Otherwise the button is "Join the waitlist".
 
 intro: |
-  The free catalog is built for single tasks: one input, one method, one output. Turn a meeting transcript into action items. Check a draft against its sources. Write a value proposition from a PRD. Each free skill does one job well, and you stay in charge of how the jobs fit together.
-
-  Real work is rarely one task. A researched article means finding the question, doing the research, choosing an angle, outlining, drafting in your own voice, fact-checking, editing and then adapting it for every channel. A market judgment means defining the question, mapping competitors, gathering evidence you can trust, comparing, and writing a recommendation someone can act on. Done by hand, that's a dozen prompts and a lot of copy-pasting, and the business logic quietly gets lost along the way.
-
-  Pro skills run those whole workflows end to end. Each one chains several methods into a single job, carries your decisions from one stage to the next, and stops at checkpoints where you approve the direction before it goes further. You get a finished package, not a pile of drafts.
-
-  And if your team's work doesn't fit any of these, I'll build a custom skill around it: your inputs, your standards, tested on your real material before you rely on it.
+  The free catalog is built for single tasks: one input, one method, one output. Turn a meeting transcript into action items. Check a draft against its sources. Write a value proposition from a PRD. Pro skills run whole workflows end to end, with checkpoints where you approve the direction, and I can build a custom skill around your team's own work.
 
 plans:
   - name: Free
@@ -43,7 +37,7 @@ plans:
       - A consultation on the work you want packaged
       - A skill designed for your inputs, outputs and standards
       - Testing on your real material before handover
-    cta: Tell me about your work
+    cta: What can I help you solve? →
     form: true
 
 # Pro skills (long-horizon workflows). Listed here; the files themselves are sold, not published.

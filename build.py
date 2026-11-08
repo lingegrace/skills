@@ -37,19 +37,19 @@ EMAIL = "graceguo2004@outlook.com"
 
 # Repo folder → catalog field (one drawer each). Order = order on the site.
 FIELDS = [
-    {"key": "research", "code": "RS", "slug": "research", "name": "Research & Intelligence",
+    {"key": "research", "code": "RS", "slug": "research", "name": "Social Science & Market Research",
      "blurb": "Find, check and analyse information, then form a judgment.", "color": "#3E6B8A"},
-    {"key": "writing", "code": "WR", "slug": "writing", "name": "Content & Communication",
+    {"key": "writing", "code": "WR", "slug": "writing", "name": "Writing, Editing & Social Media",
      "blurb": "You know what to say. Turn it into writing that fits the reader.", "color": "#6E7F3E"},
-    {"key": "work", "code": "WK", "slug": "work", "name": "Work & Documents",
+    {"key": "work", "code": "WK", "slug": "work", "name": "Meetings, Memos & Reports",
      "blurb": "Meetings, reports, memos and SOPs, without the busywork.", "color": "#8A6A2E"},
-    {"key": "learning", "code": "LN", "slug": "learning", "name": "Learning & Practice",
+    {"key": "learning", "code": "LN", "slug": "learning", "name": "Learning & Exam Prep",
      "blurb": "Tutors, active recall, exam prep and interview practice.", "color": "#7A4E8A"},
     {"key": "marketing", "code": "MK", "slug": "marketing", "name": "Marketing",
      "blurb": "Customer research, positioning, SEO, landing pages, launches.", "color": "#C4562A"},
-    {"key": "product", "code": "PD", "slug": "product", "name": "Product",
+    {"key": "product", "code": "PD", "slug": "product", "name": "Product Management",
      "blurb": "Discovery, PRDs, specs and critiques, grounded in user research.", "color": "#2E7A6E"},
-    {"key": "skill-engineering", "code": "SE", "slug": "skill-engineering", "name": "Skill Engineering",
+    {"key": "skill-engineering", "code": "SE", "slug": "skill-engineering", "name": "Build Your Own Skills",
      "blurb": "Write, review and test your own skills.", "color": "#5A5A5A"},
 ]
 FIELD_BY_KEY = {f["key"]: f for f in FIELDS}
@@ -353,10 +353,10 @@ def build_home(skills, issues, resources, site):
 <section class="hero">
   <div class="hero-text">
     <p class="eyebrow">Claude skills for research, writing and everyday work</p>
-    <h1>AI is good at output.<br><em>Input is the work.</em></h1>
+    <h1>AI is good at output.<br><em>But input is the work.</em></h1>
     <p class="lede">These skills don't automate your job. They package the work inside it: the right questions to ask first, a proven method to follow, and evidence for every claim.</p>
     <p class="for">For <b>students</b> in social science, media and education, and for <b>people at work</b> in marketing, product, content, research and operations.</p>
-    <div class="hero-cta"><a class="btn btn-ink" href="#who">Find skills for me</a><a class="btn btn-line" href="{url('skills/')}">Browse the catalog</a></div>
+    <div class="hero-cta"><a class="btn btn-ink" href="#who">Find skills for me</a><a class="btn btn-line" href="{url('skills/')}">See the whole catalog</a></div>
   </div>
   <div class="hero-stack" id="stack" aria-label="Sample skill cards. Swipe a card up to see the next one.">
     <div class="stack-cards">{stack_html}</div>
@@ -372,13 +372,15 @@ def build_home(skills, issues, resources, site):
   {p_groups}
 </section>
 
-<section class="block catalog-cta">
-  <div>
-    <p class="eyebrow">Or browse by type of work</p>
-    <h2>Every skill, filed by field</h2>
-    <p class="muted">Research, writing, work documents, learning, marketing, product and skill engineering. Search in your own words, in English or Chinese.</p>
-  </div>
-  <a class="btn btn-ink" href="{url('skills/')}">Open the catalog →</a>
+<section class="block">
+  <a class="catalog-cta" href="{url('skills/')}" aria-label="Open the whole catalog">
+    <span class="cta-text">
+      <span class="eyebrow">Or browse by type of work</span>
+      <span class="cta-title">Every skill, filed by field</span>
+      <span class="cta-fields">{' · '.join(e(f['name']) for f in FIELDS)}</span>
+    </span>
+    <span class="cta-arrow" aria-hidden="true">→</span>
+  </a>
 </section>
 
 <section class="block principles">
@@ -400,7 +402,7 @@ def build_home(skills, issues, resources, site):
   </div>
   <div class="duo-col">
     <p class="eyebrow">Skill Workshop</p>
-    <div class="block-head"><h2>Write your own</h2><a href="{url('resources/')}">All lessons →</a></div>
+    <div class="block-head"><h2>Write your own skill</h2><a href="{url('resources/')}">All lessons →</a></div>
     <p class="muted">How to create skills that actually work, plus my LLM notebook and reading notes.</p>
     <div class="lessons">{lessons}</div>
   </div>
@@ -483,7 +485,7 @@ def build_insights(issues, site):
     <img class="author-mark" src="{url('assets/grace-cat.png')}" alt="Grace's avatar: a calico cat drinking bubble tea" width="88" height="88">
     <div>
       <p class="lede">I'm <b>Linge (Grace) Guo</b>, a sociologist trained at UCL and Oxford. I study how AI and digital technology reshape the way we know, work and live, and I build tools from what I learn.</p>
-      <div class="hero-cta"><a class="btn btn-accent" href="{PERSONAL_SITE}">Visit my personal site ↗</a><a class="btn btn-line" href="{SUBSCRIBE_URL}">Subscribe to the newsletter</a></div>
+      <div class="hero-cta"><a class="btn btn-accent" href="{SUBSCRIBE_URL}">Subscribe on LinkedIn</a><a class="btn btn-line" href="{PERSONAL_SITE}">Visit my personal site ↗</a></div>
     </div>
   </div>
 </section>
@@ -585,7 +587,7 @@ def build_pro(pro, site):
   <div class="pro-intro">{''.join(f'<p>{e(x)}</p>' for x in (pro.get('intro') or '').split(chr(10)+chr(10)) if x.strip())}</div>
 </section>
 <section class="block"><div class="plans">{''.join(plan(p) for p in pro.get('plans', []))}</div></section>
-{f'<section class="block"><div class="block-head"><h2>In the special collection</h2><span class="muted">Whole workflows, end to end · every one included in the Library Pass</span></div><div class="cards cards-3">{skills_html}</div></section>' if skills_html else ''}
+{f'<section class="block"><div class="block-head"><h2>In the special collection <span class="h-note">Whole workflows, end to end</span></h2></div><div class="cards cards-3">{skills_html}</div></section>' if skills_html else ''}
 <section class="block" id="consult">
   <form class="request" data-form="consult">
     <div class="request-paper">
@@ -615,7 +617,7 @@ def build_about(skills, site):
     <p class="eyebrow">About the librarian</p>
     <h1>Hi, I'm Grace.</h1>
     <p class="lede">I'm a sociologist (UCL; MSc Sociology, Oxford) who studies how AI and digital technologies reshape the way we know, work and live.</p>
-    <div class="hero-cta"><a class="btn btn-accent" href="{PERSONAL_SITE}">Visit my personal site ↗</a><a class="btn btn-line" href="{url('insights/')}">Read my insights</a></div>
+    <div class="hero-cta"><a class="btn btn-accent" href="{SUBSCRIBE_URL}">Subscribe on LinkedIn</a><a class="btn btn-line" href="{PERSONAL_SITE}">Visit my personal site ↗</a></div>
   </div>
   <img class="about-cat" src="{url('assets/grace-cat-cutout-480.png')}" alt="Grace's avatar: a calico cat drinking bubble tea" width="300" height="457">
 </section>

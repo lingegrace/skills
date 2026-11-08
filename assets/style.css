@@ -435,3 +435,36 @@ img.author-mark { width: 88px; height: 88px; border-radius: 50%; object-fit: cov
   background-color: color-mix(in srgb, var(--c, var(--accent)) 16%, transparent);
   padding: .04em .28em .08em; margin-left: -.28em; border-radius: 4px;
 }
+
+/* ── round 3 ── */
+/* the catalog block is one big button */
+a.catalog-cta { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; text-decoration: none; color: var(--ink);
+  padding: 2.2rem 2.4rem; background: var(--ink); color: var(--paper); border: 0; border-radius: 10px; box-shadow: 0 18px 30px -18px rgba(26,15,7,.6); transition: transform .2s, background .2s; }
+a.catalog-cta:hover { transform: translateY(-3px); background: color-mix(in srgb, var(--ink) 88%, var(--accent)); }
+a.catalog-cta .eyebrow { color: var(--accent-2); margin-bottom: .4rem; }
+.cta-text { display: flex; flex-direction: column; gap: .5rem; min-width: 0; }
+.cta-title { font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.1; letter-spacing: -.01em; }
+.cta-fields { font-size: .95rem; color: #D9CBB5; line-height: 1.6; }
+.cta-arrow { flex-shrink: 0; display: grid; place-items: center; width: clamp(64px, 9vw, 96px); height: clamp(64px, 9vw, 96px); border-radius: 50%; background: var(--accent); color: #fff; font-size: clamp(2rem, 4vw, 3rem); transition: transform .25s; }
+a.catalog-cta:hover .cta-arrow { transform: translateX(6px); }
+:root[data-theme="dark"] a.catalog-cta { background: var(--card); color: var(--ink); }
+@media (max-width: 600px) { a.catalog-cta { padding: 1.6rem 1.3rem; } }
+
+/* category headings and article titles use the skill-name font */
+.drawer-label h2, .lesson-title, .lesson-page h1, .series-title, .col-section h2 { font-family: 'Fraunces', 'Instrument Serif', serif; font-weight: 600; letter-spacing: -.01em; }
+.drawer-label h2 { font-size: clamp(1.5rem, 2.6vw, 1.9rem); }
+.lesson-title { font-size: 1.2rem; line-height: 1.25; }
+.lesson-big .lesson-title { font-size: 1.35rem; }
+.lesson-page h1 { font-size: clamp(2rem, 4.4vw, 3rem); line-height: 1.12; }
+
+/* "In the special collection — Whole workflows, end to end" on one line, left */
+.h-note { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 400; color: var(--ink-3); margin-left: .6rem; letter-spacing: 0; }
+
+/* page intros can run wider */
+.page-head .lede { max-width: 860px; }
+/* long field names: keep the call number intact, truncate the label */
+.card-top .call { white-space: nowrap; flex-shrink: 0; }
+.card-top .card-field { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 1 1 auto; }
+.card-top .stamp { flex-shrink: 0; }
+a.catalog-cta { flex-wrap: nowrap; }
+a.catalog-cta .cta-text { flex: 1 1 auto; }
