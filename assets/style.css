@@ -392,3 +392,46 @@ img.author-mark { width: 88px; height: 88px; border-radius: 50%; object-fit: cov
 .prose p > img + img { margin-top: .8rem; }
 .prose p > img ~ em { display: block; font-style: normal; font-size: .8rem; line-height: 1.5; color: var(--ink-3); margin-bottom: 1.6rem; }
 .prose p > img ~ em a { color: var(--ink-2); }
+
+/* ── readability pass ── */
+/* buttons: sentence case, larger text, smaller box */
+.btn { font-family: 'Inter', system-ui, sans-serif; font-weight: 600; font-size: .92rem; letter-spacing: .005em; text-transform: none; padding: .55rem 1rem; border-radius: 6px; }
+.btn-big { padding: .6rem 1.1rem; font-size: .95rem; }
+.stack-next, .filter { font-family: 'Inter', system-ui, sans-serif; font-weight: 500; letter-spacing: 0; text-transform: none; font-size: .82rem; }
+
+/* skill names: Fraunces, with a marker highlight in the field's colour */
+.card-title, .scard-title, .skill-card h1, .tcard-name, .sheet-name {
+  font-family: 'Fraunces', 'Instrument Serif', serif; font-weight: 600; letter-spacing: -.01em; line-height: 1.2;
+  font-variation-settings: "opsz" 72;
+}
+.card-title, .scard-title, .skill-card h1 {
+  align-self: flex-start; display: inline;
+  background-image: linear-gradient(transparent 58%, color-mix(in srgb, var(--c, var(--accent)) 24%, transparent) 58%, color-mix(in srgb, var(--c, var(--accent)) 24%, transparent) 92%, transparent 92%);
+  -webkit-box-decoration-break: clone; box-decoration-break: clone; padding: 0 .12em; margin-left: -.12em;
+}
+.card-title { font-size: 1.32rem; }
+.scard-title { font-size: 1.55rem; }
+.skill-card h1 { font-size: clamp(2rem, 4.4vw, 3rem); }
+
+/* catalog call-to-action on the home page */
+.catalog-cta { display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; padding: 2rem 2.2rem; background: var(--card); border: 1px solid var(--rule); border-left: 4px solid var(--accent); border-radius: 8px; box-shadow: var(--shadow); }
+.catalog-cta p.muted { max-width: 620px; margin-top: .4rem; }
+
+/* about: the cut-out cat, no frame */
+.about-cat { width: clamp(150px, 20vw, 240px); height: auto; border-radius: 0; box-shadow: none; transform: rotate(3deg); filter: drop-shadow(0 10px 14px rgba(26,15,7,.18)); }
+
+/* pro: longer intro, left aligned */
+.pro-intro { max-width: 760px; margin-top: 1rem; }
+.pro-intro p { font-size: 1.06rem; color: var(--ink-2); margin-bottom: .9rem; }
+.pro-intro p:first-child { font-size: 1.15rem; color: var(--ink); }
+
+/* Library Pass corner badge on special-collection cards */
+.card-static { overflow: hidden; }
+.corner-badge { position: absolute; top: 14px; right: -34px; width: 150px; transform: rotate(35deg); text-align: center; padding: .2rem 0; background: var(--accent); color: var(--accent-ink); font-family: 'Inter', sans-serif; font-weight: 600; font-size: .62rem; letter-spacing: .04em; box-shadow: 0 2px 6px rgba(0,0,0,.15); z-index: 2; }
+.card-static .card-top .stamp { margin-right: 3.2rem; }
+/* skill-name highlight: full soft tint behind the whole name (not a band through the letters) */
+.card-title, .scard-title, .skill-card h1 {
+  background-image: none;
+  background-color: color-mix(in srgb, var(--c, var(--accent)) 16%, transparent);
+  padding: .04em .28em .08em; margin-left: -.28em; border-radius: 4px;
+}

@@ -166,7 +166,7 @@ def fmt_date(d):
 
 # ─────────────────────────── shared pieces ───────────────────────────
 
-NAV = [("skills/", "Catalog"), ("insights/", "Insights"), ("resources/", "Skill Workshop"), ("pro/", "Pro"), ("about/", "About")]
+NAV = [("", "Home"), ("skills/", "Catalog"), ("insights/", "Insights"), ("resources/", "Skill Workshop"), ("pro/", "Pro"), ("about/", "About")]
 
 
 def lamp(site):
@@ -217,7 +217,7 @@ def page(path, title, description, body, site, active="", extra_head=""):
 <link rel="apple-touch-icon" href="{url('assets/grace-cat.png')}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{url('assets/style.css')}">
 {extra_head}
 </head>
@@ -255,7 +255,7 @@ def card(s, compact=False):
   <span class="card-title">{e(s['name'])}</span>
   <span class="card-tag">{e(s['tagline'])}</span>
   {'' if compact else f'<span class="card-sum">{e(s["summary"])}</span>'}
-  <span class="card-lines"><span><b>Give</b>{e(s['give'])}</span><span><b>Get</b>{e(s['get'])}</span></span>
+  <span class="card-lines"><span><b>Input</b>{e(s['give'])}</span><span><b>Output</b>{e(s['get'])}</span></span>
 </a>"""
 
 
@@ -314,7 +314,7 @@ def build_home(skills, issues, resources, site):
     stack_html = "".join(f"""<div class="scard" style="--c:{s['field']['color']}" data-href="{url('skills/' + s['name'] + '/')}">
   <span class="card-top"><span class="call">{s['call']}</span><span class="card-field">{e(s['field']['name'])}</span><span class="stamp stamp-free">Free</span></span>
   <span class="scard-title">{e(s['name'])}</span><span class="scard-tag">{e(s['tagline'])}</span>
-  <span class="scard-line"><b>Give</b>{e(s['give'])}</span><span class="scard-line"><b>Get</b>{e(s['get'])}</span>
+  <span class="scard-line"><b>Input</b>{e(s['give'])}</span><span class="scard-line"><b>Output</b>{e(s['get'])}</span>
   <a class="scard-open" href="{url('skills/' + s['name'] + '/')}">Open this card →</a>
 </div>""" for s in stack)
     # personas
@@ -372,14 +372,13 @@ def build_home(skills, issues, resources, site):
   {p_groups}
 </section>
 
-<section class="block" id="folders">
-  <p class="eyebrow">Or browse by type of work</p>
-  <div class="block-head"><h2>Open a folder</h2><a href="{url('skills/')}">The whole catalog →</a></div>
-  <p class="muted folders-note">Every skill, filed by the kind of work it does. Pick a tab.</p>
-  <div class="folders">
-    <div class="folder-tabs" role="tablist" aria-label="Types of work">{tabs_html}</div>
-    {panels}
+<section class="block catalog-cta">
+  <div>
+    <p class="eyebrow">Or browse by type of work</p>
+    <h2>Every skill, filed by field</h2>
+    <p class="muted">Research, writing, work documents, learning, marketing, product and skill engineering. Search in your own words, in English or Chinese.</p>
   </div>
+  <a class="btn btn-ink" href="{url('skills/')}">Open the catalog →</a>
 </section>
 
 <section class="block principles">
@@ -390,7 +389,6 @@ def build_home(skills, issues, resources, site):
     <li><b>Steps you can check.</b><span>Every step says when it's done, and the result follows a fixed template you can reuse.</span></li>
     <li><b>Evidence, not guesses.</b><span>Claims point back to your material, or are labeled as assumptions. Nothing is invented.</span></li>
   </ol>
-  <div class="method-chips" aria-label="Some of the methods inside">{method_chips}</div>
 </section>
 
 <section class="block duo">
@@ -433,7 +431,7 @@ def build_catalog(skills, site):
 <section class="page-head">
   <p class="eyebrow">The catalog</p>
   <h1>Filed by field.</h1>
-  <p class="lede">Every card says what you give it and what you get back. Search in your own words, in English or Chinese.</p>
+  <p class="lede">Every card shows the input it needs and the output you get. Search in your own words, in English or Chinese.</p>
 </section>
 <div class="filters">
   <label class="search"><span class="sr-only">Search skills</span><input id="q" type="search" placeholder="What do you need help with? e.g. sociological interviews, 周报, IELTS essay…" autocomplete="off"></label>
@@ -460,7 +458,7 @@ def build_skill(s, skills, site):
     <h1>{e(s['name'])}</h1>
     <p class="skill-tag">{e(s['tagline'])}</p>
     <p class="skill-sum">{e(s['summary'])}</p>
-    <dl class="skill-lines"><div><dt>You give it</dt><dd>{e(s['give'])}</dd></div><div><dt>You get back</dt><dd>{e(s['get'])}</dd></div>{f'<div><dt>Method</dt><dd>{e(s["method"])}</dd></div>' if s['method'] else ''}</dl>
+    <dl class="skill-lines"><div><dt>Input</dt><dd>{e(s['give'])}</dd></div><div><dt>Output</dt><dd>{e(s['get'])}</dd></div>{f'<div><dt>Method</dt><dd>{e(s["method"])}</dd></div>' if s['method'] else ''}</dl>
     <div class="skill-actions"><a class="btn btn-ink" href="#install">Install</a><a class="btn btn-line" href="{s['github']}">View on GitHub ↗</a></div>
   </header>
   <section id="install" class="skill-sec"><h2>Install</h2>{install_block(s)}</section>
@@ -578,16 +576,16 @@ def build_pro(pro, site):
         return f"""<div class="plan{' plan-hi' if p.get('highlight') else ''}">
   <p class="eyebrow">{e(p['name'])}</p><p class="price">{e(p['price'])}</p><p class="muted">{e(p.get('note', ''))}</p>
   <ul>{''.join(f'<li>{e(x)}</li>' for x in p.get('includes', []))}</ul>{cta}</div>"""
-    skills_html = "".join(f"""<div class="card card-static"><span class="card-hole" aria-hidden="true"></span><span class="card-top"><span class="call">SC-{n:02d}</span><span class="card-field">{e(x.get('field', ''))}</span><span class="stamp stamp-pro">{e(x.get('status', 'Coming soon'))}</span></span><span class="card-title">{e(x['name'])}</span><span class="card-tag">{e(x.get('tagline', ''))}</span><span class="card-sum">{e(x.get('summary', ''))}</span>{f'<span class="card-stages">{e(x["stages"])}</span>' if x.get('stages') else ''}</div>""" for n, x in enumerate(pro.get("skills", []), 1))
+    skills_html = "".join(f"""<div class="card card-static"><span class="corner-badge">In Library Pass</span><span class="card-hole" aria-hidden="true"></span><span class="card-top"><span class="call">SC-{n:02d}</span><span class="card-field">{e(x.get('field', ''))}</span><span class="stamp stamp-pro">{e(x.get('status', 'Coming soon'))}</span></span><span class="card-title">{e(x['name'])}</span><span class="card-tag">{e(x.get('tagline', ''))}</span><span class="card-sum">{e(x.get('summary', ''))}</span>{f'<span class="card-stages">{e(x["stages"])}</span>' if x.get('stages') else ''}</div>""" for n, x in enumerate(pro.get("skills", []), 1))
     faq = "".join(f"<details><summary>{e(q['q'])}</summary><p>{e(q['a'])}</p></details>" for q in pro.get("faq", []))
     body = f"""
 <section class="page-head">
   <p class="eyebrow">Special collections</p>
   <h1>Pro</h1>
-  <p class="lede">{e(pro.get('intro', ''))}</p>
+  <div class="pro-intro">{''.join(f'<p>{e(x)}</p>' for x in (pro.get('intro') or '').split(chr(10)+chr(10)) if x.strip())}</div>
 </section>
 <section class="block"><div class="plans">{''.join(plan(p) for p in pro.get('plans', []))}</div></section>
-{f'<section class="block"><div class="block-head"><h2>In the special collection</h2><span class="muted">Whole workflows, end to end</span></div><div class="cards cards-3">{skills_html}</div></section>' if skills_html else ''}
+{f'<section class="block"><div class="block-head"><h2>In the special collection</h2><span class="muted">Whole workflows, end to end · every one included in the Library Pass</span></div><div class="cards cards-3">{skills_html}</div></section>' if skills_html else ''}
 <section class="block" id="consult">
   <form class="request" data-form="consult">
     <div class="request-paper">
@@ -617,9 +615,9 @@ def build_about(skills, site):
     <p class="eyebrow">About the librarian</p>
     <h1>Hi, I'm Grace.</h1>
     <p class="lede">I'm a sociologist (UCL; MSc Sociology, Oxford) who studies how AI and digital technologies reshape the way we know, work and live.</p>
-    <div class="hero-cta"><a class="btn btn-accent btn-big" href="{PERSONAL_SITE}">Visit my personal site ↗</a><a class="btn btn-line" href="{url('insights/')}">Read my insights</a></div>
+    <div class="hero-cta"><a class="btn btn-accent" href="{PERSONAL_SITE}">Visit my personal site ↗</a><a class="btn btn-line" href="{url('insights/')}">Read my insights</a></div>
   </div>
-  <img class="about-cat" src="{url('assets/grace-cat.png')}" alt="Grace's avatar: a calico cat drinking bubble tea" width="320" height="320">
+  <img class="about-cat" src="{url('assets/grace-cat-cutout-480.png')}" alt="Grace's avatar: a calico cat drinking bubble tea" width="300" height="457">
 </section>
 <section class="block prose about">
   <p>This library started with my own research workflow. I turned the way I do research into a Claude skill, and kept going. Every skill here packages a method I trust: Braun &amp; Clarke for thematic analysis, the Minto Pyramid for executive writing, retrieval practice for learning, Feature → Advantage → Benefit for product value.</p>
