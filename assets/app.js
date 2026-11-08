@@ -258,6 +258,15 @@
     });
   }
 
+  /* ───────── Back to top: appears once the reader reaches the last section ───────── */
+  const toTop = $('#toTop');
+  if (toTop) {
+    const last = $('#ai-governance') || $$('.col-section').pop();
+    const check = () => { if (!last) return; toTop.hidden = last.getBoundingClientRect().top > innerHeight * 0.85; };
+    addEventListener('scroll', check, { passive: true }); check();
+    toTop.addEventListener('click', ev => { ev.preventDefault(); scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
+  }
+
   /* ───────── 7. Install tabs + copy buttons ───────── */
   $$('.install').forEach(box => {
     const tabs = $$('[data-tab]', box);

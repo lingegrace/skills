@@ -188,7 +188,7 @@ def lamp(site):
     <textarea id="fbMsg" name="message" rows="4" required placeholder="This page / skill would be better if…"></textarea>
     <label class="sr-only" for="fbEmail">Email (optional)</label>
     <input id="fbEmail" name="email" type="email" placeholder="Email, if you'd like a reply (optional)">
-    <button class="btn btn-ink" type="submit">Send it my way 💌</button>
+    <button class="btn btn-ink btn-heart" type="submit">Send to Grace <svg class="doodle-heart" viewBox="0 0 24 22" width="18" height="16" aria-hidden="true"><path d="M12 20.2c-.6-.5-8.6-6.3-9.6-10.6C1.6 6.1 3.8 2.6 7.2 2.7c2.1.1 3.6 1.5 4.6 3.3 1-1.9 2.6-3.3 4.8-3.4 3.4-.1 5.5 3.3 4.7 6.7-1 4.4-8.6 10.3-9.3 10.9z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <p class="form-note" role="status"></p>
   </form>
 </div>"""
@@ -518,14 +518,22 @@ def build_insights(issues, site):
                 body, site, active="insights/")
 
 
-def article_card(r, big=True):
+def article_card(r, big=True, color=None, guide=False):
     draft = '<span class="draft-chip">Draft</span>' if r.get("status") == "draft" else ""
-    return f"""<a class="lesson{' lesson-big' if big else ''}" href="{url('resources/' + r['slug'] + '/')}"><span class="lesson-no">{e(r.get('time', ''))}{draft}</span><span class="lesson-title">{e(r['title'])}</span><span class="lesson-sum">{e(r.get('summary', ''))}</span></a>"""
+    tip = '<span class="guide-tip card-tip" aria-hidden="true">Start here ↓</span>' if guide else ""
+    style = f' style="--c:{color}"' if color else ""
+    return f"""<a class="lesson{' lesson-big' if big else ''}{' lesson-guide' if guide else ''}"{style} href="{url('resources/' + r['slug'] + '/')}">{tip}<span class="lesson-no">{e(r.get('time', ''))}{draft}</span><span class="lesson-title">{e(r['title'])}</span><span class="lesson-sum">{e(r.get('summary', ''))}</span></a>"""
 
 
 def build_resources(resources, site):
     columns = [c for c in site.get("resource_columns", []) if any(r["column"] == c["key"] for r in resources)]
-    nav = "".join((f'<span class="guide-wrap"><span class="guide-tip" aria-hidden="true">Start here ↓</span><a class="col-chip col-chip-guide" href="#{c["key"]}">{e(c["name"])}</a></span>' if c["key"] == "how-skills-work" else f'<a class="col-chip" href="#{c["key"]}">{e(c["name"])}</a>') for c in columns)
+    def chip(c):
+        style = f' style="--c:{c.get("color", "")}"'
+        link = f'<a class="col-chip{" col-chip-guide" if c["key"] == "how-skills-work" else ""}"{style} href="#{c["key"]}">{e(c["name"])}</a>'
+        if c["key"] == "how-skills-work":
+            return f'<span class="guide-wrap"><span class="guide-tip" aria-hidden="true">Start here ↓</span>{link}</span>'
+        return link
+    nav = "".join(chip(c) for c in columns)
     sections = ""
     for c in columns:
         items = [r for r in resources if r["column"] == c["key"]]
@@ -536,9 +544,10 @@ def build_resources(resources, site):
         keys = sorted(groups, key=lambda s: series_order.index(s) if s in series_order else (len(series_order) if s else -1))
         inner = ""
         for s in keys:
-            head = f'<h3 class="series-title">{e(s)}</h3>' if s else ""
-            inner += f'{head}<div class="lessons lessons-grid">{"".join(article_card(r) for r in groups[s])}</div>'
-        sections += f"""<section class="block col-section" id="{c['key']}">
+            col = (c.get("series_colors") or {}).get(s) or c.get("color")
+            head = f'<h3 class="series-title" style="--c:{col}">{e(s)}</h3>' if s else ""
+            inner += f'{head}<div class="lessons lessons-grid">{"".join(article_card(r, color=col, guide=(r["slug"] == "context-is-everything")) for r in groups[s])}</div>'
+        sections += f"""<section class="block col-section" id="{c['key']}" style="--c:{c.get('color', 'var(--accent)')}">
   <p class="eyebrow">{e(c.get('kicker', ''))}</p>
   <div class="block-head"><h2>{e(c['name'])}</h2><span class="muted">{len(items)} articles</span></div>
   <p class="muted col-blurb">{e(c.get('blurb', ''))}</p>
@@ -553,6 +562,7 @@ def build_resources(resources, site):
   <nav class="col-nav" aria-label="Sections">{nav}</nav>
 </section>
 {sections}
+<a class="to-top" id="toTop" href="#main" hidden>↑ Back to top</a>
 {f'<section class="block"><div class="block-head"><h2>Coming next</h2></div><ul class="upcoming">{upcoming}</ul></section>' if upcoming else ''}
 <section class="block">
   <div class="block-head"><h2>Further reading</h2></div>

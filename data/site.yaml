@@ -169,24 +169,33 @@ upcoming_lessons:
 
 # Sections of the Skill Workshop (Resources). Articles: content/resources/<key>/<NN>-<slug>.md
 resource_columns:
-  - key: skill-workshop
-    name: Write your own skill
-    kicker: Skill Workshop
-    blurb: How to create a skill, a worked example built from a real research method, what the most popular skills do well, and how to test yours before you rely on it.
   - key: how-skills-work
     name: How skills work
     kicker: Under the hood
+    color: "#3E6B8A"
     blurb: What happens inside Claude when a skill runs, and what that means for how you write one.
+  - key: skill-workshop
+    name: Write your own skill
+    kicker: Skill Workshop
+    color: "#C4562A"
+    blurb: How to create a skill, a worked example built from a real research method, what the most popular skills do well, and how to test yours before you rely on it.
   - key: llm-notebook
     name: LLM Notebook
     kicker: Study notes
+    color: "#6E7F3E"
     blurb: My notes on how large language models work, from next-word prediction to training, alignment and evaluation.
     series: [How LLMs work, Beyond the basics, ML Crash Course notes]
+    series_colors:
+      How LLMs work: "#6E7F3E"
+      Beyond the basics: "#7A4E8A"
+      ML Crash Course notes: "#2E7A6E"
   - key: reading-notes
-    name: Reading Notes
+    name: Learning Notes
     kicker: From what I read
+    color: "#8A6A2E"
     blurb: What I'm learning from the newsletters and writers I follow, on AI, startups, growth and humane technology.
   - key: ai-governance
     name: AI Governance
     kicker: Policy, briefly
+    color: "#8A4E6E"
     blurb: Short, sourced summaries of how AI is governed, starting with China's national strategy and its positions on global AI governance.

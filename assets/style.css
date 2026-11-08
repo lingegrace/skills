@@ -533,3 +533,37 @@ a.cat-cta:hover .cat-click img { transform: rotate(-6deg) translateY(-4px); }
   font-family: 'Inter', sans-serif; font-weight: 600; font-size: .8rem; color: #fff; background: var(--accent); padding: .25rem .7rem; border-radius: 10px; animation: guidePulse 1.3s ease-in-out infinite; }
 .plan-guide::after { content: ''; position: absolute; left: 50%; top: 100%; margin-left: -5px; border: 5px solid transparent; border-top-color: var(--accent); }
 .plans { padding-top: 2.4rem; }
+
+/* ── round 6 ── */
+/* feedback button with a hand-drawn heart */
+.btn-heart { gap: .45rem; }
+.doodle-heart { color: #F2A0B5; transform: rotate(-8deg); transition: transform .25s; }
+.btn-heart:hover .doodle-heart { transform: rotate(6deg) scale(1.15); }
+
+/* Pro: bubble sits higher and lines up with the card's right edge */
+.plans { padding-top: 3.4rem; }
+.plan-guide { left: auto; right: -2px; transform: none; top: -3.3rem; animation: guidePulseUp 1.3s ease-in-out infinite; }
+.plan-guide::after { left: auto; right: 22px; margin-left: 0; }
+@keyframes guidePulseUp { 0%, 100% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(-6px); opacity: .6; } }
+
+/* Workshop: each section and series has its own colour */
+.col-chip { border-color: color-mix(in srgb, var(--c, var(--ink)) 70%, transparent); color: var(--c, var(--ink)); }
+.col-chip:hover { background: var(--c, var(--ink)); border-color: var(--c, var(--ink)); color: #fff; }
+.col-section .eyebrow { color: var(--c); }
+.col-section > .block-head h2 { color: var(--c); }
+.series-title { border-left-color: var(--c, var(--accent)); color: var(--c, var(--ink)); }
+.lesson[style] { border-left: 4px solid var(--c); }
+.lesson[style] .lesson-title { color: var(--c); }
+.lesson[style]:hover { border-color: var(--c); }
+
+/* "Start here" on a card */
+.lesson-guide { position: relative; overflow: visible; box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 18%, transparent); }
+.card-tip { left: 1.2rem; transform: none; background: var(--c, var(--accent)); }
+.card-tip::after { left: 1.2rem; margin-left: 0; border-top-color: var(--c, var(--accent)); }
+.lessons-grid { row-gap: 1.6rem; }
+
+/* back to top */
+.to-top { position: fixed; right: clamp(1rem, 3vw, 2rem); bottom: clamp(1rem, 3vw, 2rem); z-index: 50; text-decoration: none;
+  font-family: 'Inter', sans-serif; font-weight: 600; font-size: .9rem; color: #fff; background: var(--ink); padding: .65rem 1rem; border-radius: 100px; box-shadow: 0 10px 20px -8px rgba(26,15,7,.5); transition: transform .2s; animation: rise .3s ease; }
+.to-top:hover { transform: translateY(-2px); background: var(--accent); }
+.to-top[hidden] { display: none; }
