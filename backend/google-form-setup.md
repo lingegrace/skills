@@ -4,12 +4,16 @@
 
 ## 1. 建表单
 
-打开 https://forms.google.com ，新建一个空白表单，标题写 `Skill Library inbox`，然后添加 **4 个"简答"题**，题目名称如下，顺序不重要：
+打开 https://forms.google.com ，新建一个空白表单，标题写 `Skill Library inbox`，添加 **4 个题目**，题目名称和题型如下（顺序不重要）：
 
-1. `Type`
-2. `Message`
-3. `Email`
-4. `Page`
+| 题目名称 | 题型 |
+|---|---|
+| `Type` | 简答（Short answer） |
+| `Message` | **段落（Paragraph）**：用户留言可能很长 |
+| `Email` | 简答（Short answer） |
+| `Page` | 简答（Short answer） |
+
+不要用多选、日期、时间这些题型。网站提交的都是文字。
 
 都**不要**设成必填。
 
