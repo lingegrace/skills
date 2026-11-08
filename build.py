@@ -188,7 +188,7 @@ def lamp(site):
     <textarea id="fbMsg" name="message" rows="4" required placeholder="This page / skill would be better if…"></textarea>
     <label class="sr-only" for="fbEmail">Email (optional)</label>
     <input id="fbEmail" name="email" type="email" placeholder="Email, if you'd like a reply (optional)">
-    <button class="btn btn-ink" type="submit">Send feedback</button>
+    <button class="btn btn-ink" type="submit">Send it my way 💌</button>
     <p class="form-note" role="status"></p>
   </form>
 </div>"""
@@ -220,7 +220,7 @@ def page(path, title, description, body, site, active="", extra_head=""):
 <link rel="apple-touch-icon" href="{url('assets/grace-cat.png')}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{url('assets/style.css')}">
 {extra_head}
 </head>
@@ -503,7 +503,7 @@ def build_insights(issues, site):
     grid = "".join(f"""<a class="ins-card" href="{e(i['url'])}" target="_blank" rel="noopener">{cover(i)}<span class="ins-card-body"><span class="ins-date">{fmt_date(i.get('date'))}</span><span class="ins-card-title">{e(i['title'])}</span></span></a>""" for i in issues[1:])
     body = f"""
 <section class="page-head nl-head">
-  <img class="nl-logo" src="{url('assets/signals-cat.png')}" alt="A sleeping pink cat, the mascot of Signals Across Markets" width="207" height="110">
+  <img class="nl-logo" src="{url('assets/signals-cat.png')}" alt="A sleeping calico cat, the mascot of Signals Across Markets" width="207" height="110">
   <div>
     <p class="eyebrow">Insights · from my LinkedIn newsletter</p>
     <h1>Signals Across Markets</h1>
@@ -525,7 +525,7 @@ def article_card(r, big=True):
 
 def build_resources(resources, site):
     columns = [c for c in site.get("resource_columns", []) if any(r["column"] == c["key"] for r in resources)]
-    nav = "".join(f'<a class="col-chip" href="#{c["key"]}">{e(c["name"])}</a>' for c in columns)
+    nav = "".join((f'<span class="guide-wrap"><span class="guide-tip" aria-hidden="true">Start here ↓</span><a class="col-chip col-chip-guide" href="#{c["key"]}">{e(c["name"])}</a></span>' if c["key"] == "how-skills-work" else f'<a class="col-chip" href="#{c["key"]}">{e(c["name"])}</a>') for c in columns)
     sections = ""
     for c in columns:
         items = [r for r in resources if r["column"] == c["key"]]
@@ -592,7 +592,8 @@ def build_pro(pro, site):
             cta = f'<button class="btn btn-accent" type="button" data-open-form="consult">{e(p.get("cta", "Get in touch"))}</button>'
         else:
             cta = f'<button class="btn btn-line" type="button" data-open-form="waitlist" data-plan="{e(p["name"])}">Join the waitlist</button>'
-        return f"""<div class="plan{' plan-hi' if p.get('highlight') else ''}">
+        guide = '<span class="plan-guide" aria-hidden="true">Need something specific? ↓</span>' if p.get("form") else ""
+        return f"""<div class="plan{' plan-hi' if p.get('highlight') else ''}{' plan-custom' if p.get('form') else ''}">{guide}
   <p class="eyebrow">{e(p['name'])}</p><p class="price">{e(p['price'])}</p><p class="muted">{e(p.get('note', ''))}</p>
   <ul>{''.join(f'<li>{e(x)}</li>' for x in p.get('includes', []))}</ul>{cta}</div>"""
     skills_html = "".join(f"""<div class="card card-static"><span class="corner-badge">In Library Pass</span><span class="card-hole" aria-hidden="true"></span><span class="card-top"><span class="call">SC-{n:02d}</span><span class="card-field">{e(x.get('field', ''))}</span><span class="stamp stamp-pro">{e(x.get('status', 'Coming soon'))}</span></span><span class="card-title">{e(x['name'])}</span><span class="card-tag">{e(x.get('tagline', ''))}</span><span class="card-sum">{e(x.get('summary', ''))}</span>{f'<span class="card-stages">{e(x["stages"])}</span>' if x.get('stages') else ''}</div>""" for n, x in enumerate(pro.get("skills", []), 1))
@@ -634,7 +635,7 @@ def build_about(skills, site):
     <p class="eyebrow">About the librarian</p>
     <h1>Hi, I'm Grace.</h1>
     <p class="lede">I'm a sociologist (UCL; MSc Sociology, Oxford) who studies how AI and digital technologies reshape the way we know, work and live.</p>
-    <div class="hero-cta"><a class="btn btn-accent" href="{LINKEDIN}">Connect with me on LinkedIn</a><a class="btn btn-line" href="{PERSONAL_SITE}">Visit my personal site ↗</a></div>
+    <div class="hero-cta"><a class="btn btn-boba" href="{LINKEDIN}">Connect with me on LinkedIn</a><a class="btn btn-line" href="{PERSONAL_SITE}">Visit my personal site ↗</a></div>
   </div>
   <img class="about-cat" src="{url('assets/grace-cat-cutout-480.png')}" alt="Grace's avatar: a calico cat drinking bubble tea" width="300" height="457">
 </section>

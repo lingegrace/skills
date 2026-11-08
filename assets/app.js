@@ -90,7 +90,8 @@
     const index = JSON.parse(indexEl.textContent);
     const chips = $$('[data-filter-field]');
     const params = new URLSearchParams(location.search);
-    let field = params.get('field') || 'all';
+    // landing on the catalog shows Product Management first; 'All' shows everything (Social Science first)
+    let field = params.get('field') || (params.get('q') ? 'all' : 'product');
     if (params.get('q')) q.value = params.get('q');
 
     // Chinese and shorthand → English search words
