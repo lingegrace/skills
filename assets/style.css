@@ -370,3 +370,11 @@ code { font-family: 'JetBrains Mono', monospace; font-size: .88em; }
 .who-caret { display: inline-block; width: 2px; height: .9em; margin-left: .15em; background: var(--accent); vertical-align: -.08em; animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 .who-chips.auto .who-chip[aria-pressed="true"] { box-shadow: 0 0 0 3px rgba(196,86,42,.18); }
+/* Grace's cat */
+img.author-mark { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; background: #FCEFC9; box-shadow: 0 0 0 3px var(--card), 0 6px 16px -8px rgba(26,15,7,.5); }
+.about-head { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
+.about-cat { width: clamp(180px, 24vw, 300px); height: auto; border-radius: 24px; box-shadow: var(--shadow); transform: rotate(2deg); transition: transform .3s; }
+.about-cat:hover { transform: rotate(-2deg) scale(1.03); }
+@media (max-width: 700px) { .about-head { grid-template-columns: 1fr; } .about-cat { order: -1; width: 160px; } }
+.lost-cat { width: 140px; height: auto; border-radius: 20px; margin-bottom: 1.2rem; transform: rotate(-4deg); }
+.thanks-cat { width: 96px; height: 96px; border-radius: 50%; margin-bottom: .4rem; animation: rise .5s ease .9s both; }

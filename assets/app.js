@@ -208,7 +208,7 @@
       if (isEnvelope) {
         setTimeout(() => {
           form.classList.add('sent');
-          if (!$('.thanks', form)) form.insertAdjacentHTML('beforeend', `<div class="thanks"><b>Received.</b><span class="muted">${type === 'consult' ? "Thank you. I'll reply by email soon." : 'Thank you. Your request is on my desk.'}</span><button type="button" class="btn btn-line again">Send another</button></div>`);
+          if (!$('.thanks', form)) form.insertAdjacentHTML('beforeend', `<div class="thanks"><img class="thanks-cat" src="${document.querySelector('link[rel=apple-touch-icon]').href}" alt="" width="96" height="96"><b>Received.</b><span class="muted">${type === 'consult' ? "Thank you. I'll reply by email soon." : 'Thank you. Your request is on my desk.'}</span><button type="button" class="btn btn-line again">Send another</button></div>`);
           $('.again', form).onclick = () => { form.reset(); form.classList.remove('sending', 'sent'); btn.disabled = false; note.textContent = ''; };
         }, reduce ? 0 : 900);
       } else { form.classList.add('sent'); note.textContent = 'Thank you. It reached me.'; }

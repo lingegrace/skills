@@ -202,7 +202,8 @@ def page(path, title, description, body, site, active="", extra_head=""):
 <meta property="og:url" content="{canonical}">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#F4ECDD">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='8' y='18' width='84' height='64' rx='6' fill='%23FBF6EC' stroke='%231A0F07' stroke-width='6'/><line x1='22' y1='42' x2='78' y2='42' stroke='%23C4562A' stroke-width='6'/><line x1='22' y1='60' x2='62' y2='60' stroke='%231A0F07' stroke-width='5'/></svg>">
+<link rel="icon" type="image/png" href="{url('assets/grace-cat-64.png')}">
+<link rel="apple-touch-icon" href="{url('assets/grace-cat.png')}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -470,7 +471,7 @@ def build_insights(issues, site):
   <p class="eyebrow">Reading room</p>
   <h1>Insights</h1>
   <div class="author">
-    <div class="author-mark" aria-hidden="true">g</div>
+    <img class="author-mark" src="{url('assets/grace-cat.png')}" alt="Grace's avatar: a calico cat drinking bubble tea" width="88" height="88">
     <div>
       <p class="lede">I'm <b>Linge (Grace) Guo</b>, a sociologist trained at UCL and Oxford. I study how AI and digital technology reshape the way we know, work and live, and I build tools from what I learn.</p>
       <div class="hero-cta"><a class="btn btn-accent" href="{PERSONAL_SITE}">Visit my personal site ↗</a><a class="btn btn-line" href="{SUBSCRIBE_URL}">Subscribe to the newsletter</a></div>
@@ -571,11 +572,14 @@ def build_pro(pro, site):
 
 def build_about(skills, site):
     body = f"""
-<section class="page-head">
-  <p class="eyebrow">About the librarian</p>
-  <h1>Hi, I'm Grace.</h1>
-  <p class="lede">I'm a sociologist (UCL; MSc Sociology, Oxford) who studies how AI and digital technologies reshape the way we know, work and live.</p>
-  <div class="hero-cta"><a class="btn btn-accent btn-big" href="{PERSONAL_SITE}">Visit my personal site ↗</a><a class="btn btn-line" href="{url('insights/')}">Read my insights</a></div>
+<section class="page-head about-head">
+  <div>
+    <p class="eyebrow">About the librarian</p>
+    <h1>Hi, I'm Grace.</h1>
+    <p class="lede">I'm a sociologist (UCL; MSc Sociology, Oxford) who studies how AI and digital technologies reshape the way we know, work and live.</p>
+    <div class="hero-cta"><a class="btn btn-accent btn-big" href="{PERSONAL_SITE}">Visit my personal site ↗</a><a class="btn btn-line" href="{url('insights/')}">Read my insights</a></div>
+  </div>
+  <img class="about-cat" src="{url('assets/grace-cat.png')}" alt="Grace's avatar: a calico cat drinking bubble tea" width="320" height="320">
 </section>
 <section class="block prose about">
   <p>This library started with my own research workflow. I turned the way I do research into a Claude skill, and kept going. Every skill here packages a method I trust: Braun &amp; Clarke for thematic analysis, the Minto Pyramid for executive writing, retrieval practice for learning, Feature → Advantage → Benefit for product value.</p>
@@ -587,7 +591,7 @@ def build_about(skills, site):
 
 
 def build_404(site):
-    body = f"""<section class="page-head"><p class="eyebrow">Card not found</p><h1>This card isn't in the catalog.</h1><p class="lede">It may have been refiled. Try the <a href="{url('skills/')}">catalog</a>.</p></section>"""
+    body = f"""<section class="page-head"><img class="lost-cat" src="{url('assets/grace-cat.png')}" alt="" width="160" height="160"><p class="eyebrow">Card not found</p><h1>This card isn't in the catalog.</h1><p class="lede">It may have been refiled. Try the <a href="{url('skills/')}">catalog</a>.</p></section>"""
     return page("404.html", "Not found · Grace's Skill Library", "Page not found.", body, site)
 
 
