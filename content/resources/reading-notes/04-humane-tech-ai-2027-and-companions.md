@@ -4,7 +4,7 @@ summary: "You'll understand the key assumptions behind the 'AI 2027' scenario, w
 time: "5 min read"
 order: 4
 column: reading-notes
-status: draft
+status: published
 ---
 
 Two conversations dominate public worry about AI: will very powerful AI slip out of human control, and what happens when people form close relationships with chatbots? The Center for Humane Technology, a nonprofit that works on the social effects of technology, has written about both. These are my notes on its discussion of the "AI 2027" scenario and of AI companions, a topic I researched at Oxford.
@@ -71,5 +71,3 @@ The appeal of this approach is that it does not require new, AI-specific laws to
 - The alignment problem is about making AI pursue the goals we actually intend.
 - For AI companions, the Center for Humane Technology points to a human-like AI framework and to product liability.
 - Product liability combines prevention with responsive intervention, holding companies responsible for harms their products cause.
-
-<!-- Notes for Grace: 1) Changed "Centre for Humane Technology" to "Center for Humane Technology", the organisation's own spelling. 2) Your notes say "Misalignment is a given"; I framed it as an assumption of the scenario, as your notes do in the next sentence. 3) The notes don't detail the human-like AI framework, so I described it only in general terms; please add specifics from the source. 4) I did not name the authors of AI 2027 or give dates, as the notes don't. 5) The definitions of the alignment problem and AI companions, and the reward/convincing-answers example, are standard explanations I added. 6) I mentioned that you researched AI companions at Oxford, but kept the content to what's in the notes; you may want to add a line from your own research. -->

@@ -4,7 +4,7 @@ summary: "You'll be able to tell skills, function calling, MCP, RAG and memory a
 time: "7 min read"
 order: 3
 column: how-skills-work
-status: draft
+status: published
 ---
 
 Skills, tools, MCP, RAG, memory: the AI world keeps adding new names, and they're often described as if each were a different kind of magic. They aren't. Almost all of them are ways of getting the right text into the model's context at the right time.
@@ -97,11 +97,3 @@ These are often combined. A skill might tell Claude which tools to call, and in 
 - Function calling lets the model request actions; MCP standardises how tools are connected.
 - RAG uses embeddings to find passages by meaning, not exact words, then answers from them.
 - Memory carries information across sessions; skills carry procedures for specific tasks.
-
-<!-- Notes for Grace:
-1) Function calling and MCP were headings only in the notes (plus "the weather tool is written differently in OpenAI vs Anthropic APIs"). I added brief standard explanations, the get_weather example in pseudo-code, and the "universal power socket" analogy. Please check they match what you'd have written.
-2) Described MCP as "an open standard, introduced by Anthropic". Not in the notes, but well established; no date given.
-3) RAG: the notes present embeddings as the core of RAG. In practice RAG can also use keyword search or a mix of both; I kept embeddings as the focus but framed it as "a typical RAG setup".
-4) The notes repeat the RAG definition twice (lines 43 and 46); merged into one explanation.
-5) Added a short comparison table and an English translation of the 高级版 / Pro 订阅 example.
--->

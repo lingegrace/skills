@@ -5,7 +5,7 @@ time: "7 min read"
 order: 8
 column: llm-notebook
 series: "Beyond the basics"
-status: draft
+status: published
 ---
 
 Transformers power today's chatbots, but they weren't the first neural networks to read text. Looking at the older designs, convolutional and recurrent networks, makes it much clearer what the Transformer changed. It also explains a famous pre-ChatGPT chatbot, Microsoft's XiaoIce (小冰), which millions of people talked to.
@@ -104,5 +104,3 @@ That second source matters. XiaoIce learned partly from its own users, so the pe
 - CNNs see local windows; Transformers use attention to see the whole input at once.
 - RNNs read word by word, carrying a hidden state; GRUs and LSTMs help them remember longer.
 - XiaoIce combined a GRU-based generator with two retrieval-based generators, trained partly on its own users' conversations.
-
-<!-- Notes for Grace: 1) Softmax arithmetic corrected: with scores [3.2, -1.5], e^3.2/(e^3.2+e^-1.5) ≈ 0.99 (0.991), not 0.98; negative ≈ 0.01, not 0.02. If you'd rather keep 0.98, change the scores to about [2.4, -1.5]. 2) The notes show a 3x3 filter; for text the filter is (window width × embedding size), e.g. 3 × 300, so I described that. 3) The notes call the vector h "m-sized"; its length equals the number of filters (pooled values), not the embedding size m, so I left the size unstated. 4) "Translation invariance" from weight sharing: strictly, weight sharing finds the same pattern anywhere (equivariance) and max-pooling makes the result position-invariant; I phrased it in plain terms. 5) The RNN formula elsewhere in your notes (h_t = tanh(W*input + b)) was missing the recurrent term; I added U·h_(t-1). 6) "CNN 卷神经" = convolutional neural network (卷积神经网络). 7) XiaoIce details (three generators, data sources, 30 billion pairs since May 2018) come from your earlier RNN section (around line 374 of source.txt) since the section in my range only had the heading; the "response chosen from candidates" in the diagram note is standard for XiaoIce's design (a ranker selects the reply). 8) You might add a line from your Oxford qualitative audit of XiaoIce in the XiaoIce section; I didn't invent any findings. -->

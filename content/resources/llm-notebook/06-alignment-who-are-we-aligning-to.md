@@ -5,7 +5,7 @@ time: "7 min read"
 order: 6
 column: llm-notebook
 series: "Beyond the basics"
-status: draft
+status: published
 ---
 
 A freshly pre-trained model can complete sentences, but it isn't yet a helpful assistant. **Alignment** is the stage where it's tuned to behave the way people want: answering the question asked, declining harmful requests, being honest about uncertainty. The technical question is *how*. The more interesting question, for anyone who studies society, is *whose wants*.
@@ -98,5 +98,3 @@ The other side argues that removing safeguards makes misuse easier, and that ref
 - DPO learns from preference pairs directly; IPO, KTO and ORPO address its weak spots.
 - Practical costs include memory, forgetting, an alignment tax and data quality.
 - The "uncensored models" debate is ultimately about who chooses the values.
-
-<!-- Notes for Grace: 1) "KPO" corrected to "KTO" (Kahneman-Tversky Optimisation). 2) ORPO was only named in the notes; I added a one-line standard description. 3) The KTO line about learning from single good/bad labels is a well-established property I added for clarity. 4) "DPO is a default today for a lot of modern LLMs" softened to "widely used, especially for open models". 5) Notes say DPO's "compute requirements are exhaustive"; DPO is cheaper than PPO, so I wrote "still needs substantial computing power". 6) The 60 GB figure for an 8B model is kept but framed as "can take more than", since it depends on setup. 7) LoRA/PEFT folded into the resources point; "LoRa" corrected to "LoRA"; "usually only 1%" softened to "often around 1% or fewer" (your PEFT code example shows 0.19%). 8) "Uncensored models" presented as a debate attributed to open-source advocates, with the counter-argument added. The notes don't name the source; the four points match Eric Hartford's 2023 blog post "Uncensored Models", worth checking and citing. In point 4 "inconsistent base" seems to mean "unaligned base", and "resolvability" likely means "composability" (Hartford's term). 9) Constitutional AI explanation added from general knowledge since the notes only name it. -->

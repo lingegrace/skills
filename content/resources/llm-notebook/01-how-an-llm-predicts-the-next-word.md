@@ -5,7 +5,7 @@ time: "6 min read"
 order: 1
 column: llm-notebook
 series: "How LLMs work"
-status: draft
+status: published
 ---
 
 When ChatGPT or Claude answers you, it can feel like talking to someone who understands. Underneath, the machine is doing something much simpler, over and over: guessing the next small piece of text. Once you see that, a lot of LLM behaviour makes sense, from why the same question gets different answers to why some settings make a model "more creative".
@@ -89,11 +89,3 @@ Top-p adapts to the situation. When the model is confident, a handful of tokens 
 - Scale (many parameters and huge amounts of training text) is what makes these predictions accurate enough to feel like understanding.
 - Temperature controls how adventurous the choice is; 0 is the most predictable, higher values add variety and risk.
 - Top-k and top-p limit the pool of candidate tokens before the model samples from it.
-
-<!-- Notes for Grace:
-1) The 「今天天气」 percentages (真 30%, 不 20%, 很 15%) are now explicitly labelled as illustrative numbers, since they are not from a real model.
-2) Added that "temperature 0 always picks the top token" describes the idea; I avoided saying the output is fully deterministic, because in practice some systems still vary slightly at temperature 0.
-3) The notes' claim that temperature is "weakly correlated with novelty, moderately correlated with incoherence; no relationship with either cohesion or typicality" had no citation. I kept the gist as "research on story generation suggests..." without naming a study. It looks like Peeperkorn et al. (2024), "Is Temperature the Creativity Parameter of Large Language Models?" — please confirm and add the citation if you want it named. I dropped the cohesion/typicality detail for length.
-4) The notes call the sampling distribution a "PDF" (probability density function). For a discrete vocabulary it is technically a probability distribution (probability mass function), so I used "probability distribution".
-5) Added the 「中国的首都是」 example and brief definitions of token, parameter, autoregressive and nucleus sampling, which are not in this part of the notes.
--->

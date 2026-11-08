@@ -5,7 +5,7 @@ time: "8 min read"
 order: 4
 column: llm-notebook
 series: "How LLMs work"
-status: draft
+status: published
 ---
 
 A model that has only learned to predict the next word is not yet an assistant. Ask it a question and it might continue with three more questions, because that is what text on the internet often does. The journey from "text predictor" to "helpful assistant" happens in stages, and several of those stages involve people deciding what a good answer looks like.
@@ -100,15 +100,3 @@ Few-shot and many-shot prompting rely on **in-context learning**: the model pick
 - LoRA is a cheap form of fine-tuning that freezes the original weights and trains small add-on matrices.
 - RLHF (with a reward model and PPO) or DPO align the model with human preferences, and those preferences come from specific people.
 - At inference, sampling, retrieval, streaming, chain-of-thought and zero/few/many-shot prompting shape what you actually see.
-
-<!-- Notes for Grace:
-1) The notes describe GPT's flow as going through "encoder layers {multi-head self-attention}". GPT is decoder-only, so these are decoder blocks with masked self-attention; corrected.
-2) The notes say the feed-forward network uses ReLU "to remove irrelevant features". GPT models typically use GELU, a smooth variant; I didn't name the activation here, and softened the "remove irrelevant features" description.
-3) "Pretraining takes up 98% of overall compute and data resources" has no source in the notes and varies by model, so I softened it to "the large majority".
-4) "Training data: low-quality data" reworded to "mostly raw text gathered at scale ... quality is uneven", which is what I took it to mean.
-5) GPT-3 0.5 trillion tokens: kept, framed as the dataset size (the GPT-3 paper reports training on about 300 billion tokens drawn from that dataset). The notes' estimate that GPT-4 used "an order of magnitude more data" was a guess (and reads as quoted from another writer's first-person text), so I replaced it with "OpenAI has not published the size of GPT-4's training data".
-6) The notes say LoRA "keeps overall pre-trained weights by changing some trainable parameters". More precisely, LoRA freezes all original weights and trains small added low-rank matrices; clarified.
-7) The notes list function calling/tool use as "users interact via prompts ... or external API use". I separated prompting styles from tool use, since tool use is the model calling external functions rather than a way users prompt.
-8) Sampling "PDF over all tokens" changed to "probability distribution" (vocabulary is discrete).
-9) Added brief explanations of the RLHF steps (ranking, reward model), how DPO differs, vector search, SSE and in-context learning; these are standard descriptions, not from the notes.
--->

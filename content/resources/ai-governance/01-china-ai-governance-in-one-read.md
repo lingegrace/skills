@@ -4,7 +4,7 @@ summary: "You'll get a neutral, structured overview of China's 2017 national AI 
 time: "8 min read"
 order: 1
 column: ai-governance
-status: draft
+status: published
 ---
 
 Discussions of global AI rules often mention China, but the original documents are long and mostly in Chinese. This article summarises the key ones so you can see what each says, in its own terms. Every position below is attributed to the document that states it. It is a summary, not an assessment.
@@ -124,5 +124,3 @@ The MFA page also lists the Shanghai Declaration on Global AI Governance and the
 - MFA documents stress UN-centred, inclusive governance, ethics in four areas, and five principles for military AI.
 - The 2025 Global AI Governance Action Plan sets out 13 points, from infrastructure to capacity-building.
 - These documents build on UN resolutions 78/265, 78/311, 78/213, 78/132 and 77/320.
-
-<!-- Notes for Grace: 1) In your notes the eight bullets under "1. 大数据智能理论" (knowledge computing, cross-media analysis, etc.) are the plan's key common technologies, not sub-topics of big data intelligence (the table seems to have been flattened). I placed them under "key common technologies". 2) Your notes describe 智能化基础设施 as applying AI to industries. In the plan's text, this section covers network, big data and high-performance computing infrastructure, while industry applications fall under the smart economy and smart society sections. I followed the plan; please verify. 3) The plan was dated 8 July 2017 as in your notes; translated document number Guofa [2017] No. 35. 4) Speech date and the Xi attribution of the 2023 Initiative are taken from the Sun Xiaobo speech in your notes. 5) I added 79/239 to the resolutions list since the military AI paper cites it. 6) Your notes don't give 78/311's adoption date, so none is given. 7) The "what to watch" item on the Global Dialogue and scientific panel comes from the speech in your notes. 8) The CAC is mentioned only to point out it's out of scope; your notes name it but give no content. -->

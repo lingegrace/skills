@@ -4,7 +4,7 @@ summary: "You'll understand Elena Verna's Lovable Score, why she pairs it with a
 time: "6 min read"
 order: 3
 column: reading-notes
-status: draft
+status: published
 ---
 
 When AI makes it easy to copy any feature in weeks, what keeps people using your product? Elena Verna's answer, in her newsletter *Elena's Growth Scoop*, is that growth is becoming a trust problem, and that you need a way to measure whether people genuinely love what you have built. These are my notes on the "Lovable Score" she uses for Lovable, an AI tool for building apps and websites from plain-language prompts.
@@ -80,5 +80,3 @@ The following are my suggestions, not part of Verna's framework.
 - The score combines NPS (plus a real-referral check), PMF, CSAT and CES into a 100-point composite.
 - Lovable's targets are strict: NPS 60+, 70%+ referring in the last 30 days, 60% "very disappointed", 70% top-box satisfaction, 50% top-box ease.
 - The four plain questions (easy, happy, irreplaceable, talked about) are usable by any team.
-
-<!-- Notes for Grace: 1) Your notes say "4 类指标" but list NPS, referral, PMF, CSAT and CES; I treated the referral question as a bonus inside NPS, so there are four categories, matching the notes' nesting. 2) The notes don't give the weights for the composite, so none are stated. 3) The explanations of how NPS, PMF, CSAT and CES are calculated are standard definitions I added for readers; the description of Lovable as an AI app builder is also mine. 4) I assumed "Elena" is Elena Verna (author of Elena's Growth Scoop), as you indicated. 5) The "How could a team adapt it?" section is clearly marked as suggestions, not Verna's framework. -->

@@ -5,7 +5,7 @@ time: "7 min read"
 order: 5
 column: llm-notebook
 series: "Beyond the basics"
-status: draft
+status: published
 ---
 
 A lot of what makes an AI tool feel smart happens in the seconds after you press enter. This stage is called **inference**: the moment a trained model is used to produce an answer. Much of the progress you notice as a user, such as models that "think", search the web or book a meeting, comes from what engineers do at inference time, not from a new model.
@@ -110,5 +110,3 @@ For a social scientist, simulated agents are becoming a laboratory for social be
 - ReAct and function calling ground answers in outside data and let models act, which reduces hallucination.
 - An agent is an LLM plus tools, memory and orchestration code running a loop.
 - Multi-agent systems split work between roles, and simulations like Generative Agents raise real questions for social science.
-
-<!-- Notes for Grace: 1) "Functional calling" corrected to "function calling" throughout. 2) "Berkey Function Calling Leaderboard" corrected to "Berkeley". 3) Notes said "CoT reasoning: improve Self-Consistency"; it's the other way round: self-consistency improves chain-of-thought by sampling several reasoning paths and voting. 4) ReAct "overcomes hallucination" softened to "reduces". 5) EmotionPrompt results described neutrally and attributed to the paper's authors; I left out the specific EP-number rankings (EP01+EP04, EP02 most effective) since they're hard to read without the paper's table; add back if you want. 6) "Concise answers reduce hallucination" softened to "may help". 7) "Anthropic Approach - Functional Call defined by users" rephrased: developers define tools on their side (client tools). 8) Epitome's "world's first" claim reported as how the platform presents itself, not as fact. 9) The ReAct trace (Lyon population) is my illustration, not from your notes; swap in your own if you prefer. 10) Jamba-1.5, Consensus, Scite.AI, Elicit and WebArena from the notes are not covered here. -->

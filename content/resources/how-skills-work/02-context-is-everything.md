@@ -4,7 +4,7 @@ summary: "You'll understand next-token prediction, the difference between base a
 time: "7 min read"
 order: 2
 column: how-skills-work
-status: draft
+status: published
 ---
 
 Everything a language model does depends on one thing: the text in front of it. It has no other channel. It can't see your intentions, only your words, plus whatever else has been placed in its context.
@@ -94,14 +94,3 @@ Put these pieces together and a skill stops looking like magic.
 - Instruct models are base models further trained with fine-tuning and RLHF to follow requests.
 - System prompts carry extra weight because of role labels learned in training, but that weight isn't absolute.
 - Writing out steps gives the model a draft to reason from; a skill's steps do the same job.
-
-<!-- Notes for Grace:
-1) The notes say the model predicts the next 「字」 (character). Models actually predict tokens, which may be a character, a word or part of a word. I explained tokens and kept your 「今天天气」 example.
-2) "Base + RLHF = Instruct": your own next bullet says fine-tuning comes first, then RLHF. I described it as fine-tuning + RLHF.
-3) RLHF description simplified in the notes. I kept your plain version ("humans rank, model adjusts") and said "in simple terms", since in practice the rankings usually train a separate reward model that the main model is then optimised against.
-4) Temperature 0: changed "每次都选" to "(almost) always", since in practice output at temperature 0 isn't always perfectly deterministic.
-5) System prompt priority: the notes say users "没法轻易覆盖" it. I kept that but added that it isn't absolute (jailbreaks / prompt injection can sometimes get around it).
-6) Chain-of-thought: softened "准确率会高很多… 自然就更靠谱" to "often noticeably more accurate", since the gain varies by task and model.
-7) "几百亿、上千亿" parameters rendered as "tens or hundreds of billions".
-8) Added a short sentence on who RLHF reviewers are (sociological angle); not from the notes, no claims beyond the obvious.
--->

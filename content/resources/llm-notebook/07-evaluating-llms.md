@@ -5,7 +5,7 @@ time: "6 min read"
 order: 7
 column: llm-notebook
 series: "Beyond the basics"
-status: draft
+status: published
 ---
 
 Every new model launch comes with a table of scores. But a score is only as meaningful as the test behind it, and the tests embed assumptions about what "intelligence" or "fairness" means. Knowing a little about how evaluation works helps you read those launch tables with the right amount of scepticism.
@@ -84,5 +84,3 @@ Four methods, in one line each:
 - Contamination can inflate scores when test questions leak into training data.
 - Bias benchmarks such as WinoBias, CrowS-Pairs and StereoSet each measure one narrow, culturally specific idea of bias.
 - RLHF, RLAIF, DPO and NLPO are different ways of putting values into a model during training.
-
-<!-- Notes for Grace: 1) The notes headed the benchmark list "Alignment 模型"; these are benchmarks/datasets, not models, so I relabelled them. 2) DPO was described as a "preference classifier to generalize"; corrected: DPO learns directly from preference pairs without a separate reward model or classifier. 3) NLPO "adding naturalness of the sequence" expanded with the standard description (it restricts the action space to likely tokens). 4) The Turing quote "if we are trying to produce an intelligent machine, and are following the human model as closely as we can" had no page reference in the notes, so I left it out rather than guess its source; add it back with a citation if you have one. 5) The Schaeffer et al. quote in the notes describes the properties they examine (taken from earlier work), not their own definition; I framed their paper as a critique arguing emergence can be a measurement artefact. 6) The WinoBias nurse/doctor example and the US-centric caution are my additions. 7) Benchmark aggregators, the LLM political compass and the OpenAI Societal Changes report from the notes are not covered. -->

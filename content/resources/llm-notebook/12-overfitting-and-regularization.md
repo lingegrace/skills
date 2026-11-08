@@ -5,7 +5,7 @@ time: "7 min read"
 order: 12
 column: llm-notebook
 series: "ML Crash Course notes"
-status: draft
+status: published
 ---
 
 A model that scores perfectly on the data it trained on can still fail the moment it meets the real world. That gap between "works in the lab" and "works out there" is one of the most important ideas in machine learning.
@@ -102,5 +102,3 @@ A skill can overfit too. If you only test it on the three examples you used whil
 - Generalization assumes independent, identically distributed, stationary data with matching partitions.
 - **Regularization** minimizes loss plus complexity; **L2** penalizes large weights, scaled by the **regularization rate λ**; **early stopping** halts training before full convergence.
 - Learning rate and regularization rate pull in opposite directions, so tune them together.
-
-<!-- Notes for Grace: 1) Fixed typo "lamba" to "lambda". 2) Clarified "complexity is a function of the square of the model's weights" as the sum of squared weights (the standard L2 definition). 3) Brought in the regularization and early-stopping note that appeared in your logistic-regression section ("end the training without convergence"). 4) Added brief descriptions of what the validation and test sets are each used for (standard practice). 5) Linking too-high lambda to prediction bias draws on your own prediction-bias list ("too-strong regularization"). -->

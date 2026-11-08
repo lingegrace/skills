@@ -5,7 +5,7 @@ time: "9 min read"
 order: 3
 column: llm-notebook
 series: "How LLMs work"
-status: draft
+status: published
 ---
 
 "Transformer" is the T in GPT, and almost every major language model today is built on it. Its diagrams look intimidating, but it is easier to follow one sentence all the way through. We will train a translation model on a single example: 我有一只猫 → "I have a cat".
@@ -134,15 +134,3 @@ GPT keeps only the decoder half, without cross-attention: masked self-attention,
 - A linear layer and softmax turn this into a probability for every vocabulary word; cross-entropy loss (−log of the correct word's probability) measures the error.
 - Backpropagation and gradient descent adjust the parameters to reduce the loss.
 - Encoder-only (BERT) suits classification, decoder-only (GPT) suits generation, encoder-decoder suits translation.
-
-<!-- Notes for Grace:
-1) The notes call the second decoder layer "Cross Self-attention". It is cross-attention (Queries from the decoder, Keys and Values from the encoder), not self-attention, so I called it cross-attention.
-2) The notes list decoder components as masked attention, cross-attention and Add & Norm. Each decoder layer also has a feed-forward network; added.
-3) The notes say Matrix B "includes K and V". More precisely, K and V are computed from Matrix B by learned projection matrices inside cross-attention. Reworded.
-4) The notes say cross-attention "outputs the probability distribution for the next word at each position". The probabilities only appear after the feed-forward, linear and softmax steps (as your own summary flow says), so I placed it there.
-5) Loss example: the notes give Y the shape [3] with "position 0: I, position 1: have, position 2: cat". In "I have a cat" position 2 would be "a", so I relabelled the rows as "three of the target words" rather than positions 0-2. Your numbers are kept and are correct using the natural log: −ln(0.65)=0.431, −ln(0.60)=0.511, −ln(0.70)=0.357, average ≈0.43; −ln(0.95)≈0.05.
-6) The second cross-entropy example in the notes uses the input "我爱机器学习 + <begin> I have a" → "cat". The Chinese source does not match the English target (it means "I love machine learning"), so I did not use it; the 0.95 confident-prediction example is kept.
-7) Matrix A is described as "four tokens" for 我有一只猫. The token count depends on the tokenizer (it is five characters), so I did not state a number for A.
-8) "Each attention head captures different types of dependencies (syntactic, semantic, positional)" softened to "different heads can pick up different kinds of relationship".
-9) Added brief explanations of Query/Key/Value, teacher forcing, logits, backpropagation and convergence; convergence comes from your loss-reduction notes (Google crash course); learning rate is left to the separate loss and gradient descent article.
--->

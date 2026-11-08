@@ -5,7 +5,7 @@ time: "7 min read"
 order: 2
 column: llm-notebook
 series: "How LLMs work"
-status: draft
+status: published
 ---
 
 ChatGPT seemed to arrive out of nowhere in late 2022, but it sits at the end of about a decade of steady ideas. Knowing that short history helps you separate what is genuinely new from what is marketing. It also explains one word you will see everywhere: Transformer.
@@ -95,11 +95,3 @@ The Transformer's **self-attention** removes the step-by-step chain. Every token
 - word2vec turned words into vectors, so similar meanings sit close together.
 - Deep learning means neural networks with many layers that learn their own features from data, trained with gradient descent.
 - RNNs read text one step at a time with a hidden state; Transformers use self-attention to read all tokens in parallel, which is why they scaled.
-
-<!-- Notes for Grace:
-1) The notes describe word2vec as mapping words into a high-dimensional space "(Position encoding)". Positional encoding is a separate idea that belongs to the Transformer (2017), not word2vec, so I removed it here; it is covered in the next article.
-2) The notes date RNNs to 2014. RNNs go back to the 1980s (LSTM 1997); 2014 fits GRU and RNN encoder-decoder translation models. I wrote "~2014 ... RNNs are older, but around this time they became the standard tool" to keep your timeline without the error.
-3) Attention 2015: kept as written. The original paper (Bahdanau et al.) appeared online in 2014 and at a conference in 2015, so 2015 is fine.
-4) XiaoIce: kept the GRU generator + retrieval generator description. I left out the "more than 30 billion conversation pairs since May 2018" figure because the wording in the notes was ambiguous ("since" vs "as of") and the section is marked 有待展开; please check the XiaoIce paper if you want the number back.
-5) Added brief explanations of machine learning, activation function and gradient descent, and the "cat near dog" example, which are not in the notes.
--->

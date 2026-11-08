@@ -4,7 +4,7 @@ summary: "You'll understand the agent loop Claude runs on, why a written procedu
 time: "6 min read"
 order: 1
 column: how-skills-work
-status: draft
+status: published
 ---
 
 When you install a skill, nothing about Claude itself changes. No new brain, no retraining. What changes is the *text* Claude can see at the right moment. Once you understand that, it becomes much clearer why some skills work beautifully and others are ignored.
@@ -93,11 +93,3 @@ There's a quietly important consequence here, too. The description is the gateke
 - For complex tasks, following a written procedure is usually more reliable than letting the model improvise.
 - A skill is simply an operating manual (plus optional scripts) loaded into the context.
 - Progressive disclosure means Claude starts with only each skill's name and description, and loads the full file when a task matches.
-
-<!-- Notes for Grace:
-1) "现在主流模型的上下文窗口几乎都到了 1M token" softened to "some current models offer windows of up to a million tokens" (overstated and time-sensitive).
-2) Line 34 was cut off ("就像…") and had a typo ("他就能部就班" → 按部就班). I completed the thought with my own analogy (a team checklist for a new colleague); please check it fits what you intended.
-3) I attributed the scripts/ example to Anthropic's PDF skill, since the script names match it. Please confirm that's your source.
-4) Added a third layer to the progressive disclosure table (extra files/scripts loaded only when a step needs them). Your notes only describe two layers ("name + description" then "more content").
-5) Dropped the cross-reference to "用 Skills 定制你的 AI 工作流" because that article doesn't exist on this site yet.
--->

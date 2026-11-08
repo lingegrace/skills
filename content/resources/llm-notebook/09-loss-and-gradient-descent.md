@@ -5,7 +5,7 @@ time: "7 min read"
 order: 9
 column: llm-notebook
 series: "ML Crash Course notes"
-status: draft
+status: published
 ---
 
 Every model you use, from a spam filter to Claude, learned by doing one thing over and over: making a guess, measuring how wrong it was, and nudging itself to be a little less wrong. If you understand that loop, a lot of AI jargon stops being mysterious.
@@ -100,5 +100,3 @@ The same loop applies when you improve a Claude skill. You need a "loss": a clea
 - The **learning rate** sets the step size: too small is slow, too large is unstable.
 - **Batch size** sets how many examples feed each update; SGD (batch of one) is noisy, and some noise can help.
 - A long flat stretch of loss can be a **false sense of convergence**, not the end of learning.
-
-<!-- Notes for Grace: 1) Added that a too-large learning rate makes loss overshoot or diverge; the notes only described the too-small case. 2) Softened "noise can help generalize the model and find the optimal biases and weights" to "can help it avoid settling too early and help it generalise"; noise does not guarantee finding the optimal values. 3) Added the term "mini-batch" and the batch-size comparison table as standard context; the example range "10 to 1,000" is illustrative, not from your notes. 4) Explained why MSE is pulled toward outliers (squaring). 5) The "about 30 seconds" in your experiment depends on the course's exercise environment and hardware; kept as your observation. 6) Left out the pip install line, which is setup rather than content. -->

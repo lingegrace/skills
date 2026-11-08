@@ -5,7 +5,7 @@ time: "8 min read"
 order: 11
 column: llm-notebook
 series: "ML Crash Course notes"
-status: draft
+status: published
 ---
 
 A model can only learn from what it is shown, in the form it is shown. Most of the real work in machine learning is not picking an algorithm. It is deciding how to represent the world as numbers, and deciding what counts as the right answer.
@@ -111,5 +111,3 @@ When you test a skill, your expected outputs are your labels. Write them down be
 - Human (**golden**) labels beat machine (**silver**) labels, but humans disagree too, so measure **inter-rater agreement** (Cohen's kappa, ICC, Krippendorff's alpha).
 - Watch for missing values, duplicates, bad values, bad labels and bad sections of data.
 - For **class imbalance**, downsample the majority class, then upweight it by the same factor.
-
-<!-- Notes for Grace: 1) Fixed typo "Machina-labels" to "machine labels". 2) Added a short "typically used for" column to the inter-rater agreement table (standard descriptions, not from your notes). 3) Explained the "NaN trap" (overflow beyond floating-point limits) and completed the unfinished bullet "Without feature scaling". 4) Clarified that feature crosses are a kind of synthetic feature; the country × time-of-day and age/income examples are illustrative, not from your notes. 5) Your notes mentioned "End-to-end process of embeddings" as a heading with no content; left it out. 6) Proxy-label example (shares as a proxy for enjoyment) is illustrative. -->

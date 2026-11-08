@@ -4,7 +4,7 @@ summary: "You'll get a quick map of where AI startups are focusing (AI Ops, deve
 time: "6 min read"
 order: 2
 column: reading-notes
-status: draft
+status: published
 ---
 
 One of the easiest ways to understand where AI is actually going is to look at what young companies are betting on. Startups have to find a real problem someone will pay to solve, so their pitches are a rough map of where AI meets everyday work. These are my notes from three sources: a review of 139 Y Combinator (YC) startups, a TechCrunch list of 16 top YC ventures, and the *AI Valley* newsletter.
@@ -87,5 +87,3 @@ Two items from the *AI Valley* newsletter:
 - Sensitive sectors such as healthcare, government and large enterprises create demand for on-premise, compliant AI.
 - Many new ventures focus on data supply or on bringing AI into physical, high-stakes settings.
 - The big platforms are moving towards all-in-one environments where AI can browse, code and act.
-
-<!-- Notes for Grace: 1) The TechCrunch descriptions were translated from your Chinese notes into English. I kept the company names exactly as in your notes; please double-check spellings (e.g. "Librar Labs", "Doomersion") against TechCrunch before publishing. 2) The notes don't say which YC batch the 139 startups came from, or when the TechCrunch and AI Valley pieces were published, so I added no dates or batch names. 3) Softened "are not going to send sensitive data to OpenAI" by attributing it to the review and generalising to "an outside AI provider such as OpenAI". 4) "Automated collections" rendered as "automated debt collection" for clarity. 5) The "pattern worth noticing" paragraph and the sentence on trust and power are my additions; remove if you prefer pure notes. -->

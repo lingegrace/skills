@@ -5,7 +5,7 @@ time: "8 min read"
 order: 10
 column: llm-notebook
 series: "ML Crash Course notes"
-status: draft
+status: published
 ---
 
 Many AI systems don't just predict a number. They decide: spam or not spam, fraud or not fraud, flag this post or leave it. Every one of those decisions hides a choice about which mistakes we are willing to live with.
@@ -108,5 +108,3 @@ When you test a skill, decide which mistake matters more. For a skill that flags
 - **Accuracy** misleads on imbalanced data; **precision** and **recall** tell you which kind of mistake the model makes.
 - **ROC/AUC** compare models across all thresholds; picking point A, B or C depends on the cost of each error.
 - **Prediction bias** often points back to the data, the features, the pipeline or over-regularization.
-
-<!-- Notes for Grace: 1) Fixed "Logistic regression can calculator probabilities" to "outputs a probability". 2) Your notes introduced the 90%/10% odds example but the formula was missing; added odds = 0.9/0.1 = 9. 3) Added the sigmoid formula 1/(1+e^-z) and the statement that z predicts the log-odds (standard, and consistent with "log-odds is the inverse of the sigmoid"). 4) Rephrased the log loss description: your note said it "returns the logarithm of the magnitude of the change"; more precisely it uses the log of the predicted probability for the true class, which heavily penalises confident wrong answers. 5) Clarified "P(0, 0.75)" as a threshold of 0.75. 6) Your notes referenced a confusion matrix and formulas that appear to be images; added the standard confusion matrix, accuracy, precision and recall formulas, and a definition of FPR. 7) Added a definition of prediction bias (average prediction vs average label); the 5%/15% numbers are an illustrative example, not data. 8) Moved the regularization/early-stopping note from this section to the overfitting article (order 12). -->

@@ -4,7 +4,7 @@ summary: "You'll understand what it takes for your writing to be found and cited
 time: "6 min read"
 order: 1
 column: reading-notes
-status: draft
+status: published
 ---
 
 More and more people now ask a chatbot instead of typing a query into a search engine. That means a growing share of what you publish is read first by a machine, which then decides whether to repeat, summarise or cite you. These are my notes from the newsletter *Artificial Ignorance* and a few related pieces on what that shift means for anyone who writes.
@@ -83,5 +83,3 @@ So the question I am holding on to, rather than an answer: **can you write for y
 - The lasting value is in writing what does not exist online yet, and in writing to think.
 - GEO adds concrete tactics: statistics, expert quotes, FAQ sections and cited sources.
 - Gartner's prediction of a 25% drop in search engine volume by 2026 is a forecast. Treat it as one.
-
-<!-- Notes for Grace: 1) The Gartner figure is presented explicitly as a prediction and flagged as a forecast to check against real data, since 2026 has now arrived. 2) "Expertise, Authority" in E-E-A-T changed to "Authoritativeness", which is Google's own wording. 3) The notes say "AI becomes the primary readers"; softened to "one of the main readers". 4) I did not name the Artificial Ignorance author or the source of the "generous/selfish" paraphrase, as the notes don't; add names if you want them. 5) The FAQ example about qualitative interviews is mine, added for illustration. 6) The closing reflection is framed as a question, not as your opinion; edit it to your own words. -->

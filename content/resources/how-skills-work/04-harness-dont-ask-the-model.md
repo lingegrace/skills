@@ -4,7 +4,7 @@ summary: "You'll understand what a harness is, the difference between before-the
 time: "6 min read"
 order: 4
 column: how-skills-work
-status: draft
+status: published
 ---
 
 Asking a model "did you do this correctly?" is a bit like asking a student to mark their own exam. Sometimes it works. But if there's an answer key, why not use it?
@@ -100,9 +100,3 @@ Don't overdo it. If a step is genuinely a matter of judgement, a script can't he
 - Constraints act before the fact (you can't edit a file you haven't read); feedback acts after (failed tests go back into the context).
 - In Claude Code, hooks can trigger checks automatically, for example when the agent is about to stop.
 - When designing a skill, make steps checkable, and add a script when a check is mechanical or must never be skipped.
-
-<!-- Notes for Grace:
-1) The notes describe Hooks as firing "在 agent 想停下来的时候". That's one kind of hook (the Stop hook); hooks can also run at other points, such as before or after a tool is used. I described both.
-2) The "can't edit a file you haven't read" behaviour is accurate for Claude Code's Edit/Write tools at the time of writing, but tool behaviour can change; consider a date note if this page will be kept long-term.
-3) The "how to design a skill with checkable steps" section, the three-level check, the scripts/check_refs.py example and the norm-vs-fence analogy are my own additions to fulfil the brief; they're not in the notes. check_refs.py is a hypothetical script name, not a real file.
--->
