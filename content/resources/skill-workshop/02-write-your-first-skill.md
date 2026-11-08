@@ -3,6 +3,8 @@ title: "Write your first skill: turning features into benefits"
 summary: A complete walkthrough of building the value-proposition-writer skill, from the work problem to the finished SKILL.md.
 time: 12 min read
 order: 2
+column: skill-workshop
+status: published
 ---
 
 In this lesson we'll build a real skill from scratch: **[value-proposition-writer](../../skills/value-proposition-writer/)**, which turns a product's feature list into a Feature → Advantage → Benefit (FAB) analysis. You can follow the same five steps for any skill.

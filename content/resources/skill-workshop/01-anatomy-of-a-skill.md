@@ -3,6 +3,8 @@ title: The anatomy of a skill people actually use
 summary: A skill is a scaffold that breaks a job into steps. Here are the four parts every good one has, and why the most-installed skills are so short.
 time: 6 min read
 order: 1
+column: skill-workshop
+status: published
 ---
 
 A Claude skill is a folder with one file in it: `SKILL.md`. When your request matches the skill's description, Claude loads the file and follows it. That's the whole mechanism.

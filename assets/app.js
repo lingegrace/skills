@@ -184,9 +184,19 @@
 
   /* ───────── 5. Forms: request a skill, custom skill, feedback ───────── */
   const endpoint = ($('#lamp') && $('#lamp').dataset.endpoint) || '';
+  let gform = null;
+  try { gform = $('#lamp') && $('#lamp').dataset.gform ? JSON.parse($('#lamp').dataset.gform) : null; } catch (err) { gform = null; }
   const send = async (form, type) => {
     const data = Object.fromEntries(new FormData(form));
     data.type = type; data.page = location.pathname + location.search;
+    if (gform && gform.action) {
+      // Google Form: post each value to its question's entry ID. The response is opaque (no-cors).
+      const f = gform.fields || {};
+      const body = new URLSearchParams();
+      for (const k of ['type', 'message', 'email', 'page']) if (f[k] && data[k] != null) body.append(f[k], String(data[k]));
+      await fetch(gform.action, { method: 'POST', mode: 'no-cors', body });
+      return;
+    }
     if (!endpoint) throw new Error('not-connected');
     if (/script\.google(usercontent)?\.com/.test(endpoint)) {
       // Google Apps Script web app → appends a row to Grace's Google Sheet and emails her.

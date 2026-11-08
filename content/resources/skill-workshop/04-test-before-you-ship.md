@@ -3,6 +3,8 @@ title: Test a skill before you ship it
 summary: A real dry run of the value-proposition-writer on our own skill library, what it got right, and the one change it forced.
 time: 7 min read
 order: 4
+column: skill-workshop
+status: published
 ---
 
 A skill can read perfectly and still fail in use. The only way to know is to run it on real material, not a made-up example, and watch where it stumbles.

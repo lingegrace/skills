@@ -135,14 +135,23 @@ def load_newsletter():
     return [i for i in data.get("issues", []) if str(i.get("url", "")).startswith("https://www.linkedin.com/pulse/")]
 
 
-def load_resources():
+def load_resources(site):
+    """Articles live in content/resources/<column>/<NN>-<slug>.md. Columns come from site.yaml."""
+    cols = [c["key"] for c in site.get("resource_columns", [])]
     items = []
-    for p in sorted((ROOT / "content" / "resources").glob("*.md")):
+    for p in sorted((ROOT / "content" / "resources").rglob("*.md")):
         meta, body = read_frontmatter(p.read_text(encoding="utf-8"))
         meta["slug"] = p.stem.split("-", 1)[1] if re.match(r"\d+-", p.stem) else p.stem
-        meta["body"] = body
+        meta.setdefault("column", p.parent.name if p.parent.name != "resources" else "skill-workshop")
+        # private review notes for Grace never reach the page
+        meta["body"] = re.sub(r"<!--\s*Notes for Grace.*?-->", "", body, flags=re.S)
         items.append(meta)
-    items.sort(key=lambda r: r.get("order", 99))
+    col_rank = lambda r: cols.index(r["column"]) if r["column"] in cols else len(cols)
+    items.sort(key=lambda r: (col_rank(r), r.get("order", 99)))
+    slugs = [r["slug"] for r in items]
+    dupes = {s for s in slugs if slugs.count(s) > 1}
+    if dupes:
+        raise SystemExit(f"Duplicate article slugs: {dupes}")
     return items
 
 
@@ -162,7 +171,9 @@ NAV = [("skills/", "Catalog"), ("insights/", "Insights"), ("resources/", "Skill 
 
 def lamp(site):
     """Pull-cord feedback lamp, on every page."""
-    return f"""<div class="lamp" id="lamp" data-endpoint="{e(site.get('form_endpoint', ''))}">
+    gf = site.get("google_form") or {}
+    gf_attr = e(json.dumps(gf)) if gf.get("action") else ""
+    return f"""<div class="lamp" id="lamp" data-endpoint="{e(site.get('form_endpoint', ''))}" data-gform="{gf_attr}">
   <div class="lamp-wire" aria-hidden="true"></div>
   <div class="lamp-shade" aria-hidden="true"><span class="lamp-bulb"></span></div>
   <button class="lamp-cord" id="lampCord" aria-expanded="false" aria-controls="lampPanel" title="Pull for feedback"><span class="lamp-string"></span><span class="lamp-knob"></span><span class="lamp-label">feedback</span></button>
@@ -337,7 +348,7 @@ def build_home(skills, issues, resources, site):
     methods = site.get("methods", [])
     method_chips = "".join(f"<span>{e(m)}</span>" for m in methods)
     latest = "".join(f"""<li><a href="{e(i['url'])}" target="_blank" rel="noopener"><span class="ins-date">{fmt_date(i.get('date'))}</span><span class="ins-title">{e(i['title'])}</span><span class="ins-arrow">↗</span></a></li>""" for i in issues[:3])
-    lessons = "".join(f"""<a class="lesson" href="{url('resources/' + r['slug'] + '/')}"><span class="lesson-no">Lesson {r.get('order', '')}</span><span class="lesson-title">{e(r['title'])}</span></a>""" for r in resources[:4])
+    lessons = "".join(f"""<a class="lesson" href="{url('resources/' + r['slug'] + '/')}"><span class="lesson-no">{e(r.get('time', ''))}</span><span class="lesson-title">{e(r['title'])}</span></a>""" for r in [x for x in resources if x['column'] in ('skill-workshop', 'how-skills-work')][:4])
     body = f"""
 <section class="hero">
   <div class="hero-text">
@@ -490,16 +501,41 @@ def build_insights(issues, site):
                 body, site, active="insights/")
 
 
+def article_card(r, big=True):
+    draft = '<span class="draft-chip">Draft</span>' if r.get("status") == "draft" else ""
+    return f"""<a class="lesson{' lesson-big' if big else ''}" href="{url('resources/' + r['slug'] + '/')}"><span class="lesson-no">{e(r.get('time', ''))}{draft}</span><span class="lesson-title">{e(r['title'])}</span><span class="lesson-sum">{e(r.get('summary', ''))}</span></a>"""
+
+
 def build_resources(resources, site):
-    lessons = "".join(f"""<a class="lesson lesson-big" href="{url('resources/' + r['slug'] + '/')}"><span class="lesson-no">Lesson {r.get('order', '')} · {e(r.get('time', ''))}</span><span class="lesson-title">{e(r['title'])}</span><span class="lesson-sum">{e(r.get('summary', ''))}</span></a>""" for r in resources)
+    columns = [c for c in site.get("resource_columns", []) if any(r["column"] == c["key"] for r in resources)]
+    nav = "".join(f'<a class="col-chip" href="#{c["key"]}">{e(c["name"])}</a>' for c in columns)
+    sections = ""
+    for c in columns:
+        items = [r for r in resources if r["column"] == c["key"]]
+        series_order = c.get("series", [])
+        groups = {}
+        for r in items:
+            groups.setdefault(r.get("series", ""), []).append(r)
+        keys = sorted(groups, key=lambda s: series_order.index(s) if s in series_order else (len(series_order) if s else -1))
+        inner = ""
+        for s in keys:
+            head = f'<h3 class="series-title">{e(s)}</h3>' if s else ""
+            inner += f'{head}<div class="lessons lessons-grid">{"".join(article_card(r) for r in groups[s])}</div>'
+        sections += f"""<section class="block col-section" id="{c['key']}">
+  <p class="eyebrow">{e(c.get('kicker', ''))}</p>
+  <div class="block-head"><h2>{e(c['name'])}</h2><span class="muted">{len(items)} articles</span></div>
+  <p class="muted col-blurb">{e(c.get('blurb', ''))}</p>
+  {inner}
+</section>"""
     upcoming = "".join(f"<li>{e(t)}</li>" for t in site.get("upcoming_lessons", []))
     body = f"""
 <section class="page-head">
   <p class="eyebrow">Skill Workshop</p>
   <h1>Learn to write skills that actually improve your work.</h1>
-  <p class="lede">Short lessons built from real skills in this library: what a good skill is made of, how to write one for your own job, how to name it so it gets found, and how to test it before you rely on it.</p>
+  <p class="lede">Lessons on writing skills, how skills work inside Claude, my notebook on how large language models work, and notes from what I read.</p>
+  <nav class="col-nav" aria-label="Sections">{nav}</nav>
 </section>
-<section class="block"><div class="lessons lessons-grid">{lessons}</div></section>
+{sections}
 {f'<section class="block"><div class="block-head"><h2>Coming next</h2></div><ul class="upcoming">{upcoming}</ul></section>' if upcoming else ''}
 <section class="block">
   <div class="block-head"><h2>Further reading</h2></div>
@@ -512,14 +548,18 @@ def build_resources(resources, site):
 
 
 def build_lesson(r, resources, site):
-    i = resources.index(r)
-    prev_l = resources[i - 1] if i > 0 else None
-    next_l = resources[i + 1] if i + 1 < len(resources) else None
+    col = next((c for c in site.get("resource_columns", []) if c["key"] == r["column"]), {"key": r["column"], "name": r["column"]})
+    same = [x for x in resources if x["column"] == r["column"]]
+    i = same.index(r)
+    prev_l = same[i - 1] if i > 0 else None
+    next_l = same[i + 1] if i + 1 < len(same) else None
     pager = '<nav class="pager">' + (f'<a href="{url("resources/" + prev_l["slug"] + "/")}">← {e(prev_l["title"])}</a>' if prev_l else "<span></span>") + (f'<a href="{url("resources/" + next_l["slug"] + "/")}">{e(next_l["title"])} →</a>' if next_l else "") + "</nav>"
+    series = f" · {e(r['series'])}" if r.get("series") else ""
+    draft = '<p class="draft-note">Draft: this article is still being reviewed.</p>' if r.get("status") == "draft" else ""
     body = f"""
-<nav class="crumbs" aria-label="Breadcrumb"><a href="{url('resources/')}">Skill Workshop</a> / <span>Lesson {r.get('order', '')}</span></nav>
+<nav class="crumbs" aria-label="Breadcrumb"><a href="{url('resources/')}">Skill Workshop</a> / <a href="{url('resources/#' + col['key'])}">{e(col['name'])}</a>{(' / <span>' + e(r['series']) + '</span>') if r.get('series') else ''}</nav>
 <article class="lesson-page">
-  <header><p class="eyebrow">Lesson {r.get('order', '')} · {e(r.get('time', ''))}</p><h1>{e(r['title'])}</h1><p class="lede">{e(r.get('summary', ''))}</p></header>
+  <header><p class="eyebrow">{e(col['name'])}{series} · {e(r.get('time', ''))}</p><h1>{e(r['title'])}</h1><p class="lede">{e(r.get('summary', ''))}</p>{draft}</header>
   <div class="prose">{md(r['body'])}</div>
   {pager}
 </article>
@@ -610,7 +650,7 @@ def main():
     if not skills:
         raise SystemExit(f"No skills found in {SKILLS_DIR}. Set SKILLS_DIR to a checkout of {REPO}.")
     issues = load_newsletter()
-    resources = load_resources()
+    resources = load_resources(site)
     if OUT.exists():
         shutil.rmtree(OUT)
     shutil.copytree(ROOT / "assets", OUT / "assets")

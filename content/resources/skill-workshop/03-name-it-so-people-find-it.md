@@ -3,6 +3,8 @@ title: Name it so people find it
 summary: Why we renamed "product-value-fab" to "value-proposition-writer", and how to choose names and descriptions that both Claude and people searching can understand.
 time: 5 min read
 order: 3
+column: skill-workshop
+status: published
 ---
 
 A skill has two audiences, and both judge it by its name and description:

@@ -378,3 +378,12 @@ img.author-mark { width: 88px; height: 88px; border-radius: 50%; object-fit: cov
 @media (max-width: 700px) { .about-head { grid-template-columns: 1fr; } .about-cat { order: -1; width: 160px; } }
 .lost-cat { width: 140px; height: auto; border-radius: 20px; margin-bottom: 1.2rem; transform: rotate(-4deg); }
 .thanks-cat { width: 96px; height: 96px; border-radius: 50%; margin-bottom: .4rem; animation: rise .5s ease .9s both; }
+/* resources: sections, series, drafts */
+.col-nav { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1.4rem; }
+.col-chip { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .06em; text-decoration: none; padding: .4rem .8rem; border: 1px solid var(--ink); border-radius: 100px; background: var(--card); }
+.col-chip:hover { background: var(--ink); color: var(--paper); }
+.col-section { scroll-margin-top: 90px; }
+.col-blurb { margin: -.6rem 0 1.4rem; max-width: 720px; }
+.series-title { font-size: 1.35rem; margin: 1.6rem 0 .8rem; padding-left: .7rem; border-left: 3px solid var(--accent); }
+.draft-chip { margin-left: .6rem; font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .14em; padding: .05rem .4rem; border: 1px dashed var(--accent); border-radius: 3px; color: var(--accent); }
+.draft-note { margin-top: 1rem; font-family: 'JetBrains Mono', monospace; font-size: .74rem; color: var(--accent); padding: .5rem .8rem; border: 1px dashed var(--accent); border-radius: 4px; display: inline-block; }

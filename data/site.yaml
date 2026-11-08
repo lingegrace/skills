@@ -6,6 +6,17 @@
 # and you get an email. Leave empty until it's set up: forms then say they aren't connected yet.
 form_endpoint: ""
 
+# Google Form (preferred). Paste the form's "formResponse" URL and the entry IDs of its four questions.
+# Get them from the form's "Get pre-filled link" (see backend/google-form-setup.md). When action is set,
+# all three forms (request a skill, feedback lamp, custom skill) submit straight into the Google Form.
+google_form:
+  action: ""        # https://docs.google.com/forms/d/e/<FORM_ID>/formResponse
+  fields:
+    type: ""        # entry.XXXXXXXXX  (Type: request / feedback / consult)
+    message: ""     # entry.XXXXXXXXX  (Message)
+    email: ""       # entry.XXXXXXXXX  (Email)
+    page: ""        # entry.XXXXXXXXX  (Page)
+
 # Claude Code plugin for each drawer (see .claude-plugin/marketplace.json in the skills repo).
 plugins:
   research: research-intelligence-skills
@@ -155,3 +166,27 @@ upcoming_lessons:
   - How to evaluate a skill without asking AI whether it worked
   - What I learned from studying 20 real-world AI skills
   - "Free vs paid AI skills: what should actually be monetized?"
+
+# Sections of the Skill Workshop (Resources). Articles: content/resources/<key>/<NN>-<slug>.md
+resource_columns:
+  - key: skill-workshop
+    name: Skill Workshop
+    kicker: Write your own
+    blurb: Practical lessons on writing skills that actually improve your work, built from real skills in this library.
+  - key: how-skills-work
+    name: How skills work
+    kicker: Under the hood
+    blurb: What happens inside Claude when a skill runs, and what that means for how you write one.
+  - key: llm-notebook
+    name: LLM Notebook
+    kicker: Study notes
+    blurb: My notes on how large language models work, from next-word prediction to training, alignment and evaluation.
+    series: [How LLMs work, Beyond the basics, ML Crash Course notes]
+  - key: reading-notes
+    name: Reading Notes
+    kicker: From what I read
+    blurb: What I'm learning from the newsletters and writers I follow, on AI, startups, growth and humane technology.
+  - key: ai-governance
+    name: AI Governance
+    kicker: Policy, briefly
+    blurb: Short, sourced summaries of how AI is governed, starting with China's national strategy and its positions on global AI governance.
