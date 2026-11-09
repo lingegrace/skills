@@ -63,7 +63,83 @@ e = html.escape
 
 def bold(s):
     return re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", s)
+
+
 md = lambda text: markdown.markdown(text, extensions=["tables", "fenced_code", "sane_lists"])
+
+FENCE = re.compile(r"^\s*(```|~~~)")
+LIST_ITEM = re.compile(r"^\s*(\d+\.|[-*+])\s")
+
+
+def _indent_unit(lines):
+    sizes = [len(l) - len(l.lstrip(" ")) for l in lines if l.strip() and l.startswith(" ")]
+    return min(sizes) if sizes else 4
+
+
+def skill_md(text):
+    """Render a SKILL.md body safely.
+
+    SKILL.md files use <placeholders> and 3-space nested lists. Python-Markdown
+    treats the first as HTML tags (they vanish) and needs 4 spaces for the second.
+    """
+    lines, out, in_fence = text.split("\n"), [], False
+    plain = []
+    for l in lines:
+        if FENCE.match(l):
+            in_fence = not in_fence
+            continue
+        if not in_fence:
+            plain.append(l)
+    unit = _indent_unit(plain)
+    in_fence = False
+    for l in lines:
+        if FENCE.match(l):
+            in_fence = not in_fence
+            n = len(l) - len(l.lstrip(" "))
+            out.append(" " * ((n // unit) * 4 if unit != 4 else n) + l.lstrip(" "))
+            continue
+        if in_fence:
+            out.append(l)
+            continue
+        n = len(l) - len(l.lstrip(" "))
+        if n and unit != 4:
+            l = " " * ((n // unit) * 4 + n % unit) + l.lstrip(" ")
+        # escape "<" outside inline code so <placeholders> stay visible
+        parts = re.split(r"(`[^`]*`)", l)
+        l = "".join(p if p.startswith("`") else p.replace("<", "&lt;") for p in parts)
+        # a list item straight after paragraph text needs a blank line, or it is swallowed
+        if LIST_ITEM.match(l) and out and out[-1].strip() and not LIST_ITEM.match(out[-1]) \
+                and not out[-1].lstrip().startswith(("|", "#")):
+            out.append("")
+        out.append(l)
+    return md("\n".join(out))
+
+
+def skill_steps(body):
+    """Top-level steps of '## How to work' as (title, gist) pairs, for a short overview."""
+    m = re.search(r"^## How to work\s*\n(.*?)(?=^## |\Z)", body, re.S | re.M)
+    steps = []
+    if m:
+        for line in m.group(1).split("\n"):
+            s = re.match(r"^\d+\.\s+(.*)", line)
+            if not s:
+                continue
+            t = s.group(1)
+            b = re.match(r"\*\*(.+?)\*\*\s*(.*)", t)
+            title, rest = (b.group(1), b.group(2)) if b else (t, "")
+            title = title.rstrip(" .:")
+            rest = re.sub(r"[*`]", "", rest).strip()
+            if rest.lower() in ("ask:", "ask") or rest.endswith(":") or rest.startswith("("):
+                rest = ""
+            first = re.split(r"(?<=[.;])\s", rest)[0] if rest else ""
+            if len(first) > 160:
+                first = first[:157].rsplit(" ", 1)[0] + "…"
+            steps.append((title, first))
+    if not steps:
+        # longer skills name their stages in headings: "## 4. Stage A — Brief", "### Step 1 — Inventory"
+        for h in re.findall(r"^#{2,3}\s+(?:\d+\.\s+)?(?:Stage [A-Z]|Step \d+)\s+[—-]\s+(.+)$", body, re.M):
+            steps.append((re.sub(r"\s*\(.*?\)\s*$", "", h).strip(), ""))
+    return steps
 
 
 def url(path=""):
@@ -456,6 +532,14 @@ def build_catalog(skills, site):
                 body, site, active="skills/")
 
 
+def steps_html(body):
+    steps = skill_steps(body)
+    if not steps:
+        return ""
+    items = "".join(f"<li><b>{e(t)}</b>{(' <span>' + e(g) + '</span>') if g else ''}</li>" for t, g in steps)
+    return f'<section class="skill-sec"><h2>How it works</h2><ol class="skill-steps">{items}</ol></section>'
+
+
 def build_skill(s, skills, site):
     related = [x for x in skills if x["field"]["key"] == s["field"]["key"] and x["name"] != s["name"]][:3]
     body = f"""
@@ -471,7 +555,8 @@ def build_skill(s, skills, site):
     <div class="skill-actions"><a class="btn btn-ink" href="#install">Install</a><a class="btn btn-line" href="{s['github']}">View on GitHub ↗</a></div>
   </header>
   <section id="install" class="skill-sec"><h2>Install</h2>{install_block(s)}</section>
-  <section class="skill-sec"><h2>The full instructions</h2><p class="muted">This is exactly what Claude reads. Nothing hidden.</p><div class="prose skill-md">{md(s['body'])}</div></section>
+  {steps_html(s['body'])}
+  <section class="skill-sec"><details class="skill-full"><summary>Read the full instructions</summary><div class="prose skill-md">{skill_md(s['body'])}</div></details></section>
   {f'<section class="skill-sec"><h2>Search terms</h2><p class="muted">{e(s["terms"])}</p></section>' if s['terms'] else ''}
   {f'<section class="skill-sec"><h2>In the same folder</h2><div class="cards cards-3">{"".join(card(r, compact=True) for r in related)}</div></section>' if related else ''}
 </article>

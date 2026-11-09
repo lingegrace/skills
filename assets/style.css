@@ -603,3 +603,12 @@ a.cat-click:hover img, a.cat-click:focus-visible img { transform: rotate(-6deg) 
 /* catalog: search and filters stay at the top of the page, they don't follow the scroll */
 .filters { position: static; }
 #request { scroll-margin-top: 90px; }
+
+/* skill page: short step overview + collapsible full instructions */
+.skill-steps { counter-reset: st; list-style: none; padding: 0; display: grid; gap: .7rem; }
+.skill-steps li { counter-increment: st; position: relative; padding-left: 2.6rem; line-height: 1.55; color: var(--ink-2); }
+.skill-steps li::before { content: counter(st); position: absolute; left: 0; top: .05rem; width: 1.8rem; height: 1.8rem; border-radius: 50%; background: var(--accent); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: .8rem; display: grid; place-items: center; }
+.skill-steps b { display: block; font-family: 'Fraunces', serif; font-weight: 600; color: var(--ink); font-size: 1.05rem; }
+.skill-full summary { cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; color: var(--accent); padding: .6rem 0; }
+.skill-full[open] summary { margin-bottom: .8rem; }
+.skill-md li > ul, .skill-md li > ol { margin-top: .35rem; }
