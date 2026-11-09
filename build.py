@@ -556,7 +556,7 @@ def build_skill(s, skills, site):
   </header>
   <section id="install" class="skill-sec"><h2>Install</h2>{install_block(s)}</section>
   {steps_html(s['body'])}
-  <section class="skill-sec"><details class="skill-full"><summary>Read the full instructions</summary><div class="prose skill-md">{skill_md(s['body'])}</div></details></section>
+  <section class="skill-sec"><details class="skill-full" open><summary>The full instructions</summary><div class="prose skill-md">{skill_md(s['body'])}</div></details></section>
   {f'<section class="skill-sec"><h2>Search terms</h2><p class="muted">{e(s["terms"])}</p></section>' if s['terms'] else ''}
   {f'<section class="skill-sec"><h2>In the same folder</h2><div class="cards cards-3">{"".join(card(r, compact=True) for r in related)}</div></section>' if related else ''}
 </article>
