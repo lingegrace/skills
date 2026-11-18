@@ -784,6 +784,10 @@ def main():
     write("about/index.html", build_about(skills, site))
     write("404.html", build_404(site))
     write("skills.json", json.dumps([dict({k: s[k] for k in ("name", "call", "tagline", "summary", "give", "get", "method", "github", "zip", "access")}, field=s["field"]["name"]) for s in skills], ensure_ascii=False, indent=2))
+    by_name = {s["name"]: s for s in skills}
+    featured = [by_name[n] for n in site.get("featured", []) if n in by_name]
+    write("featured.json", json.dumps({"skills": [{"name": s["name"], "tagline": s["tagline"], "summary": s["summary"],
+        "url": SITE_URL + "/skills/" + s["name"] + "/"} for s in featured]}, ensure_ascii=False, indent=2))
     pages = ["", "skills/", "insights/", "resources/", "pro/", "about/"] + [f"skills/{s['name']}/" for s in skills] + [f"resources/{r['slug']}/" for r in resources]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{SITE_URL}/{p}</loc></url>\n" for p in pages) + "</urlset>\n")
     write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n")

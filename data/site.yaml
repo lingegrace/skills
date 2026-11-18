@@ -28,6 +28,9 @@ plugins:
   product: product-skills
   skill-engineering: skill-engineering-skills
 
+# The skills shown on Grace's personal site, in order. Rename or swap here and the personal site follows (via featured.json).
+featured: [deep-research, human-writing, meeting-to-actions]
+
 # Cards in the swipeable stack on the home page.
 hero_stack: [deep-research, meeting-to-actions, human-writing, literature-review, value-proposition-writer, socratic-tutor]
 
