@@ -390,7 +390,97 @@ def search_index(skills):
 
 # ─────────────────────────── pages ───────────────────────────
 
-def build_home(skills, issues, resources, site):
+def pro_card(x, n):
+    full = bool(x.get("page"))
+    badge = '<span class="stamp stamp-pro">Read the method</span>' if full else '<span class="stamp stamp-soon">Coming soon</span>'
+    return f"""<a class="card pro-card{' pro-card-full' if full else ''}" href="{url('pro/' + x['slug'] + '/')}">
+  <span class="card-top"><span class="call">PRO-{n:02d}</span><span class="card-field">{e(x.get('field', ''))}</span>{badge}</span>
+  <span class="card-title">{e(x['name'])}</span>
+  <span class="card-tag">{e(x.get('tagline', ''))}</span>
+  <span class="card-sum">{e(x.get('summary', ''))}</span>
+  {f'<span class="card-stages">{e(x["stages"])}</span>' if x.get('stages') else ''}
+</a>"""
+
+
+def waitlist_form(name):
+    return f"""<form class="request" data-form="waitlist">
+    <div class="request-paper">
+      <p class="eyebrow">Be first in line</p>
+      <h2>Get {e(name)} when it opens.</h2>
+      <p class="muted">Leave your email and I'll write once, when it's ready. Tell me what you'd use it for, if you like.</p>
+      <input type="hidden" name="plan" value="{e(name)}">
+      <textarea name="message" rows="2" placeholder="What would you use it for? (optional)"></textarea>
+      <input name="email" type="email" required placeholder="Your email">
+      <button class="btn btn-accent" type="submit">Join the waitlist</button>
+      <p class="form-note" role="status"></p>
+    </div>
+    {envelope()}
+  </form>"""
+
+
+def build_pro_skill(x, pro, site):
+    others = [o for o in pro.get("skills", []) if o["slug"] != x["slug"]]
+    others_html = "".join(f'<a class="pro-next" href="{url("pro/" + o["slug"] + "/")}"><b>{e(o["name"])}</b><span>{e(o.get("tagline", ""))}</span></a>' for o in others)
+    pg = x.get("page")
+    head = f"""<nav class="crumbs" aria-label="Breadcrumb"><a href="{url('pro/')}">Pro</a> / <span>{e(x['name'])}</span></nav>"""
+    if not pg:
+        body = f"""{head}
+<section class="pro-hero pro-hero-short">
+  <p class="eyebrow">Pro skill · {e(x.get('field', ''))}</p>
+  <h1>{e(x['name'])}</h1>
+  <p class="pro-claim">{e(x.get('tagline', ''))}</p>
+  <p class="lede">{e(x.get('summary', ''))}</p>
+  {f'<p class="pro-meta">{e(x["stages"])}</p>' if x.get('stages') else ''}
+  <p class="pro-soon">The full page, with the method and the research behind it, is on its way.</p>
+</section>
+<section class="block" id="waitlist">{waitlist_form(x['name'])}</section>
+<section class="block"><div class="block-head"><h2>Other Pro skills</h2></div><div class="pro-nexts">{others_html}</div></section>
+"""
+        return page(f"pro/{x['slug']}/", f"{x['name']} · Pro Claude skill · Grace's Skill Library", (x.get("summary") or "")[:300], body, site, active="pro/")
+    problem = "".join(f"<li>{e(t)}</li>" for t in pg.get("problem", []))
+    design = "".join(f'<div class="rd"><b>{e(d["title"])}</b><p>{e(d["text"])}</p></div>' for d in pg.get("research_design", []))
+    method = "".join(f'<li><b>{e(m["title"])}</b><span>{e(m["text"])}</span></li>' for m in pg.get("method", []))
+    body = f"""{head}
+<section class="pro-hero">
+  <p class="eyebrow">Pro skill · {e(x.get('field', ''))}</p>
+  <h1>{e(x['name'])}</h1>
+  <p class="pro-claim">{e(pg.get('claim', ''))}</p>
+  <p class="lede">{e(pg.get('lede', ''))}</p>
+  <div class="hero-cta"><a class="btn btn-accent" href="#waitlist">Join the waitlist</a><a class="btn btn-line" href="#method">See the method</a></div>
+</section>
+<section class="block pro-sec">
+  <p class="eyebrow">The problem</p>
+  <h2>Sounding human isn't the same as sounding like you.</h2>
+  <ul class="pro-problem">{problem}</ul>
+</section>
+<section class="block pro-sec pro-research">
+  <p class="eyebrow">The research</p>
+  <h2>A study in progress</h2>
+  <p class="lede">{e(pg.get('research_intro', ''))}</p>
+  <div class="rd-grid">{design}</div>
+  <div class="rd-findings"><span class="stamp stamp-soon">Findings pending</span><p>Results, effect sizes and the study's limits will be published here once the data is in. Nothing on this page is estimated in advance.</p></div>
+</section>
+<section class="block pro-sec" id="method">
+  <p class="eyebrow">The method</p>
+  <h2>Five steps, and you stay the judge</h2>
+  <ol class="pro-method">{method}</ol>
+</section>
+<section class="block pro-sec pro-io">
+  <div><p class="eyebrow">You give it</p><p>{e(pg.get('input', ''))}</p></div>
+  <div><p class="eyebrow">You get back</p><p>{e(pg.get('output', ''))}</p></div>
+</section>
+<section class="block pro-sec">
+  <p class="eyebrow">See it work</p>
+  <div class="pro-demo"><p>{e(pg.get('demo_note', ''))}</p></div>
+</section>
+<section class="block" id="waitlist">{waitlist_form(x['name'])}</section>
+<section class="block"><div class="block-head"><h2>Other Pro skills</h2></div><div class="pro-nexts">{others_html}</div></section>
+"""
+    return page(f"pro/{x['slug']}/", f"{x['name']}: {pg.get('claim', '')} · Pro Claude skill",
+                (pg.get("lede") or x.get("summary") or "")[:300], body, site, active="pro/")
+
+
+def build_home(skills, issues, resources, site, pro=None):
     by_name = {s["name"]: s for s in skills}
     # hero card stack
     stack = [by_name[n] for n in site.get("hero_stack", []) if n in by_name][:6]
@@ -439,7 +529,7 @@ def build_home(skills, issues, resources, site):
     <p class="eyebrow">Claude skills for research, writing and everyday work</p>
     <h1>AI is good at output.<br><em>But input is the work.</em></h1>
     <p class="lede">These skills don't automate your job. They package the work inside it: the right questions to ask first, a proven method to follow, and evidence for every claim.</p>
-    <div class="hero-cta"><a class="btn btn-ink" href="#who">Find skills for me</a><a class="btn btn-line" href="{url('skills/')}">See the whole catalog</a></div>
+    <div class="hero-cta"><a class="btn btn-ink" href="#pro-skills">See the Pro skills</a><a class="btn btn-line" href="#who">Find free skills for me</a></div>
   </div>
   <div class="hero-stack" id="stack" aria-label="Sample skill cards. Swipe a card up to see the next one.">
     <div class="stack-cards">{stack_html}</div>
@@ -448,8 +538,26 @@ def build_home(skills, issues, resources, site):
   </div>
 </section>
 
+<section class="block pro-shelf" id="pro-skills">
+  <p class="eyebrow">Pro skills</p>
+  <div class="block-head"><h2>For the work everyone needs done right</h2><a href="{url('pro/')}">Pricing &amp; details →</a></div>
+  <p class="muted pro-shelf-lede">Each one is built on a named method and its own research, and runs a whole job end to end, stopping for your approval at the moments that matter.</p>
+  <div class="cards cards-3">{"".join(pro_card(x, n) for n, x in enumerate((pro or {}).get("skills", []), 1))}</div>
+</section>
+
+<section class="block help-one">
+  <a class="help-card" href="{url('pro/#consult')}"><div><p class="eyebrow">Work with me</p><h3>Help with a business problem</h3><p>Research, positioning or an AI workflow that isn't working. We'll work out the problem first, then whether a skill is the answer.</p></div><span class="help-go">Start a conversation →</span></a>
+</section>
+
+<section class="block" id="fun">
+  <p class="eyebrow">Free and fun</p>
+  <div class="block-head"><h2>Skills that think with you</h2></div>
+  <p class="muted">They ask questions, push back and get you thinking. Free, forever.</p>
+  <div class="cards cards-3">{"".join(card(by_name[n], compact=True) for n in site.get("free_fun", []) if n in by_name)}</div>
+</section>
+
 <section class="block" id="who">
-  <p class="eyebrow">Start from who you are</p>
+  <p class="eyebrow">Free and practical · start from who you are</p>
   <div class="block-head"><h2 class="who-head" aria-live="polite"><span class="who-pre">{e(h0[0])}</span> <span class="who-word">{e(h0[1])}</span><span class="who-caret" aria-hidden="true"></span></h2></div>
   <div class="who-chips" role="group" aria-label="Choose who you are">{p_chips}</div>
   {p_groups}
@@ -466,15 +574,7 @@ def build_home(skills, issues, resources, site):
   </div>
 </section>
 
-<section class="block principles">
-  <div class="block-head"><h2>Built on the same principles</h2></div>
-  <ol class="how-steps">
-    <li><b>Grounded in real methods.</b><span>Each skill encodes a named method from research, editing, learning science or product practice, not vague "best practices".</span></li>
-    <li><b>Input first.</b><span>It starts from what you already have, and asks your goal, audience and constraints before writing, with sensible defaults.</span></li>
-    <li><b>Steps you can check.</b><span>Every step says when it's done, and the result follows a fixed template you can reuse.</span></li>
-    <li><b>Evidence, not guesses.</b><span>Claims point back to your material, or are labeled as assumptions. Nothing is invented.</span></li>
-  </ol>
-</section>
+
 
 <section class="block duo">
   <div class="duo-col">
@@ -491,10 +591,6 @@ def build_home(skills, issues, resources, site):
   </div>
 </section>
 
-<section class="block pro-teaser">
-  <div><p class="eyebrow">Pro &amp; custom skills</p><h2>Need a skill built around your own work?</h2><p>Pro skills run whole workflows end to end. Or I can build one around your team's process.</p></div>
-  <a class="btn btn-accent" href="{url('pro/')}">See Pro</a>
-</section>
 """
     return page("", "Grace's Skill Library · Claude skills for research, writing and everyday work",
                 f"{len(skills)} free Claude skills for students and professionals: deep research, literature reviews, writing in your own voice, meeting actions, decision memos, learning and exam practice, marketing and product work.",
@@ -540,6 +636,13 @@ def steps_html(body):
     return f'<section class="skill-sec"><h2>How it works</h2><ol class="skill-steps">{items}</ol></section>'
 
 
+def upgrade_note(s, site):
+    u = (site.get("pro_upgrades") or {}).get(s["name"])
+    if not u:
+        return ""
+    return f'<a class="pro-upsell" href="{url("pro/" + u["slug"] + "/")}"><span class="stamp stamp-pro">Pro</span><span>{e(u.get("line", ""))}</span><b>See {e(u["name"])} →</b></a>'
+
+
 def build_skill(s, skills, site):
     related = [x for x in skills if x["field"]["key"] == s["field"]["key"] and x["name"] != s["name"]][:3]
     body = f"""
@@ -554,6 +657,7 @@ def build_skill(s, skills, site):
     <dl class="skill-lines"><div><dt>Input</dt><dd>{e(s['give'])}</dd></div><div><dt>Output</dt><dd>{e(s['get'])}</dd></div>{f'<div><dt>Method</dt><dd>{e(s["method"])}</dd></div>' if s['method'] else ''}</dl>
     <div class="skill-actions"><a class="btn btn-ink" href="#install">Install</a><a class="btn btn-line" href="{s['github']}">View on GitHub ↗</a></div>
   </header>
+  {upgrade_note(s, site)}
   <section id="install" class="skill-sec"><h2>Install</h2>{install_block(s)}</section>
   {steps_html(s['body'])}
   <section class="skill-sec"><details class="skill-full" open><summary>The full instructions</summary><div class="prose skill-md">{skill_md(s['body'])}</div></details></section>
@@ -695,7 +799,7 @@ def build_pro(pro, site):
         return f"""<div class="plan{' plan-hi' if p.get('highlight') else ''}{' plan-custom' if p.get('form') else ''}">{guide}
   <p class="eyebrow">{e(p['name'])}</p><p class="price">{e(p['price'])}</p><p class="muted">{e(p.get('note', ''))}</p>
   <ul>{''.join(f'<li>{e(x)}</li>' for x in p.get('includes', []))}</ul>{cta}</div>"""
-    skills_html = "".join(f"""<div class="card card-static"><span class="corner-badge">In Library Pass</span><span class="card-hole" aria-hidden="true"></span><span class="card-top"><span class="call">SC-{n:02d}</span><span class="card-field">{e(x.get('field', ''))}</span><span class="stamp stamp-pro">{e(x.get('status', 'Coming soon'))}</span></span><span class="card-title">{e(x['name'])}</span><span class="card-tag">{e(x.get('tagline', ''))}</span><span class="card-sum">{e(x.get('summary', ''))}</span>{f'<span class="card-stages">{e(x["stages"])}</span>' if x.get('stages') else ''}</div>""" for n, x in enumerate(pro.get("skills", []), 1))
+    skills_html = "".join(pro_card(x, n) for n, x in enumerate(pro.get("skills", []), 1))
     faq = "".join(f"<details><summary>{e(q['q'])}</summary><p>{e(q['a'])}</p></details>" for q in pro.get("faq", []))
     body = f"""
 <section class="page-head pro-head">
@@ -771,7 +875,7 @@ def main():
     if OUT.exists():
         shutil.rmtree(OUT)
     shutil.copytree(ROOT / "assets", OUT / "assets")
-    write("index.html", build_home(skills, issues, resources, site))
+    write("index.html", build_home(skills, issues, resources, site, pro))
     write("skills/index.html", build_catalog(skills, site))
     for s in skills:
         write(f"skills/{s['name']}/index.html", build_skill(s, skills, site))
@@ -781,6 +885,8 @@ def main():
     for r in resources:
         write(f"resources/{r['slug']}/index.html", build_lesson(r, resources, site))
     write("pro/index.html", build_pro(pro, site))
+    for x in pro.get("skills", []):
+        write(f"pro/{x['slug']}/index.html", build_pro_skill(x, pro, site))
     write("about/index.html", build_about(skills, site))
     write("404.html", build_404(site))
     write("skills.json", json.dumps([dict({k: s[k] for k in ("name", "call", "tagline", "summary", "give", "get", "method", "github", "zip", "access")}, field=s["field"]["name"]) for s in skills], ensure_ascii=False, indent=2))
@@ -788,7 +894,7 @@ def main():
     featured = [by_name[n] for n in site.get("featured", []) if n in by_name]
     write("featured.json", json.dumps({"skills": [{"name": s["name"], "tagline": s["tagline"], "summary": s["summary"],
         "url": SITE_URL + "/skills/" + s["name"] + "/"} for s in featured]}, ensure_ascii=False, indent=2))
-    pages = ["", "skills/", "insights/", "resources/", "pro/", "about/"] + [f"skills/{s['name']}/" for s in skills] + [f"resources/{r['slug']}/" for r in resources]
+    pages = ["", "skills/", "insights/", "resources/", "pro/", "about/"] + [f"skills/{s['name']}/" for s in skills] + [f"resources/{r['slug']}/" for r in resources] + [f"pro/{x['slug']}/" for x in pro.get("skills", [])]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{SITE_URL}/{p}</loc></url>\n" for p in pages) + "</urlset>\n")
     write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n")
     print(f"Built {len(pages)} pages: {len(skills)} skills, {len(issues)} insights, {len(resources)} lessons → {OUT}")

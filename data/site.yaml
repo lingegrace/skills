@@ -31,6 +31,14 @@ plugins:
 # The skills shown on Grace's personal site, in order. Rename or swap here and the personal site follows (via featured.json).
 featured: [deep-research, human-writing, meeting-to-actions]
 
+# Free skills whose page points to a Pro skill that goes further.
+pro_upgrades:
+  human-writing: {slug: your-voice, name: Your Voice, line: "Want every draft to sound like you, with your voice learned once and re-checked when models change?"}
+  my-writing-voice: {slug: your-voice, name: Your Voice, line: "Want the full workflow: a voice profile, sentence-by-sentence edits, and re-checks when models change?"}
+
+# "Free and fun" on the home page: skills that talk with you and get you thinking.
+free_fun: [socratic-tutor, research-question-grill, book-tutor, transfer-practice, knowledge-gap-detector, prompt-to-skill]
+
 # Cards in the swipeable stack on the home page.
 hero_stack: [deep-research, meeting-to-actions, human-writing, literature-review, value-proposition-writer, socratic-tutor]
 

@@ -40,47 +40,76 @@ plans:
     cta: How can I help you?
     form: true
 
-# Pro skills (long-horizon workflows). Listed here; the files themselves are sold, not published.
+# The six Pro skills. Each gets its own page at /pro/<slug>/.
+# A skill with a `page:` block gets the full page (claim, problem, research, method, input/output, pricing).
+# Without one it gets a short page with a waitlist. Never put numbers in `research` until the study has run.
 skills:
-  - name: research-to-article
-    field: Content
-    tagline: From a question to a published article
-    summary: Deep research, angle, outline, draft in your voice, fact-check, edit, and a publishing package with social posts.
-    stages: 9 stages · 2 checkpoints
-  - name: linkedin-content-system
-    field: Content
-    tagline: A month of LinkedIn content, researched
-    summary: Pillars, topic bank, calendar, research per post, drafts in your voice, fact-check, repurposing and a monthly review.
-    stages: 9 stages · checkpoints on pillars and calendar
-  - name: content-strategist
-    field: Marketing
-    tagline: Audience to key message to every channel
-    summary: Audience, JTBD, research, positioning and key message, then angles, funnel mapping, drafts and repurposing, with a message-integrity check at every step.
-    stages: 11 stages · 2 checkpoints
-  - name: marketing-researcher
+  - slug: your-voice
+    name: Your Voice
+    field: Writing
+    tagline: AI that writes like you, not like "a human"
+    summary: Learns your voice from your own writing, then edits each AI draft sentence by sentence toward it, and re-checks when the model changes.
+    stages: 5 stages · checkpoint on your voice profile
+    page:
+      claim: Don't scrub the AI out. Teach it your voice.
+      lede: Most "de-AI" tools delete patterns until the text sounds like nobody in particular. Your Voice works the other way. It starts from how you write, and moves each draft toward you, case by case.
+      problem:
+        - Removing "AI tells" makes text generic, not personal. A draft with every dash and "not only… but also" stripped out still doesn't sound like you.
+        - The tells change. Each new model writes differently, so a fixed list of banned phrases goes stale within months.
+        - What matters is case by case. A contrast or a list can be exactly right in one sentence and filler in the next. Only your own writing can tell which.
+      research_intro: I'm running the study behind this skill now, as a sociologist would. The design is below; the findings will be published here, with their limits, once the data is in.
+      research_design:
+        - title: Your writing as the baseline
+          text: A corpus of the author's own published writing, compared with drafts that different models write on the same topics from the same notes.
+        - title: Across models and versions
+          text: The same prompts run on several current models, and again on each new version, to see which differences fade as models change and which persist.
+        - title: Blind reading
+          text: Readers who know the author's work judge, without labels, which version sounds like the author, and why.
+        - title: What gets measured
+          text: Sentence rhythm, how ideas are linked, how claims are hedged, word choice, structure, and the moves that make a piece recognisably the author's.
+      method:
+        - title: Learn your voice
+          text: Read 5–20 pieces you wrote and build a voice profile, with examples from your own text for each trait.
+        - title: Read the draft against it
+          text: Go through an AI draft sentence by sentence and mark where it drifts from your profile, and how.
+        - title: Edit lightly
+          text: Change only what drifts. Keep every fact and every point; never add claims.
+        - title: Show every change
+          text: A side-by-side view, with the reason for each edit, so you stay the judge.
+        - title: Re-check when models change
+          text: Re-run your profile against a new model's drafts and update what no longer applies.
+      input: 5–20 pieces of your own writing, plus the AI draft you want to fix.
+      output: A voice profile, the draft annotated sentence by sentence, the revised draft and a change log.
+      demo_note: A real before-and-after, from the study, will be shown here.
+  - slug: research-dossier
+    name: Research Dossier
     field: Research
-    tagline: A market judgment you can defend
-    summary: Define the question, map competitors, build a taxonomy, gather tiered evidence, compare, find white space and write the judgment memo.
+    tagline: A research report you can defend
+    summary: A sociologist's research workflow, from question to literature map, evidence ledger, claim checks and a synthesis, with your approval at each checkpoint.
     stages: 8 stages · 2 checkpoints
-  - name: pm-researcher
+  - slug: research-to-article
+    name: Research to Article
+    field: Writing
+    tagline: From a question to a published article
+    summary: Research, angle, outline, a draft in your voice, a fact-check and a publishing package, the way I write my newsletter.
+    stages: 9 stages · 2 checkpoints
+  - slug: market-research
+    name: Market & Competitor Research
+    field: Marketing
+    tagline: A market judgment you can defend
+    summary: Define the question, map competitors, gather tiered evidence, compare, find the white space and write the judgment memo.
+    stages: 8 stages · 2 checkpoints
+  - slug: pm-research
+    name: PM Research to Decision
     field: Product
     tagline: User, competitor and market research to a decision
-    summary: Synthesizes user research, competitors and the market into an opportunity tree, a prioritized recommendation and a PRD seed.
+    summary: Pulls user research, competitors and the market into an opportunity tree, a prioritized recommendation and a PRD seed.
     stages: 7 stages · checkpoint on priorities
-  - name: seo-content-system
-    field: Marketing
-    tagline: From keywords to a content plan that ranks
-    summary: Keyword research and intent clusters, a funnel topic map, briefs, drafts, on-page checks, internal links and a refresh schedule.
-    stages: 8 stages · checkpoint on the topic map
-  - name: knowledge-base-builder
-    field: Work
-    tagline: Scattered docs into one knowledge base
-    summary: Inventory, taxonomy, de-duplication, article templates, rewritten articles, cross-links, a gap list and a maintenance plan.
-    stages: 9 stages · checkpoint on the taxonomy
-  - name: skill-eval-system
-    field: Skill Engineering
+  - slug: skill-eval
+    name: Skill Eval System
+    field: Skill engineering
     tagline: Test and track your team's skills
-    summary: Criteria per skill, a test set, baseline runs, scoring, and regression tracking across versions before you ship changes.
+    summary: Criteria for each skill, a test set, baseline runs, scoring, and regression tracking across versions before you ship changes.
     stages: 7 stages · checkpoint before each release
 
 faq:

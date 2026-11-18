@@ -612,3 +612,63 @@ a.cat-click:hover img, a.cat-click:focus-visible img { transform: rotate(-6deg) 
 .skill-full summary { cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; color: var(--accent); padding: .6rem 0; }
 .skill-full[open] summary { margin-bottom: .8rem; }
 .skill-md li > ul, .skill-md li > ol { margin-top: .35rem; }
+
+/* ── reform: Pro skills in the middle, free shelves around them ── */
+.stamp-soon { color: var(--ink-3); border-color: var(--ink-3); }
+.pro-shelf { background: var(--card); border: 1px solid var(--rule); border-top: 4px solid var(--accent); border-radius: 14px; padding: clamp(1.4rem, 3vw, 2.4rem); box-shadow: var(--shadow); }
+.pro-shelf .card { background: var(--paper-2); }
+.pro-shelf-lede { max-width: 720px; margin: -.4rem 0 1.4rem; }
+.pro-card { --c: var(--accent); }
+.pro-card .card-title { font-family: 'Fraunces', 'Instrument Serif', serif; font-weight: 600; font-size: 1.35rem; }
+.pro-card-full { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent); }
+.help-duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
+.help-card { display: block; text-decoration: none; padding: 1.5rem 1.6rem; border: 1px solid var(--rule); border-radius: 12px; background: var(--card); transition: transform .25s, border-color .25s, box-shadow .25s; }
+.help-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: var(--shadow); }
+.help-card h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.4rem; line-height: 1.25; margin: .35rem 0 .5rem; }
+.help-card p:not(.eyebrow) { color: var(--ink-2); }
+.help-go { display: inline-block; margin-top: .9rem; font-weight: 600; color: var(--accent); }
+@media (max-width: 760px) { .help-duo { grid-template-columns: 1fr; } }
+
+/* Pro skill pages */
+.pro-hero { padding: clamp(2.5rem, 7vw, 5rem) 0 2rem; max-width: 860px; }
+.pro-hero h1 { font-size: clamp(3rem, 8vw, 5.6rem); line-height: .98; }
+.pro-claim { font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.2; color: var(--accent); margin: .8rem 0 .2rem; }
+.pro-hero .lede { max-width: 720px; }
+.pro-meta { font-family: 'JetBrains Mono', monospace; font-size: .78rem; color: var(--ink-3); margin-top: 1rem; }
+.pro-soon { margin-top: 1.2rem; padding: .8rem 1rem; border-left: 3px solid var(--accent-2); background: var(--card); color: var(--ink-2); max-width: 640px; }
+.pro-sec h2 { font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(1.6rem, 3.4vw, 2.4rem); line-height: 1.15; margin: .3rem 0 1.2rem; max-width: 820px; }
+.pro-problem { list-style: none; display: grid; gap: .9rem; max-width: 760px; }
+.pro-problem li { position: relative; padding-left: 1.6rem; font-size: 1.05rem; color: var(--ink-2); }
+.pro-problem li::before { content: ''; position: absolute; left: 0; top: .65em; width: .7rem; height: 2px; background: var(--accent); }
+.pro-research { background: var(--card); border: 1px solid var(--rule); border-radius: 14px; padding: clamp(1.4rem, 3vw, 2.4rem); }
+.rd-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 2rem; margin-top: 1.4rem; }
+.rd { padding-top: .8rem; border-top: 1px solid var(--rule); }
+.rd b { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.1rem; }
+.rd p { color: var(--ink-2); margin-top: .2rem; }
+.rd-findings { display: flex; gap: 1rem; align-items: center; margin-top: 1.6rem; padding: 1rem 1.2rem; border: 1px dashed var(--rule); border-radius: 10px; color: var(--ink-3); }
+.rd-findings .stamp { margin-left: 0; flex: none; }
+.pro-method { list-style: none; counter-reset: m; display: grid; gap: 1rem; max-width: 820px; }
+.pro-method li { counter-increment: m; position: relative; padding: 0 0 1rem 3.4rem; border-bottom: 1px solid var(--rule); }
+.pro-method li::before { content: counter(m, decimal-leading-zero); position: absolute; left: 0; top: .1rem; font-family: 'JetBrains Mono', monospace; font-size: .85rem; color: var(--accent); }
+.pro-method b { display: block; font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.2rem; }
+.pro-method span { color: var(--ink-2); }
+.pro-io { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
+.pro-io > div { padding: 1.3rem 1.4rem; background: var(--card); border: 1px solid var(--rule); border-radius: 12px; }
+.pro-io p:not(.eyebrow) { font-size: 1.05rem; margin-top: .3rem; }
+.pro-demo { padding: 2.4rem 1.4rem; text-align: center; border: 1px dashed var(--rule); border-radius: 12px; color: var(--ink-3); background: repeating-linear-gradient(-45deg, transparent 0 14px, rgba(26, 15, 7, .025) 14px 28px); }
+.pro-nexts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .8rem; }
+.pro-next { display: block; text-decoration: none; padding: .9rem 1.1rem; border: 1px solid var(--rule); border-radius: 10px; background: var(--card); transition: border-color .2s, transform .2s; }
+.pro-next:hover { border-color: var(--accent); transform: translateY(-2px); }
+.pro-next b { font-family: 'Fraunces', serif; font-weight: 600; display: block; }
+.pro-next span { font-size: .88rem; color: var(--ink-3); }
+@media (max-width: 760px) { .rd-grid, .pro-io { grid-template-columns: 1fr; } .rd-findings { flex-direction: column; align-items: flex-start; } }
+@media (max-width: 900px) { .cards-3 { grid-template-columns: minmax(0, 1fr); } .card { min-width: 0; } }
+@media (max-width: 560px) { .pro-shelf, .pro-research { padding: 1.1rem .9rem; border-radius: 12px; } }
+.pro-upsell { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin: 1.4rem 0; padding: 1rem 1.2rem; text-decoration: none; background: var(--card); border: 1px solid var(--accent); border-radius: 12px; transition: transform .2s, box-shadow .2s; }
+.pro-upsell:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.pro-upsell .stamp { margin-left: 0; }
+.pro-upsell span:not(.stamp) { flex: 1 1 280px; color: var(--ink-2); }
+.pro-upsell b { color: var(--accent); white-space: nowrap; }
+.help-one { margin-top: -2.6rem; }
+.help-one .help-card { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; border-left: 4px solid var(--accent); }
+.help-one .help-card > div { flex: 1 1 420px; }
